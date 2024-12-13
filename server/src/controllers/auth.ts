@@ -344,6 +344,8 @@ export const resetPasswordToken = async (req:Request,res:Response): Promise<any>
       return ErrorResponseHandling(res,500,"Email service problem");
     }
 
+    return;
+
   } catch (error) {
     console.log(error);
     return ErrorResponseHandling(res,500,"Internal Server error");

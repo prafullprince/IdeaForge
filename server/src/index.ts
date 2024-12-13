@@ -6,7 +6,7 @@ import cors from "cors";
 
 // initialize port and app
 const app: Application = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000;
 
 // middlewares
 app.use(express.json());
