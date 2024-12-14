@@ -1,46 +1,97 @@
-import React from "react"
-import HighlightButton from "./HighlightButton"
-import { motion } from "framer-motion"
-
+import React from "react";
+import HighlightButton from "./HighlightButton";
+import { motion } from "framer-motion";
 
 interface CodingBlocksProps {
-    heading:React.ReactNode,
-    para:string,
-    btnText1:string,
-    btnText2:string,
-    isReverse:boolean
+  heading: React.ReactNode;
+  para: string;
+  btnText1: string;
+  btnText2: string;
+  isReverse: boolean;
 }
 
-const data:string[] = [
-  "<!DOCTYPE html>","<html>","head><title>Example</title><linkrel='stylesheet'href='styles.css'>","/head>","body>","h1><ahref='/'>Header</a>","/h1>","nav><ahref='one/'>One</a><ahref='two/'>Two</a><ahref='three/'>Three</a>","/nav>"
-]
+const data: string[] = [
+  "<!DOCTYPE html>",
+  "<html>",
+  "head><title>Example</title><linkrel='stylesheet'href='styles.css'>",
+  "/head>",
+  "body>",
+  "h1><ahref='/'>Header</a>",
+  "/h1>",
+  "nav><ahref='one/'>One</a><ahref='two/'>Two</a><ahref='three/'>Three</a>",
+  "/nav>",
+];
 
-const CodeBlocks = ({heading,para,btnText1,btnText2,isReverse}:CodingBlocksProps) => {
+const CodeBlocks = ({
+  heading,
+  para,
+  btnText1,
+  btnText2,
+  isReverse,
+}: CodingBlocksProps) => {
   return (
-    <div className={`flex flex-col gap-12 lg:flex-row lg:justify-between lg:items-center ${isReverse ? "lg:flex-row-reverse" : ""}`}>
-        {/* left part */}
-        <div className="flex flex-col gap-4 lg:max-w-2xl">
-            <div className="text-[#F1F2FF] font-semibold text-[36px] leading-[44px] tracking-[-2%]">{heading}</div>
-            <p className="break-words text-left text-[#838894] font-semibold text-[16px] leading-6">{para}</p>
-            <div className="flex gap-4 items-center mt-6">
-                <HighlightButton isActive={true} linkto="/login">{btnText1}</HighlightButton>
-                <HighlightButton isActive={false} linkto="/signup">{btnText2}</HighlightButton>
-            </div>
+    <div
+      className={`flex flex-col gap-12 lg:flex-row lg:justify-between lg:items-center ${
+        isReverse ? "lg:flex-row-reverse" : ""
+      }`}
+    >
+      {/* left part */}
+      <div className="flex flex-col gap-4 lg:max-w-2xl">
+        <div className="text-[#F1F2FF] font-semibold text-[36px] leading-[44px] tracking-[-2%]">
+          {heading}
         </div>
-        {/* right part */}
-        <motion.div
-          className={`p-6 bg-richblack-800 border-richblack-900 border ${isReverse === false ? "shadow-md shadow-blue-100":"shadow-md shadow-yellow-50"}`}>
-          {
-            data.map((line,index)=>(
-              <div key={index} className="flex gap-4 break-all">
-                <p className="text-richblack-400 font-semibold">{index+1}</p>
-                <p className={`${index===0 ? "text-[#E7BC5B]":""} ${ index === 3 ? "text-[#eb483c]":""} ${ index === 5 ? "text-[#eb483c]":""} ${ index === 7 ? "text-[#eb483c]":""} ${ index === 8 ? "text-[#eb483c]":""} font-semibold sm:font-bold break-words text-wrap text-left`}>{line}</p>
-              </div>
-            ))
-          }
-        </motion.div>
+        <p className="break-words text-left text-[#838894] font-semibold text-[16px] leading-6">
+          {para}
+        </p>
+        <div className="flex gap-4 items-center mt-6">
+          <HighlightButton isActive={true} linkto="/login">
+            {btnText1}
+          </HighlightButton>
+          <HighlightButton isActive={false} linkto="/signup">
+            {btnText2}
+          </HighlightButton>
+        </div>
+      </div>
+      {/* right part */}
+      <motion.div
+        className={`p-6 bg-richblack-800 border-richblack-900 border ${
+          isReverse === false
+            ? "shadow-md shadow-blue-100"
+            : "shadow-md shadow-yellow-50"
+        }`}
+      >
+        {data.map((line, index) => (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: 1,
+            }}
+            exit={{ opacity: 0 }}
+            transition={{
+              delay: index * 0.4, // Staggered animation for each line
+              duration: 0.7, // Duration of the fade-in
+              repeat: Infinity, // Infinite loop
+              repeatType: "loop", // Loop the animation
+              repeatDelay: (data.length - 1) * 1, // Delay between loop resets
+            }}
+            key={index}
+            className="flex gap-4 break-all"
+          >
+            <p className="text-richblack-400 font-semibold">{index + 1}</p>
+            <p
+              className={`${index === 0 ? "text-[#E7BC5B]" : ""} ${
+                index === 3 ? "text-[#eb483c]" : ""
+              } ${index === 5 ? "text-[#eb483c]" : ""} ${
+                index === 8 ? "text-[#eb483c]" : ""
+              } font-semibold sm:font-bold break-words text-wrap text-left`}
+            >
+              {line}
+            </p>
+          </motion.div>
+        ))}
+      </motion.div>
     </div>
-  )
-}
+  );
+};
 
-export default CodeBlocks
+export default CodeBlocks;

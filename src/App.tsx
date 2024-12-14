@@ -1,6 +1,11 @@
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import HomePage from './pages/HomePage'
+import SignupPage from './pages/SignupPage'
+import LoginPage from './pages/LoginPage'
+import ResetPassword from './pages/ResetPassword'
+import ResetPasswordToken from './pages/ResetPasswordToken'
+import VerifyEmail from './pages/VerifyEmail'
 
 function App() {
 
@@ -11,6 +16,11 @@ function App() {
 
       <Routes>
         <Route path='/' element={<HomePage />} />
+        <Route path='/signup' element={<SignupPage />} />
+        <Route path='/login' element={<LoginPage />} />
+        <Route path='/resetPassword' element={<ResetPassword />} />
+        <Route path='/resetPasswordToken' element={<ResetPasswordToken />} />
+        <Route path='/verifyEmail' element={<VerifyEmail />} />
       </Routes>
     </div>
   )

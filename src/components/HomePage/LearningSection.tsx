@@ -37,7 +37,7 @@ const LearningSection = () => {
             <h2 className="lg:text-5xl lg:font-semibold text-3xl font-medium">Unlock the <HighlightText text="Power of Code" /></h2>
             <p className="text-[#838894] font-medium mt-4">Learn to Build Anything You Can Imagine</p>
             <div className="mt-8">
-                <Tab data={data} tabData={tabData} setTabData={setTabData} />
+                <Tab which="homepage" data={data} tabData={tabData} setTabData={setTabData} />
             </div>
 
         </div>
