@@ -11,7 +11,6 @@ interface formInputTypesLogin {
 
 // rafce
 const LoginForm = () => {
-
   // useForm
   const {
     register,
@@ -26,13 +25,11 @@ const LoginForm = () => {
 
   return (
     <div className="flex flex-col gap-4">
-
       {/* form */}
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="w-full flex flex-col gap-5 mt-6"
       >
-
         {/* email */}
         <div className="w-full flex flex-col">
           <LabelInputContainer>
@@ -91,12 +88,11 @@ const LoginForm = () => {
         {/* button */}
         <button
           type="submit"
-          className="bg-gradient-to-br mt-4 relative group from-pure-greys-700 to-pure-greys-800 block w-full text-white rounded-md h-10 font-medium hover:shadow-sm hover:shadow-blue-100 transition-all duration-500"
+          className="bg-gradient-to-br mt-4 relative group from-yellow-25 to-yellow-50 block w-full text-black rounded-md h-10 font-medium hover:shadow-sm hover:shadow-blue-100 transition-all duration-500"
         >
           Log in &rarr;
           <BottomGradient />
         </button>
-
       </form>
     </div>
   );

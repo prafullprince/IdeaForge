@@ -3,6 +3,10 @@ import Tab from "../common/Tab";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Input } from "../ui/input";
 import clsx from "clsx";
+import { sendOtpApi } from "../../services/apiCall/auth";
+import { useNavigate } from "react-router-dom";
+import { setSignupData } from "../../slices/authSlice";
+import { useDispatch } from "react-redux";
 
 // formInputTypes
 interface formInputTypes {
@@ -15,30 +19,52 @@ interface formInputTypes {
 // data
 const data: string[] = ["Student", "Instructor"];
 
-
-// rafce
+// component
 const SignupForm = () => {
+  // hook
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // state
   const [tabData, setTabData] = useState(data[0]);
+  const [loading, setLoading] = useState(false);
 
   // useForm
   const {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm<formInputTypes>();
   const passwordValue = watch("password");
 
   // submitHandler
-  const onSubmit: SubmitHandler<formInputTypes> = (data: any) => {
-    console.log("data", data);
+  const onSubmit: SubmitHandler<formInputTypes> = async (data: any) => {
+    setLoading(true);
+    try {
+      // saveData in store for signup after otp validation
+      const accountType = tabData;
+      dispatch(setSignupData({ ...data, accountType }));
+
+      // sendOtpApiCall
+      await sendOtpApi(data.email, navigate);
+
+      // resetForm after successfull apiCall
+      reset({
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      });
+    } catch (error) {
+      console.log(error);
+    }
+    setLoading(false);
   };
 
   return (
     <div className="flex flex-col gap-4">
-
       {/* tab */}
       <div className="w-fit mt-4">
         <Tab
@@ -177,13 +203,15 @@ const SignupForm = () => {
         {/* button */}
         <button
           type="submit"
-          className="bg-gradient-to-br mt-4 relative group from-pure-greys-700 to-pure-greys-800 block w-full text-white rounded-md h-10 font-medium hover:shadow-sm hover:shadow-blue-100 transition-all duration-500"
+          className="bg-gradient-to-r mt-4 relative group from-yellow-25 to-yellow-50 block w-full text-black rounded-md h-10 font-medium hover:shadow-sm hover:shadow-blue-100 transition-all duration-500"
         >
-          Create account &rarr;
-          <BottomGradient />
+          {loading ? (
+            <span className="loader"></span>
+          ) : (
+            <p>Create account &rarr;</p>
+          )}
         </button>
       </form>
-
     </div>
   );
 };

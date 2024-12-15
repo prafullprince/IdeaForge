@@ -96,7 +96,7 @@ export const signup = async (req: Request, res: Response): Promise<any> => {
     // Check if user already exists, Find the most recent OTP for the email
     const [existingUser, response] = await Promise.all([
       User.findOne({ email }),
-      Otp.findOne({ email }).sort({ createdAt: -1 }),
+      Otp.findOne({ email }).sort({ createdAt: -1 })
     ]);
 
     // validation
@@ -107,7 +107,6 @@ export const signup = async (req: Request, res: Response): Promise<any> => {
       });
     }
     if (!response) {
-      // OTP not found for the email
       return res.status(400).json({
         success: false,
         message: 'Resend otp,previous one is expire',
@@ -117,7 +116,7 @@ export const signup = async (req: Request, res: Response): Promise<any> => {
       // Invalid OTP
       return res.status(400).json({
         success: false,
-        message: 'The OTP is not valid',
+        message: 'Invalid otp',
       });
     }
 

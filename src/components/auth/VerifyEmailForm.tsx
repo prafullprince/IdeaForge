@@ -1,13 +1,46 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import OtpInput from "react-otp-input";
-import { BottomGradient } from "./SignupForm";
 import { LuRefreshCw } from "react-icons/lu";
 import { FaArrowLeft } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { signupApi } from "../../services/apiCall/auth";
+import { useSelector } from "react-redux";
 
 const VerifyEmailForm = () => {
+
+  // hook
+  const navigate = useNavigate();
+
+  // store
+  const { signupData } = useSelector((state:any)=>state.auth);
+
   // state
   const [otp, setOtp] = useState<string>("");
+  const [loading,setLoading] = useState(false);
+
+  // signupAPiCall
+  const sendOtpHandler = async ()=>{
+    setLoading(true);
+    try {
+
+      // club otp with formData
+      const formData = {...signupData,otp};
+
+      // signupApiCall
+      await signupApi(formData,navigate);
+
+    } catch (error) {
+      console.log(error);
+    }
+    setLoading(false);
+  }
+
+  // sideEffect
+  useEffect(()=>{
+    if(!signupData){
+      navigate("/signup");
+    }
+  },[]);
 
   return (
     <div className="w-full flex flex-col gap-4">
@@ -35,10 +68,10 @@ const VerifyEmailForm = () => {
 
       {/* button */}
       <button
+      onClick={sendOtpHandler}
         className="bg-gradient-to-br mt-4 relative group from-yellow-50 to-yellow-400 block w-full text-black rounded-md h-10 font-medium hover:shadow-sm hover:shadow-blue-100 transition-all duration-500"
       >
-        Create account &rarr;
-        <BottomGradient />
+        {loading ? (<span className="loader"></span>) : (<p>Create account &rarr;</p>) }
       </button>
 
       {/* resend */}

@@ -38,7 +38,7 @@ const userSchema:Schema = new Schema({
     accountType:{
         type:String,
         required:true,
-        enum:["Admin","Instructor","Blogger"],
+        enum:["Admin","Instructor","Student"],
         trim:true
     },
     additionalDetails:{
