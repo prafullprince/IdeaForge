@@ -18,7 +18,7 @@ interface AuthState {
 // initialstate
 const initialState: AuthState = {
   signupData: null,
-  token: null,
+  token: localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token") as string) : null
 };
 
 // slice

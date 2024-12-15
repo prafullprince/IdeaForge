@@ -26,13 +26,11 @@ const Template = ({
       {/* box */}
       <div className="w-11/12 lg:w-[80%] mx-auto flex justify-center items-center min-h-screen">
         {/* content box */}
-        <div className="flex justify-center lg:justify-between items-center gap-6 w-11/12 lg:w-[80%] mx-auto">
+        <div className={`flex ${ ["resetToken","resetPassword","verifyEmail"].includes(formType) ? "justify-center" :"lg:justify-between justify-center" } items-center gap-6 w-11/12 lg:w-[80%] mx-auto`}>
           {/* left */}
           <div
             className={`p-6 flex flex-col gap-4 ${
-              formType === "signup" ? "lg:w-[45%]" : "max-w-lg"
-            } ${
-              formType === "login" ? "lg:w-[45%]" : ""
+              ["signup","login"].includes(formType) ? "lg:w-[45%]" : "max-w-lg"
             } rounded-2xl shadow-input border-pure-greys-200 border-2 hover:border-blue-100 transition-all duration-500`}
           >
             {/* content */}

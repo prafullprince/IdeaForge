@@ -1,12 +1,14 @@
 import toast from "react-hot-toast";
 import { apiConnector } from "../apiConnector";
 import { authEndPoints } from "../api";
+import { setToken } from "../../slices/authSlice";
 
 
 
 // ********************************************************************************************************
 //                                      Typescript types
 // ********************************************************************************************************
+
 // signup formDataTypes
 interface signupDataType {
     name: string,
@@ -18,10 +20,10 @@ interface signupDataType {
 }
 
 
-
 // ********************************************************************************************************
 //                                      Authentication apiCall
 // ********************************************************************************************************
+
 // sendOtp
 export const sendOtpApi = async (email:string,navigate:any)=>{
     const tid = toast.loading("Loading...");
@@ -63,9 +65,83 @@ export const signupApi = async (formData:signupDataType,navigate:any)=>{
 }
 
 // login
+export const loginApi = async (formData:signupDataType,navigate:any,dispatch:any)=>{
+    const tid = toast.loading("Loading...");
+    try {
+        // apiCall
+        const response = await apiConnector("POST",authEndPoints.LOGIN,formData);
 
-// changePassword
+        // save in store
+        dispatch(setToken(response.data.user.token));
+
+        // save in localstorage
+        localStorage.setItem("token",JSON.stringify(response.data.user.token));
+        
+        // navigate to login
+        navigate("/dashboard/profile");
+
+        // success response
+        toast.success(response.data.message);
+
+    } catch (error: any) {
+        console.log(error);
+        toast.error(error.response.data.message);
+    }
+    toast.dismiss(tid);
+}
 
 // resetPasswordToken
+export const resetPasswordTokenApi = async (email:string)=>{
+    const tid = toast.loading("Loading...");
+    try {
+        // apiCall
+        const response = await apiConnector("POST",authEndPoints.RESET_PASSWORD_TOKEN,{email});
+
+        // success response
+        toast.success(response.data.message);
+
+    } catch (error: any) {
+        console.log(error);
+        toast.error(error.response.data.message);
+    }
+    toast.dismiss(tid);
+}
 
 // resetPassword
+export const resetPasswordApi = async (formData:any,navigate:any)=>{
+    const tid = toast.loading("Loading...");
+    try {
+
+        // apiCall
+        const response = await apiConnector("POST",authEndPoints.RESET_PASSWORD,formData);
+
+        // navigate to login
+        navigate("/login")
+
+        // success response
+        toast.success(response.data.message);
+
+    } catch (error: any) {
+        console.log(error);
+        toast.error(error.response.data.message);
+    }
+    toast.dismiss(tid);
+}
+
+// changePassword
+export const changePasswordApi = async (formData:any)=>{
+    const tid = toast.loading("Loading...");
+    try {
+
+        // apiCall
+        const response = await apiConnector("POST",authEndPoints.CHANGE_PASSWORD,formData);
+
+        // success response
+        toast.success(response.data.message);
+
+    } catch (error: any) {
+        console.log(error);
+        toast.error(error.response.data.message);
+    }
+    toast.dismiss(tid);
+}

@@ -161,6 +161,7 @@ export const signup = async (req: Request, res: Response): Promise<any> => {
 // login
 export const login = async (req: Request, res: Response): Promise<any> => {
   try {
+
     // fetch data
     const { email, password } = req.body;
 
@@ -205,7 +206,6 @@ export const login = async (req: Request, res: Response): Promise<any> => {
       };
       res.cookie('token', token, options).status(200).json({
         success: true,
-        token,
         user,
         message: `User Login Success`,
       });
@@ -320,6 +320,11 @@ export const resetPasswordToken = async (req:Request,res:Response): Promise<any>
       return ErrorResponseHandling(res,400,"User not found");
     }
 
+    // ifAlreadyGenerated
+    if(userDetails.resetPasswordExpiry > new Date(Date.now()) && userDetails.resetPasswordToken ){
+      return ErrorResponseHandling(res,400,"Link already generated, open mail")
+    } 
+
     // createToken
     const token = crypto.randomBytes(20).toString("hex");
 
@@ -329,7 +334,7 @@ export const resetPasswordToken = async (req:Request,res:Response): Promise<any>
     userDetails.save();
 
     // frontend Url : resetPassword
-    const url = `http://localhost:3000/updatePassword/${token}`;
+    const url = `http://localhost:5173/resetPassword/${token}`;
 
     // response
     res.status(200).json({success:true,message:"Link sent on mail"});

@@ -1,6 +1,10 @@
-import { BottomGradient, LabelInputContainer } from "./SignupForm";
+import { LabelInputContainer } from "./SignupForm";
 import { Input } from "../ui/input";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { resetPasswordApi } from "../../services/apiCall/auth";
+import { useState } from "react";
+import { FaArrowLeftLong } from "react-icons/fa6";
 
 // formInputTypes
 interface formInputTypesTokenReset {
@@ -10,17 +14,40 @@ interface formInputTypesTokenReset {
 
 // rafce
 const ResetPasswordForm = () => {
+
+  // hook
+  const { token } = useParams();
+  const navigate = useNavigate();
+
+  // state
+  const [loading,setLoading] = useState(false);
+
   // useForm
   const {
     register,
     handleSubmit,
     watch,
-    formState: { errors }
+    reset,
+    formState: { errors },
   } = useForm<formInputTypesTokenReset>();
 
   // submitHandler
-  const onSubmit: SubmitHandler<formInputTypesTokenReset> = (data: any) => {
-    console.log("data", data);
+  const onSubmit: SubmitHandler<formInputTypesTokenReset> = async (data: any) => {
+    setLoading(true);
+    try {
+
+      // apiCall - resetPassword
+      const formData = {...data,token};
+      await resetPasswordApi(formData,navigate);
+      reset({
+        newPassword: "",
+        confirmNewPassword: ""
+      });
+
+    } catch (error) {
+      console.log(error);
+    }
+    setLoading(false);
   };
   const passwordValue = watch("newPassword");
 
@@ -31,7 +58,6 @@ const ResetPasswordForm = () => {
         onSubmit={handleSubmit(onSubmit)}
         className="w-full flex flex-col gap-5 mt-6"
       >
-
         {/* password */}
         <div className="w-full flex flex-col">
           <LabelInputContainer>
@@ -100,10 +126,10 @@ const ResetPasswordForm = () => {
           type="submit"
           className="bg-gradient-to-br mt-4 relative group from-yellow-50 to-yellow-100 block w-full text-black rounded-md h-10 font-medium hover:shadow-sm hover:shadow-blue-100 transition-all duration-500"
         >
-          Reset Password &rarr;
-          <BottomGradient />
+          {loading ? <span className="loader"></span> : <p>Reset Password &rarr;</p> }
         </button>
       </form>
+      <Link to={"/login"} className="flex items-center gap-2 text-sm text-caribbeangreen-100"><FaArrowLeftLong className="text-lg font-semibold" />Login</Link>
     </div>
   );
 };

@@ -3,7 +3,7 @@ import OtpInput from "react-otp-input";
 import { LuRefreshCw } from "react-icons/lu";
 import { FaArrowLeft } from "react-icons/fa6";
 import { Link, useNavigate } from "react-router-dom";
-import { signupApi } from "../../services/apiCall/auth";
+import { sendOtpApi, signupApi } from "../../services/apiCall/auth";
 import { useSelector } from "react-redux";
 
 const VerifyEmailForm = () => {
@@ -77,7 +77,7 @@ const VerifyEmailForm = () => {
       {/* resend */}
       <div className="w-full flex justify-between items-center">
         <Link to={"/signup"} className="text-[#F1F2FF] font-medium flex items-center gap-2"><FaArrowLeft className="" />Back to signup</Link>
-        <button className="text-[#47A5C5] font-medium flex items-center gap-1"><LuRefreshCw className="text-[#47A5C5] text-lg" />Resend it</button>
+        <button onClick={()=> sendOtpApi(signupData.email,navigate)} className="text-[#47A5C5] font-medium flex items-center gap-1"><LuRefreshCw className="text-[#47A5C5] text-lg" />Resend it</button>
       </div>
     </div>
   );

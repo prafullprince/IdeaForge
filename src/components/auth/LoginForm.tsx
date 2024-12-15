@@ -1,16 +1,25 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Input } from "../ui/input";
-import { BottomGradient, LabelInputContainer } from "./SignupForm";
+import { LabelInputContainer } from "./SignupForm";
+import { loginApi } from "../../services/apiCall/auth";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { FaArrowLeftLong } from "react-icons/fa6";
 
-// formInputTypes
+// formInputTypesLogin
 interface formInputTypesLogin {
   email: string;
   password: string;
-  confirmPassword: string;
 }
 
 // rafce
 const LoginForm = () => {
+
+  // hook
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   // useForm
   const {
     register,
@@ -18,9 +27,20 @@ const LoginForm = () => {
     formState: { errors },
   } = useForm<formInputTypesLogin>();
 
-  // submitHandler
-  const onSubmit: SubmitHandler<formInputTypesLogin> = (data: any) => {
-    console.log("data", data);
+  // state
+  const [loading,setLoading] = useState(false);
+
+  // submitHandler -> login
+  const onSubmit: SubmitHandler<formInputTypesLogin> = async (data: any) => {
+    setLoading(true);
+    try {
+      // loginApiCall
+      await loginApi(data,navigate,dispatch);
+
+    } catch (error) {
+      console.log(error);
+    }
+    setLoading(false);
   };
 
   return (
@@ -90,10 +110,15 @@ const LoginForm = () => {
           type="submit"
           className="bg-gradient-to-br mt-4 relative group from-yellow-25 to-yellow-50 block w-full text-black rounded-md h-10 font-medium hover:shadow-sm hover:shadow-blue-100 transition-all duration-500"
         >
-          Log in &rarr;
-          <BottomGradient />
+          {loading ? <span className="loader"></span> : <p>Log in &rarr;</p>}
         </button>
       </form>
+
+      {/* forgot,signup */}
+      <div className="w-full flex justify-between">
+        <Link to={"/signup"} className="flex items-center gap-2 text-sm text-caribbeangreen-100"><FaArrowLeftLong className="text-lg font-semibold" />Signup</Link>
+        <Link to={"/resetPasswordToken"} className="text-[#47A5C5] text-sm font-medium">Forgot password</Link>
+      </div>
     </div>
   );
 };

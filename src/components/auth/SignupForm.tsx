@@ -4,9 +4,10 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { Input } from "../ui/input";
 import clsx from "clsx";
 import { sendOtpApi } from "../../services/apiCall/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { setSignupData } from "../../slices/authSlice";
 import { useDispatch } from "react-redux";
+import { FaArrowLeftLong } from "react-icons/fa6";
 
 // formInputTypes
 interface formInputTypes {
@@ -212,6 +213,12 @@ const SignupForm = () => {
           )}
         </button>
       </form>
+
+      {/* forgot,signup */}
+      <div className="w-full flex justify-between">
+        <Link to={"/login"} className="flex items-center gap-2 text-sm text-caribbeangreen-100"><FaArrowLeftLong className="text-lg font-semibold" />Login</Link>
+        <Link to={"/resetPasswordToken"} className="text-[#47A5C5] text-sm font-medium">Forgot password</Link>
+      </div>
     </div>
   );
 };
