@@ -1,3 +1,4 @@
+
 interface Course {
   heading: string;
   description: string;

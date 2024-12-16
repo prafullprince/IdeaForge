@@ -1,6 +1,14 @@
+// import package
 import express, { Application, Request, Response } from 'express';
+
+// import database instances
 import connectDB from './config/database';
+
+// import routes
 import authRoutes from "./routes/authRoutes";
+import courseRoutes from "./routes/courseRoutes";
+
+// import middleware package
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
@@ -21,6 +29,7 @@ connectDB();
 
 // routes mounting
 app.use("/api/v1/auth",authRoutes);
+app.use("/api/v1/course",courseRoutes);
 
 // default routes
 app.get('/', (req: Request, res: Response) => {

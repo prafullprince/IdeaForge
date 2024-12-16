@@ -10,7 +10,8 @@ export interface IUser extends Document {
     resetPasswordToken:string,
     resetPasswordExpiry:Date,
     accountType:string,
-    additionalDetails: mongoose.Types.ObjectId
+    additionalDetails: mongoose.Types.ObjectId,
+    courses: mongoose.Types.ObjectId[]
 }
 
 // userSchema
@@ -44,7 +45,11 @@ const userSchema:Schema = new Schema({
     additionalDetails:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"Profile"
-    }
+    },
+    courses:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Course"
+    }]
 },{timestamps:true});
 
 // registering userSchema

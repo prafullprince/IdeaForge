@@ -4,7 +4,7 @@ import * as express from 'express';
 interface UserPayload {
   id: string;
   email: string;
-  role: string;
+  accountType: string;
 }
 
 declare global {

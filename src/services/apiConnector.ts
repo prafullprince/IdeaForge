@@ -13,7 +13,7 @@ export const axiosInstance = axios.create({});
 // }
 
 // apiConnector
-export const apiConnector = (method:Method,url:string,bodyData:Record<string,any>,headers?:Record<string,string>,params?:Record<string,any>)=> {
+export const apiConnector = (method:Method,url:string,bodyData?:Record<string,any>,headers?:Record<string,string>,params?:Record<string,any>)=> {
     const config: AxiosRequestConfig = {
         method:`${method}`,
         url:`${url}`,

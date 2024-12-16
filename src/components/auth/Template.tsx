@@ -22,7 +22,7 @@ const Template = ({
   formType,
 }: TemplateProps) => {
   return (
-    <div className="bg-black">
+    <div className="bg-black py-4">
       {/* box */}
       <div className="w-11/12 lg:w-[80%] mx-auto flex justify-center items-center min-h-screen">
         {/* content box */}

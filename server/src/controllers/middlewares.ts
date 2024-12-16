@@ -51,7 +51,7 @@ export const isInstructor = async (req: Request, res: Response,next:NextFunction
   try {
 
     // fetch token
-    const accountType = req.user?.role;
+    const accountType = req.user?.accountType;
 
     // validation
     if(!accountType){
@@ -79,7 +79,7 @@ export const isStudent = async (req: Request, res: Response,next:NextFunction): 
   try {
 
     // fetch token
-    const accountType = req.user?.role;
+    const accountType = req.user?.accountType;
 
     // validation
     if(!accountType){
@@ -107,7 +107,7 @@ export const isAdmin = async (req: Request, res: Response,next:NextFunction): Pr
   try {
 
     // fetch token
-    const accountType = req.user?.role;
+    const accountType = req.user?.accountType;
 
     // validation
     if(!accountType){

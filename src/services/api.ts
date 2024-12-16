@@ -1,6 +1,7 @@
 // baseUrl
 const BASE_URL = "https://studyforge.onrender.com/api/v1";
 
+// https://studyforge.onrender.com/api/v1
 
 // auth
 export const authEndPoints = {
@@ -25,4 +26,6 @@ export const authEndPoints = {
 
 
 // category
-
+export const categoryEndPoints = {
+    FETCH_ALL_CATEGORY: BASE_URL + "/course/getAllCategory"
+}
