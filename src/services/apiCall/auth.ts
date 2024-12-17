@@ -1,7 +1,7 @@
 import toast from "react-hot-toast";
 import { apiConnector } from "../apiConnector";
 import { authEndPoints } from "../api";
-import { logOut, setToken, setUserImage } from "../../slices/authSlice";
+import { logOut, setToken, setUser, setUserImage } from "../../slices/authSlice";
 
 // signup formDataTypes
 interface signupDataType {
@@ -71,10 +71,12 @@ export const loginApi = async (
     // save in store
     dispatch(setToken(response.data.user.token));
     dispatch(setUserImage(response.data.user.image));
+    dispatch(setUser(response.data.user));
 
     // save in localstorage
     localStorage.setItem("token", JSON.stringify(response.data.user.token));
     localStorage.setItem("image", JSON.stringify(response.data.user.image));
+    localStorage.setItem("user",JSON.stringify(response.data.user));
 
     // navigate to login
     navigate("/dashboard/profile");

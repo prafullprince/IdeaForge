@@ -1,6 +1,13 @@
-export const ACCOUNT_TYPE = {
-  VISITOR: "Instructor",
-  BLOGGER: "Blogger",
+
+interface IRole {
+  STUDENT: string,
+  INSTRUCTOR: string,
+  ADMIN: string
+}
+
+export const ACCOUNT_TYPE: IRole = {
+  STUDENT: "Student",
+  INSTRUCTOR: "Instructor",
   ADMIN: "Admin",
 };
 

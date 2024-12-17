@@ -5,7 +5,6 @@ import { TbLogout2 } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../services/apiCall/auth";
 
-
 const ProfileDropDown = () => {
   // store
   const { userImage } = useSelector((state: any) => state.auth);
@@ -21,12 +20,10 @@ const ProfileDropDown = () => {
   // sideEffect
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
-      console.log(dropDownRef.current);
       if (
         dropDownRef.current &&
         !dropDownRef.current.contains(e.target as Node)
       ) {
-        console.log(e.target);
         setIsOpen(false);
       }
     }
@@ -54,19 +51,22 @@ const ProfileDropDown = () => {
           className="absolute mt-2 right-0 bg-[#343541] rounded-md shadow-lg flex flex-col items-start px-2 py-2 text-white z-50"
         >
           <button
-            onClick={()=>{
-                navigate("/dashboard/profile");
-                setIsOpen(false);
+            onClick={() => {
+              navigate("/dashboard/profile");
+              setIsOpen(false);
             }}
             className="flex gap-2 items-center px-3 py-2 w-full hover:bg-richblack-600 rounded-md transition-all duration-200"
           >
             <RiDashboard3Line className="text-xl" />
             <p>Dashboard</p>
           </button>
-          <button onClick={()=>{
-                logout(dispatch,navigate);
-                setIsOpen(false);
-            }} className="flex gap-2 items-center px-3 py-2 hover:bg-richblack-600 rounded-md transition-all duration-200 w-full">
+          <button
+            onClick={() => {
+              logout(dispatch, navigate);
+              setIsOpen(false);
+            }}
+            className="flex gap-2 items-center px-3 py-2 hover:bg-richblack-600 rounded-md transition-all duration-200 w-full"
+          >
             <TbLogout2 className="text-xl" />
             <p>Logout</p>
           </button>

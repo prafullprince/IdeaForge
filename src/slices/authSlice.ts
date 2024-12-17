@@ -9,18 +9,26 @@ interface SignUpData {
   confirmPassword: string;
 }
 
+// interface IUser {
+//   name: string,
+//   accountType: string,
+//   email: string,
+// }
+
 // initialState types
 interface AuthState {
   signupData: SignUpData | null;
   token: string | null;
-  userImage: string
+  userImage: string,
+  user: any
 }
 
 // initialstate
 const initialState: AuthState = {
   signupData: null,
   token: localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token") as string) : null,
-  userImage: localStorage.getItem("image") ? JSON.parse(localStorage.getItem("image") as string) : null
+  userImage: localStorage.getItem("image") ? JSON.parse(localStorage.getItem("image") as string) : null,
+  user: localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user") as string) : null,
 };
 
 // slice
@@ -39,12 +47,15 @@ const authSlice = createSlice({
     },
     logOut(state){
       state.token = null;
+    },
+    setUser(state,action: PayloadAction<any>){
+      state.user = action.payload;
     }
   },
 });
 
 // Export actions
-export const { setSignupData, setToken, setUserImage, logOut } = authSlice.actions;
+export const { setSignupData, setToken, setUserImage, logOut, setUser } = authSlice.actions;
 
 // Export reducer
 export default authSlice.reducer;

@@ -1,15 +1,24 @@
-import { ACCOUNT_TYPE } from "../utils/constants";
-export const sidebarLinks = [
+import { ACCOUNT_TYPE } from "../lib/constants";
+
+export interface ISidebarLink {
+  id: number,
+  name: string,
+  type?: string,
+  icon: string,
+  path: string
+}
+
+export const sidebarLinks: ISidebarLink[] = [
   {
     id: 1,
     name: "My Profile",
-    path: "/dashboard/my-profile",
+    path: "/dashboard/profile",
     icon: "VscAccount",
   },
   {
     id: 2,
     name: "Dashboard",
-    path: "/dashboard/instructor",
+    path: "/dashboard/my-dashboard",
     type: ACCOUNT_TYPE.INSTRUCTOR,
     icon: "VscDashboard",
   },
