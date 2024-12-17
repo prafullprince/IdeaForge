@@ -1,7 +1,7 @@
 import * as Icons from "react-icons/vsc";
 import { useSelector } from "react-redux";
 import { Link, matchPath, useLocation } from "react-router-dom";
-import { motion } from "framer-motion";
+
 
 const SidebarLink = ({ link, iconName }: any) => {
   // store
@@ -31,14 +31,11 @@ const SidebarLink = ({ link, iconName }: any) => {
     >
       <Icon className="text-2xl w-fit" />
       {isOpenSidebar && (
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
+        <p
           className=""
         >
           {link.name}
-        </motion.p>
+        </p>
       )}
       <div className={`absolute ${matchRoute(link.path) ? "w-1 bg-yellow-50 h-full left-0" : ""}`}></div>
     </Link>

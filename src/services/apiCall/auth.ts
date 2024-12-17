@@ -133,7 +133,7 @@ export const resetPasswordApi = async (formData: any, navigate: any) => {
   toast.dismiss(tid);
 };
 
-// changePassword
+// changePassword - TODO: token vali
 export const changePasswordApi = async (formData: any) => {
   const tid = toast.loading("Loading...");
   try {

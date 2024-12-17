@@ -15,9 +15,15 @@ import Dashboard from './pages/Dashboard/Dashboard'
 import MyCourses from './pages/Dashboard/MyCourses'
 import AddCourse from './pages/Dashboard/AddCourse'
 import Setting from './pages/Dashboard/Setting'
+// import { useEffect } from 'react'
+// import { userDetails } from './services/apiCall/profile'
+// import { useSelector } from 'react-redux'
 
 function App() {
-
+  // const {token} = useSelector((state:any)=>state.auth);
+  // useEffect(()=>{
+  //   userDetails(token);
+  // },[])
 
   return (
     <div className='min-h-screen overflow-auto bg-richblack-900 text-white font-inter'>

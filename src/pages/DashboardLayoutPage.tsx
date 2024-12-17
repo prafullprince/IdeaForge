@@ -31,7 +31,7 @@ const DashboardLayoutPage = () => {
         {/* sidebar */}
         <Sidebar />
         {/* outlet */}
-        <div ref={btnRef} className="bg-pure-greys-900 w-full py-6">
+        <div ref={btnRef} className="bg-black w-full py-20">
           <div className="w-11/12 mx-auto">
             <Outlet />
           </div>

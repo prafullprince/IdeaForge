@@ -1,7 +1,8 @@
 // baseUrl
-const BASE_URL = "https://studyforge.onrender.com/api/v1";
+const BASE_URL = "http://localhost:4000/api/v1";
 
 // https://studyforge.onrender.com/api/v1
+// http://localhost:4000/api/v1
 
 // auth
 export const authEndPoints = {
@@ -23,6 +24,12 @@ export const authEndPoints = {
 
 
 // extra
+
+
+// profile
+export const profileEndpoints = {
+    GET_USER_DETAILS: BASE_URL + "/auth/getUserDetails"
+}
 
 
 // category
