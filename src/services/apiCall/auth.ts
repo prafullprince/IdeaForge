@@ -1,7 +1,7 @@
 import toast from "react-hot-toast";
 import { apiConnector } from "../apiConnector";
 import { authEndPoints } from "../api";
-import { logOut, setToken, setUser, setUserImage } from "../../slices/authSlice";
+import { logOut, setToken } from "../../slices/authSlice";
 
 // signup formDataTypes
 interface signupDataType {
@@ -70,13 +70,13 @@ export const loginApi = async (
 
     // save in store
     dispatch(setToken(response.data.user.token));
-    dispatch(setUserImage(response.data.user.image));
-    dispatch(setUser(response.data.user));
+    // dispatch(setUserImage(response.data.user.image));
+    // dispatch(setUser(response.data.user));
 
     // save in localstorage
     localStorage.setItem("token", JSON.stringify(response.data.user.token));
-    localStorage.setItem("image", JSON.stringify(response.data.user.image));
-    localStorage.setItem("user",JSON.stringify(response.data.user));
+    // localStorage.setItem("image", JSON.stringify(response.data.user.image));
+    // localStorage.setItem("user",JSON.stringify(response.data.user));
 
     // navigate to login
     navigate("/dashboard/profile");
@@ -133,7 +133,7 @@ export const resetPasswordApi = async (formData: any, navigate: any) => {
   toast.dismiss(tid);
 };
 
-// changePassword - TODO: token vali
+// changePassword - TODO: token valid
 export const changePasswordApi = async (formData: any) => {
   const tid = toast.loading("Loading...");
   try {

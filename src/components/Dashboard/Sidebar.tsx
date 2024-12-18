@@ -21,7 +21,7 @@ interface IModalData {
 
 const Sidebar = () => {
   // store
-  const { user } = useSelector((state: any) => state.auth);
+  const { user } = useSelector((state: any) => state.profile);
   const { isOpenSidebar } = useSelector((state: any) => state.global);
 
   // hook
@@ -31,7 +31,6 @@ const Sidebar = () => {
   //   state
   const [modalData, setModalData] = useState<IModalData | null>(null);
 
-  //   [cubic-bezier(0,1.47,.59,.71)]
 
   return (
     <div

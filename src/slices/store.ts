@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authSlice from "./authSlice";
 import globalSlice from './globalSlice';
+import profileSlice from './profileSlice';
 
 export const store = configureStore({
   reducer: {
     auth: authSlice,
-    global: globalSlice
+    global: globalSlice,
+    profile: profileSlice
   },
 });
 

@@ -7,7 +7,7 @@ import { logout } from "../../services/apiCall/auth";
 
 const ProfileDropDown = () => {
   // store
-  const { userImage } = useSelector((state: any) => state.auth);
+  const { user } = useSelector((state: any) => state.profile);
 
   // hook
   const dropDownRef = useRef<HTMLDivElement | null>(null);
@@ -38,7 +38,7 @@ const ProfileDropDown = () => {
     <div className="relative mt-2">
       <button onClick={() => setIsOpen((prev) => !prev)}>
         <img
-          src={userImage}
+          src={user?.image}
           width={32}
           height={32}
           className="border-0 rounded-full max-w-[28px] max-h-[28px] sm:max-w-8 sm:max-h-8"
