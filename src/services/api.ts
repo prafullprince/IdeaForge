@@ -1,5 +1,5 @@
 // baseUrl
-const BASE_URL = "https://studyforge.onrender.com/api/v1";
+const BASE_URL = "http://localhost:4000/api/v1";
 
 // https://studyforge.onrender.com/api/v1
 // http://localhost:4000/api/v1
@@ -15,7 +15,12 @@ export const authEndPoints = {
 }
 
 // course
-
+export const courseEndPoints = {
+    CREATE_COURSE: BASE_URL + "/course/createCourse",
+    EDIT_COURSE: BASE_URL + "/course/editCourse",
+    DELETE_COURSE: BASE_URL + "/course/deleteCourse",
+    INSTRUCTOR_COURSES: BASE_URL + "/course/getInstructorCourse"
+}
 
 // section
 

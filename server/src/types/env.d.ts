@@ -1,5 +1,6 @@
 // types.d.ts or express.d.ts
 import * as express from 'express';
+import fileUpload from "express-fileupload";
 
 interface UserPayload {
   id: string;
@@ -11,6 +12,7 @@ declare global {
   namespace Express {
     interface Request {
       user?: UserPayload | undefined;
+      files?: fileUpload | null
     }
   }
 }

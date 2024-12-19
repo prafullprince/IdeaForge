@@ -2,7 +2,7 @@ import mongoose, { Schema } from "mongoose";
 
 
 // category schema types
-interface ICategory {
+export interface ICategory {
     categoryName: string,
     categoryDesc: string,
     courses: mongoose.Types.ObjectId[]

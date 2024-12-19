@@ -20,6 +20,7 @@ import { userDetails } from './services/apiCall/profile'
 import { useDispatch, useSelector } from 'react-redux'
 import { setUser } from './slices/profileSlice'
 import Spinner1 from './components/spinners/Spinner1'
+import PrivateRoute from './components/auth/PrivateRoute'
 
 function App() {
 
@@ -64,7 +65,7 @@ function App() {
         <Route path='/resetPasswordToken' element={<ResetPasswordToken />} />
         <Route path='/verifyEmail' element={<VerifyEmail />} />
 
-        <Route element={<DashboardLayoutPage />} >
+        <Route element={<PrivateRoute><DashboardLayoutPage /></PrivateRoute>} >
           <Route path='/dashboard/profile' element={<Profile />} />
           <Route path='/dashboard/my-dashboard' element={<Dashboard />} />
           <Route path='/dashboard/my-courses' element={<MyCourses />} />
