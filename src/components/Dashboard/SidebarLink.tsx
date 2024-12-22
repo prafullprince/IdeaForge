@@ -32,7 +32,7 @@ const SidebarLink = ({ link, iconName }: any) => {
       <Icon className="text-2xl w-fit" />
       {isOpenSidebar && (
         <p
-          className=""
+          className="hidden sm:block"
         >
           {link.name}
         </p>

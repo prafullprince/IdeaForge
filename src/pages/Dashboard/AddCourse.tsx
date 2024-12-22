@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import CourseInfo from "../../components/AddCourse/info/CourseInfo";
 import CourseBuilder from "../../components/AddCourse/builder/CourseBuilder";
 import CoursePublish from "../../components/AddCourse/publish/CoursePublish";
+import { Link } from "react-router-dom";
 
 const steps = [
   { id: 1, name: "Course Information" },
@@ -19,10 +20,10 @@ const AddCourse = () => {
     <div className="flex justify-center items-center w-full">
       <div className="flex flex-col gap-8 w-full xl:w-[75%] 2xl:w-[60%]">
         {/* back to dashboard button */}
-        <button className="flex gap-1 w-fit text-[#838894] items-center">
+        <Link to={"/dashboard/profile"} className="flex gap-1 w-fit text-[#838894] items-center">
           <IoChevronBack className="text-lg" />
           <p className="text-sm">Back to Dashboard</p>
-        </button>
+        </Link>
 
         {/* render steps */}
         <div className="flex flex-col gap-2 w-full">

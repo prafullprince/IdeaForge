@@ -159,7 +159,6 @@ export const logout = (dispatch: any, navigate: any) => {
   try {
     dispatch(logOut());
     localStorage.removeItem("token");
-    localStorage.removeItem("image");
     navigate("/login");
     toast.success("Logout successfull");
   } catch (error) {

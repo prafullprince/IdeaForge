@@ -19,14 +19,24 @@ export const courseEndPoints = {
     CREATE_COURSE: BASE_URL + "/course/createCourse",
     EDIT_COURSE: BASE_URL + "/course/editCourse",
     DELETE_COURSE: BASE_URL + "/course/deleteCourse",
-    INSTRUCTOR_COURSES: BASE_URL + "/course/getInstructorCourse"
+    INSTRUCTOR_COURSES: BASE_URL + "/course/getInstructorCourse",
+    PUBLISH_COURSE: BASE_URL + "/course/publishCourse"
 }
 
 // section
-
+export const sectionEndPoints = {
+    CREATE_SECTION: BASE_URL + "/course/createSection",
+    EDIT_SECTION: BASE_URL + "/course/editSection",
+    DELETE_SECTION: BASE_URL + "/course/deleteSection",
+    COURSE_CONTENT: BASE_URL + "/course/getAllContent"
+}
 
 // subSection
-
+export const subSectionEndPoints = {
+    CREATE_SUBSECTION: BASE_URL + "/course/createSubSection",
+    EDIT_SUBSECTION: BASE_URL + "/course/editSubSection",
+    DELETE_SUBSECTION: BASE_URL + "/course/deleteSubSection"
+}
 
 // extra
 

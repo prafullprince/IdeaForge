@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { ErrorResponseHandling } from "../helper/EroorResponse";
 import Category from "../models/Category";
+import client from "../config/redis";
 
 
 // create category
@@ -57,8 +58,28 @@ export const fetchAllCategory = async (req:Request, res:Response): Promise<any> 
         // const totalCategory:number = await Category.countDocuments();
         // const totalPages:number = Math.ceil(totalCategory/limit);
 
+        // return data if cached
+        // const cachedValue = await client.get("getCategory");
+        // if(cachedValue){
+        //     try {
+        //         const data = JSON.parse(cachedValue);
+        //         return res.status(200).json({
+        //             success:true,
+        //             message:"Category fetched",
+        //             data
+        //         })
+        //     } catch (parseError) {
+        //         console.log(parseError);
+        //         await client.del("getCategory");
+        //     }
+        // }
+
         // find in db
         const data = await Category.find({});
+
+        // if not cached, cached data
+        // await client.set("getCategory",JSON.stringify(data));
+        // await client.expire("getCategory",300);
 
         // return res
         return res.status(200).json({

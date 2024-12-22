@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { memo, useEffect, useRef } from "react";
 
 const ConfirmationModal = ({ modalData,setModalData }: any) => {
 
@@ -57,4 +57,4 @@ const ConfirmationModal = ({ modalData,setModalData }: any) => {
   );
 };
 
-export default ConfirmationModal;
+export default memo(ConfirmationModal);

@@ -9,7 +9,7 @@ import ConfirmationModal from "../common/ConfirmationModal";
 import { logout } from "../../services/apiCall/auth";
 import { useNavigate } from "react-router-dom";
 
-interface IModalData {
+export interface IModalData {
   text1: string;
   text2: string;
   btn1Text: string;
@@ -35,7 +35,7 @@ const Sidebar = () => {
   return (
     <div
       className={`bg-pure-greys-900 min-h-screen relative ${
-        isOpenSidebar ? "w-[300px]" : "sm:w-[80px] w-0"
+        isOpenSidebar ? "sm:w-[300px] w-fit" : "sm:w-[80px] w-0"
       } ease-[cubic-bezier(0,1.93,0,1.93)] transition-all duration-1000`}
     >
       {/* sidebar button */}
@@ -97,7 +97,7 @@ const Sidebar = () => {
           } text-richblack-25`}
         >
           <TbLogout2 className="text-3xl" />
-          {isOpenSidebar && <p className="">Logout</p>}
+          {isOpenSidebar && <p className="sm:block hidden">Logout</p>}
         </button>
       </div>
       {modalData && (

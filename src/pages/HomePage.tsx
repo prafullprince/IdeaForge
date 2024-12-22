@@ -51,7 +51,7 @@ const HomePage = () => {
       </div>
       {/* section 2 -> Video */}
       <div className="lg:w-[80%] w-11/12 mt-16 mx-auto flex justify-center">
-        <img src={HomeBanner} alt="banner" />
+        <img src={HomeBanner} alt="banner" width={800} height={400} />
       </div>
       {/* section 3 -> codeBlocks */}
       <div className="lg:w-[80%] w-11/12 mx-auto mt-16 lg:mt-[120px] flex flex-col gap-20 lg:gap-[150px]">

@@ -1,10 +1,12 @@
-import { Request, response, Response } from 'express';
+import { Request, Response } from 'express';
 import { ErrorResponseHandling } from '../helper/EroorResponse';
-import Category, { ICategory } from '../models/Category';
+import Category from '../models/Category';
 import User from '../models/User';
 import { uploadMediaToCloudinary } from '../helper/UploadMedia';
-import Course, { ICourse } from '../models/Course';
+import Course from '../models/Course';
 import { UploadedFile } from 'express-fileupload';
+import Section from '../models/Section';
+import SubSection from '../models/SubSection';
 
 // createCourse
 export const createCourse = async (
@@ -28,7 +30,7 @@ export const createCourse = async (
 
     // validation
     const fileSizeInMb = thumbnail?.size / (1024 * 1024);
-    if (fileSizeInMb > 1 ) {
+    if (fileSizeInMb > 1) {
       return ErrorResponseHandling(res, 400, 'Image should be under 1mb');
     }
 
@@ -62,11 +64,15 @@ export const createCourse = async (
       return ErrorResponseHandling(res, 400, 'Invalid credentials');
     }
 
+    console.time('upload');
     // upload image on cloudinary
     const uploadedImage = await uploadMediaToCloudinary(
       thumbnail,
       process.env.FOLDER_NAME,
+      400,
+      400,
     );
+    console.timeEnd('upload');
 
     // save in data
     const data = await Course.create({
@@ -116,6 +122,10 @@ export const editCourse = async (req: Request, res: Response): Promise<any> => {
     // fetch data
     const updates = req.body;
     const { courseId } = req.body;
+
+    if (!courseId) {
+      return ErrorResponseHandling(res, 400, 'pass course');
+    }
 
     // course and category validation
     const [course, categoryDetails]: [
@@ -175,7 +185,6 @@ export const deleteCourse = async (
   res: Response,
 ): Promise<any> => {
   try {
-
     // fetch data
     const { courseId } = req.body;
     const { categoryId } = req.body;
@@ -187,27 +196,39 @@ export const deleteCourse = async (
     }
 
     // course and category and user validation
-    const [course,categoryDetails,userDetails] = await Promise.all([Course.findOne({ _id: courseId }),Category.findOne({_id:categoryId}),User.findOne({_id:userId})]);
+    const [course, categoryDetails, userDetails] = await Promise.all([
+      Course.findOne({ _id: courseId }),
+      Category.findOne({ _id: categoryId }),
+      User.findOne({ _id: userId }),
+    ]);
     if (!course || !categoryDetails || !userDetails) {
       return ErrorResponseHandling(res, 400, 'Invalid credentials');
     }
 
     // delete in course db
-    const data = await Course.findOneAndDelete({_id:courseId});
+    const data = await Course.findOneAndDelete({ _id: courseId });
 
     // delete in user.course
-    const updatedUser = await User.findByIdAndUpdate({_id:userId},{$pull:{courses:data?._id}},{new:true});
+    const updatedUser = await User.findByIdAndUpdate(
+      { _id: userId },
+      { $pull: { courses: data?._id } },
+      { new: true },
+    );
 
     // updatedCategory
-    const updatedCategory = await Category.findByIdAndUpdate({_id:categoryId},{$pull:{courses:data?._id}},{new:true});
+    const updatedCategory = await Category.findByIdAndUpdate(
+      { _id: categoryId },
+      { $pull: { courses: data?._id } },
+      { new: true },
+    );
 
     // return res
     return res.status(200).json({
       success: true,
-      message: 'Course created',
+      message: 'Course deleted',
       data,
       updatedUser,
-      updatedCategory
+      updatedCategory,
     });
   } catch (error) {
     console.log(error);
@@ -216,47 +237,400 @@ export const deleteCourse = async (
 };
 
 // getInstructorCourse
-export const getInstructorCourse = async (req:Request, res:Response): Promise<any> =>{
+export const getInstructorCourse = async (
+  req: Request,
+  res: Response,
+): Promise<any> => {
   try {
     // fetch data
     const userId = req.user?.id;
+    const page = parseInt(req.body.page) || 1;
+    const limit = parseInt(req.body.limit) || 3;
+    const { status } = req.body;
 
     // validation
-    if(!userId){
-      return ErrorResponseHandling(res,400,"Provide all details");
+    if (!userId || !status) {
+      return ErrorResponseHandling(res, 400, 'Provide all details');
     }
 
-    // findUserAndCourses
-    const data = await User.findById(userId).populate("courses");
+    //  Validate page and limit
+    if (page < 1 || limit < 1) {
+      return res.status(400).json({
+        success: false,
+        message: 'Page and limit must be positive integers',
+      });
+    }
 
+    // // cached value
+    // const cachedValue = await client.get(`instructorCourse:${userId}`);
+    // if(cachedValue){
+    //   try {
+    //     const data = JSON.parse(cachedValue);
+    //     return res.status(200).json({
+    //       success:true,
+    //       message:"fetched all instructor courses",
+    //       data
+    //     })
+    //   } catch (parseError) {
+    //     console.log(parseError);
+    //     await client.del("instructorCourse")
+    //   }
+    // }
+
+    // courses of instructor
+    const course: any = await Course.find({ instructor: userId,status:status }).sort({createdAt:-1});
+    console.log(course)
+    if (!course) {
+      return ErrorResponseHandling(res, 400, 'Invalid credentials');
+    }
+
+    // skip,calculation
+    const skip = (page - 1) * limit;
+    const totalCourse = course.length;
+    const totalPages = Math.ceil(totalCourse / limit);
+
+    // findUserAndCourses
+    const data = await Course.find({ instructor: userId, status:status })
+      .skip(skip)
+      .limit(limit);
+
+    // // if not cached then cached it
+    // await client.set(`instructorCourse:${userId}`,JSON.stringify(data));
+    // await client.expire(`instructorCourse:${userId}`,10);
+
+    // return res
+    return res.status(200).json({
+      success: true,
+      message: 'fetched all instructor courses',
+      pagination: {
+        data,
+        totalPages,
+        totalCourse,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    return ErrorResponseHandling(res, 500, 'Internal server error');
+  }
+};
+
+// createSection
+export const createSection = async (
+  req: Request,
+  res: Response,
+): Promise<any> => {
+  try {
+    // fetch data
+    let { sectionName, courseId } = req.body;
+
+    // validation
+    if (!sectionName || !courseId) {
+      return ErrorResponseHandling(res, 400, 'Provide all fields');
+    }
+
+    // save in data
+    const data = await Section.create({
+      sectionName
+    });
+
+    // updated course
+    const updatedCourse = await Course.findByIdAndUpdate({_id:courseId},{$push:{sections:data._id}},{new:true});
+    if(!updatedCourse){
+      return ErrorResponseHandling(res,400,"invalid credentials");
+    }
+
+    // return res
+    return res.status(200).json({
+      success: true,
+      message: 'Section created'
+    });
+  } catch (error) {
+    console.log(error);
+    return ErrorResponseHandling(res, 500, 'Internal server error');
+  }
+};
+
+// edit section
+export const editSection = async (
+  req: Request,
+  res: Response,
+): Promise<any> => {
+  try {
+    // fetch data
+    const { sectionId,sectionName } = req.body;
+
+    // validation
+    if(!sectionId || !sectionName){
+      return ErrorResponseHandling(res,400,"section not found");
+    }
+
+    // check section is valid or not
+    const section = await Section.findOne({_id:sectionId});
+    if(!section){
+      return ErrorResponseHandling(res,400,"Invalid credentials");
+    }
+
+    // edit data
+    section.sectionName = sectionName;
+
+    // save data
+    await section.save();
+
+    // return res
+    return res.status(200).json({
+      success: true,
+      message: 'Section edited',
+    });
+  } catch (error) {
+    console.log(error);
+    return ErrorResponseHandling(res, 500, 'Internal server error');
+  }
+};
+
+// delete section
+export const deleteSection = async (
+  req: Request,
+  res: Response,
+): Promise<any> => {
+  try {
+    // fetch data
+    const { sectionId } = req.body;
+    const { courseId } = req.body;
+
+    // validation
+    if (!courseId || !sectionId) {
+      return ErrorResponseHandling(res, 400, 'Provide all details');
+    }
+
+    // delete in section db
+    const data = await Section.findOneAndDelete({ _id: sectionId });
+    if(!data){
+      return ErrorResponseHandling(res,400,"Invalid credentials");
+    }
+
+    // delete in user.course
+    await Course.findByIdAndUpdate(
+      { _id: courseId },
+      { $pull: { sections: data?._id } },
+      { new: true },
+    );
+
+    // return res
+    return res.status(200).json({
+      success: true,
+      message: 'Section deleted'
+    });
+  } catch (error) {
+    console.log(error);
+    return ErrorResponseHandling(res, 500, 'Internal server error');
+  }
+};
+
+// getCourseContent
+export const getCourseContent = async (
+  req: Request,
+  res: Response,
+): Promise<any> => {
+  try {
+    // fetch data
+    let { courseId } = req.body;
+
+    // validation
+    if (!courseId) {
+      return ErrorResponseHandling(res, 400, 'Course not found');
+    }
+
+    // find in db
+    const data = await Course.findOne({
+      _id:courseId
+    })
+    .select("sections")
+    .populate({
+      path:"sections",
+      populate:{
+        path:"subSections",
+        select:"title description duration videoUrl"
+      }
+    }).lean();
+
+    if(!data){
+      return ErrorResponseHandling(res,400,"invalid credentials");
+    }
+
+    // return res
+    return res.status(200).json({
+      success: true,
+      message: 'Course content fetched',
+      data
+    });
+  } catch (error) {
+    console.log(error);
+    return ErrorResponseHandling(res, 500, 'Internal server error');
+  }
+};
+
+// create subSection
+export const createSubSection = async (
+  req: Request,
+  res: Response,
+): Promise<any> => {
+  try {
+    // fetch data
+    const { sectionId, title, description } = req.body;
+    const videoUrl = req.files?.videoUrl as UploadedFile;
+    console.log(sectionId)
+    // validation
+    if (!sectionId || !title || !description || !videoUrl) {
+      return ErrorResponseHandling(res, 400, 'Provide all fields');
+    }
+
+    // uploadFile
+    const uploadedFile = await uploadMediaToCloudinary(videoUrl,process.env.FOLDER_NAME!);
+    console.log(uploadedFile)
+    // save in data
+    const data = await SubSection.create({
+      title,
+      description,
+      duration: uploadedFile.duration,
+      videoUrl: uploadedFile.secure_url
+    });
+
+    // updated section
+    const updatedSection = await Section.findByIdAndUpdate({_id:sectionId},{$push:{subSections:data._id}},{new:true});
+    if(!updatedSection){
+      return ErrorResponseHandling(res,400,"invalid credentials");
+    }
+
+    // return res
+    return res.status(200).json({
+      success: true,
+      message: 'Sub-Section created'
+    });
+  } catch (error) {
+    console.log(error);
+    return ErrorResponseHandling(res, 500, 'Internal server error');
+  }
+};
+
+// edit subSection
+export const editSubSection = async (
+  req: Request,
+  res: Response,
+): Promise<any> => {
+  try {
+    // fetch data
+    const { subSectionId, title, description } = req.body;
+
+    // validation
+    if (!subSectionId) {
+      return ErrorResponseHandling(res, 400, 'Provide all fields');
+    }
+
+    // subSection
+    const subSection:any = await SubSection.findOne({_id:subSectionId});
+
+    if(!subSection){
+      return ErrorResponseHandling(res,400,"Invalid credentials");
+    }
+
+    // if video is present
+    if(req.files){
+      const videoUrl = req.files?.videoUrl as UploadedFile;
+      const uploadedFile = await uploadMediaToCloudinary(videoUrl,process.env.FOLDER_NAME!);
+      subSection.videoUrl = uploadedFile.secure_url;
+      subSection.duration = uploadedFile.duration;
+    }
+
+    // title,description
+    if(title){
+      subSection.title = title;
+    }
+
+    if(description){
+      subSection.description = description;
+    }
+
+    await subSection.save();
+
+    // return res
+    return res.status(200).json({
+      success: true,
+      message: 'Sub-Section edited'
+    });
+  } catch (error) {
+    console.log(error);
+    return ErrorResponseHandling(res, 500, 'Internal server error');
+  }
+};
+
+// delete subSection
+export const deleteSubSection = async (
+  req: Request,
+  res: Response,
+): Promise<any> => {
+  try {
+    // fetch data
+    const { subSectionId,sectionId } = req.body;
+
+    // validation
+    if (!sectionId || !subSectionId) {
+      return ErrorResponseHandling(res, 400, 'Provide all details');
+    }
+
+    // delete in subSection db
+    const data = await SubSection.findOneAndDelete({ _id: subSectionId });
+    if(!data){
+      return ErrorResponseHandling(res,400,"Invalid credentials");
+    }
+
+    // delete in subSection in section
+    await Section.findByIdAndUpdate(
+      { _id: sectionId },
+      { $pull: { subSections: data?._id } },
+      { new: true },
+    );
+
+    // return res
+    return res.status(200).json({
+      success: true,
+      message: 'Sub-Section deleted'
+    });
+  } catch (error) {
+    console.log(error);
+    return ErrorResponseHandling(res, 500, 'Internal server error');
+  }
+};
+
+// publish course
+export const publishCourse = async (
+  req: Request,
+  res: Response,
+): Promise<any> => {
+  try {
+    // fetch data
+    const { courseId,status } = req.body;
+
+    // validation
+    if (!courseId || !status) {
+      return ErrorResponseHandling(res, 400, 'Provide all details');
+    }
+
+    // updateCourse status
+    const data = await Course.findByIdAndUpdate({ _id: courseId },{status:status},{new:true});
     if(!data){
       return ErrorResponseHandling(res,400,"Invalid credentials");
     }
 
     // return res
     return res.status(200).json({
-      success:true,
-      message:"fetched all instructor courses",
-      data
+      success: true,
+      message: `Course status is now ${status}`
     });
-
   } catch (error) {
     console.log(error);
-    return ErrorResponseHandling(res,500,"Internal server error");
+    return ErrorResponseHandling(res, 500, 'Internal server error');
   }
-}
-
-// createSection
-
-// create subSection
-
-// edit section
-
-// edit subSection
-
-// delete section
-
-// delete subSection
+};
 
 // get coursePageDetails
 
@@ -267,4 +641,3 @@ export const getInstructorCourse = async (req:Request, res:Response): Promise<an
 // create Rating and reviews
 
 // createComment for particular subSection/video
-

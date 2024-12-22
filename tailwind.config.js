@@ -146,6 +146,7 @@ export default {
         scroll:"scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
         move: "move 5s linear infinite",
         spotlight: "spotlight 2s ease .75s 1 forwards",
+        l23: "l23 1s infinite steps(12)",
       },
       keyframes: {
         spotlight: {
@@ -166,6 +167,11 @@ export default {
         move: {
           "0%": { transform: "translateX(-200px)" },
           "100%": { transform: "translateX(200px)" },
+        },
+        l23: {
+          "100%": {
+            transform: "rotate(1turn)",
+          },
         },
       },
     },
