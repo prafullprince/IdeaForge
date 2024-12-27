@@ -1,8 +1,9 @@
 // baseUrl
-const BASE_URL = "https://studyforge.onrender.com/api/v1";
+const BASE_URL = "https://study-forge.onrender.com";
 
 // https://studyforge.onrender.com/api/v1
 // http://localhost:4000/api/v1
+// https://study-forge.onrender.com
 
 // auth
 export const authEndPoints = {
