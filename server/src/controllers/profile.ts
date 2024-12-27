@@ -20,20 +20,20 @@ export const getUserDetails = async (
     }
 
     // if data available in cache then return success response if not first cache then return
-    // const cachedValue = await client.get(`userDetails:${userId}`);
-    // if (cachedValue) {
-    //   try {
-    //     const userDetails = JSON.parse(cachedValue);
-    //     return res.status(200).json({
-    //       success: true,
-    //       message: 'User details fetched successfully',
-    //       userDetails,
-    //     });
-    //   } catch (parseError) {
-    //     console.error('Error parsing cached value:', parseError);
-    //     await client.del(`userDetails:${userId}`);
-    //   }
-    // }
+    const cachedValue = await client.get(`userDetails:${userId}`);
+    if (cachedValue) {
+      try {
+        const userDetails = JSON.parse(cachedValue);
+        return res.status(200).json({
+          success: true,
+          message: 'User details fetched successfully',
+          userDetails,
+        });
+      } catch (parseError) {
+        console.error('Error parsing cached value:', parseError);
+        await client.del(`userDetails:${userId}`);
+      }
+    }
 
     // userDetails
     const userDetails: any = await User.findOne({
@@ -55,8 +55,8 @@ export const getUserDetails = async (
       .lean();
 
     // if data is freash then cached them
-    // await client.set(`userDetails:${userId}`, JSON.stringify(userDetails));
-    // await client.expire(`userDetails:${userId}`, 30);
+    await client.set(`userDetails:${userId}`, JSON.stringify(userDetails));
+    await client.expire(`userDetails:${userId}`, 30);
 
     // return res
     return res.status(200).json({

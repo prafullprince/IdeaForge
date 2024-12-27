@@ -670,18 +670,18 @@ export const coursePageDetails = async (
     }
 
     // if cached present use them
-    // const cachedValue = await client.get(`coursePageDetails:${courseId}`);
-    // if (cachedValue) {
-    //   try {
-    //     const data = JSON.parse(cachedValue);
-    //     return res
-    //       .status(200)
-    //       .json({ success: true, message: 'Success', data });
-    //   } catch (error) {
-    //     console.log(error);
-    //     await client.del(`coursePageDetails:${courseId}`);
-    //   }
-    // }
+    const cachedValue = await client.get(`coursePageDetails:${courseId}`);
+    if (cachedValue) {
+      try {
+        const data = JSON.parse(cachedValue);
+        return res
+          .status(200)
+          .json({ success: true, message: 'Success', data });
+      } catch (error) {
+        console.log(error);
+        await client.del(`coursePageDetails:${courseId}`);
+      }
+    }
 
     // findCourse details
     const data = await Course.findOne({ _id: courseId })
@@ -702,8 +702,8 @@ export const coursePageDetails = async (
     }
 
     // if not cached then cached them
-    // await client.set(`coursePageDetails:${courseId}`, JSON.stringify(data));
-    // await client.expire(`coursePageDetails:${courseId}`, 100);
+    await client.set(`coursePageDetails:${courseId}`, JSON.stringify(data));
+    await client.expire(`coursePageDetails:${courseId}`, 100);
 
     // return res
     return res.status(200).json({
@@ -777,20 +777,20 @@ export const studentEnrolledCourses = async (
     }
 
     // check is cached available
-    // const cachedValue = await client.get(`enrolledCourse:${userId}`);
-    // if(cachedValue){
-    //   try {
-    //     const data = JSON.parse(cachedValue);
-    //     return res.status(200).json({
-    //       success: true,
-    //       message: "All Enrolled Courses",
-    //       data
-    //     });
-    //   } catch (error) {
-    //     console.log(error);
-    //     await client.del(`enrolledCourse:${userId}`);
-    //   }
-    // }
+    const cachedValue = await client.get(`enrolledCourse:${userId}`);
+    if(cachedValue){
+      try {
+        const data = JSON.parse(cachedValue);
+        return res.status(200).json({
+          success: true,
+          message: "All Enrolled Courses",
+          data
+        });
+      } catch (error) {
+        console.log(error);
+        await client.del(`enrolledCourse:${userId}`);
+      }
+    }
 
     // find user
     const user = await User.findOne({_id: userId}).populate({
@@ -807,8 +807,8 @@ export const studentEnrolledCourses = async (
     const data = user.courses;
 
     // if not cached then cached them
-    // await client.set(`enrolledCourse:${userId}`,JSON.stringify(data));
-    // await client.expire(`enrolledCourse:${userId}`,40);
+    await client.set(`enrolledCourse:${userId}`,JSON.stringify(data));
+    await client.expire(`enrolledCourse:${userId}`,40);
 
     // return res
     return res.status(200).json({
@@ -838,20 +838,20 @@ export const courseViewPageDetails = async (
     }
 
     // check is cached available
-    // const cachedValue = await client.get(`courseView:${courseId}`);
-    // if(cachedValue){
-    //   try {
-    //     const data = JSON.parse(cachedValue);
-    //     return res.status(200).json({
-    //       success: true,
-    //       message: "All Enrolled Courses",
-    //       data
-    //     });
-    //   } catch (error) {
-    //     console.log(error);
-    //     await client.del(`courseView:${courseId}`);
-    //   }
-    // }
+    const cachedValue = await client.get(`courseView:${courseId}`);
+    if(cachedValue){
+      try {
+        const data = JSON.parse(cachedValue);
+        return res.status(200).json({
+          success: true,
+          message: "All Enrolled Courses",
+          data
+        });
+      } catch (error) {
+        console.log(error);
+        await client.del(`courseView:${courseId}`);
+      }
+    }
 
     // isValid credentials
     const [user,course] = await Promise.all([
@@ -875,8 +875,8 @@ export const courseViewPageDetails = async (
                                           ]).lean();
     
     // if not cached then cached them
-    // await client.set(`courseView:${courseId}`,JSON.stringify(data));
-    // await client.expire(`courseView:${courseId}`,40);
+    await client.set(`courseView:${courseId}`,JSON.stringify(data));
+    await client.expire(`courseView:${courseId}`,40);
 
     // return res
     return res.status(200).json({

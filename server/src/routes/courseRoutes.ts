@@ -12,7 +12,7 @@ const router = express.Router();
 
 // category routes
 router.post("/createCategory",auth,isInstructor,createCategory);
-router.post("/getAllCategory",fetchAllCategory);
+router.get("/getAllCategory",fetchAllCategory);
 router.post("/categoryPageDetails",categoryPageDetails);
 
 // course routes

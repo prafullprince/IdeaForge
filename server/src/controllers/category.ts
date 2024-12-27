@@ -41,23 +41,6 @@ export const createCategory = async (req:Request, res:Response): Promise<any> =>
 export const fetchAllCategory = async (req:Request, res:Response): Promise<any> =>{
     try {
 
-        // // fetch data
-        // const page = parseInt(req.query.page as string,10) || 1 ;
-        // const limit = parseInt(req.query.limit as string,10) || 5;
-
-        // // Validate page and limit
-        // if (page < 1 || limit < 1) {
-        //     return res.status(400).json({
-        //         success: false,
-        //         message: "Page and limit must be positive integers",
-        //     });
-        // }
-
-        // // skip
-        // const skip:number = (page-1)*limit;
-        // const totalCategory:number = await Category.countDocuments();
-        // const totalPages:number = Math.ceil(totalCategory/limit);
-
         // return data if cached
         const cachedValue = await client.get("getCategory");
         if(cachedValue){
