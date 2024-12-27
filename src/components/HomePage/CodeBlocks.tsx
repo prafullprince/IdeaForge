@@ -1,6 +1,5 @@
 import React from "react";
 import HighlightButton from "./HighlightButton";
-import { motion } from "framer-motion";
 
 interface CodingBlocksProps {
   heading: React.ReactNode;
@@ -53,7 +52,7 @@ const CodeBlocks = ({
         </div>
       </div>
       {/* right part */}
-      <motion.div
+      <div
         className={`p-6 bg-richblack-800 border-richblack-900 border ${
           isReverse === false
             ? "shadow-md shadow-blue-100"
@@ -61,19 +60,7 @@ const CodeBlocks = ({
         }`}
       >
         {data.map((line, index) => (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{
-              opacity: 1,
-            }}
-            exit={{ opacity: 0 }}
-            transition={{
-              delay: index * 0.4, // Staggered animation for each line
-              duration: 0.7, // Duration of the fade-in
-              repeat: Infinity, // Infinite loop
-              repeatType: "loop", // Loop the animation
-              repeatDelay: (data.length - 1) * 1, // Delay between loop resets
-            }}
+          <div
             key={index}
             className="flex gap-4 break-all"
           >
@@ -87,9 +74,9 @@ const CodeBlocks = ({
             >
               {line}
             </p>
-          </motion.div>
+          </div>
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 };

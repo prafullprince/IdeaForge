@@ -9,6 +9,7 @@ import ConfirmationModal from "../common/ConfirmationModal";
 import { logout } from "../../services/apiCall/auth";
 import { useNavigate } from "react-router-dom";
 
+
 export interface IModalData {
   text1: string;
   text2: string;
@@ -27,10 +28,15 @@ const Sidebar = () => {
   // hook
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  // const location = useLocation();
+
+  // // match route
+  // const matchRoute = (route: any) => {
+  //   return matchPath({ path: route }, location.pathname);
+  // };
 
   //   state
   const [modalData, setModalData] = useState<IModalData | null>(null);
-
 
   return (
     <div
@@ -65,6 +71,21 @@ const Sidebar = () => {
         <div className="px-4">
           <div className="w-full h-[1px] bg-richblack-500"></div>
         </div>
+        {/* cart */}
+        {/* {user?.accountType === ACCOUNT_TYPE.STUDENT && (
+          <Link to={"/dashboard/cart"}
+          className={`flex gap-3 items-center relative mt-8 ${
+            isOpenSidebar ? "py-3 px-6 mx-2" : "py-[12px] px-4 w-fit mx-2"
+          } rounded-lg font-thin ${
+            matchRoute("/dashboard/cart")
+              ? "bg-[#3D2A01] text-yellow-25 font-medium"
+              : "text-richblack-25"
+          }`}
+          >
+            <FaShoppingBag className="text-3xl" />
+            {isOpenSidebar && <p className="sm:block hidden">Cart</p>}
+          </Link>
+        )} */}
         {/* settings */}
         <div className="mt-8">
           <SidebarLink
@@ -90,7 +111,7 @@ const Sidebar = () => {
               heading: "Logout Modal",
             });
           }}
-          className={`mt-1 flex items-center gap-3 ${
+          className={`mt-2 flex items-center gap-3 ${
             isOpenSidebar
               ? "py-3 px-4 mx-3 w-full"
               : "py-[12px] px-2 w-[80px] mx-3"

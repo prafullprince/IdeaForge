@@ -41,14 +41,15 @@ const ProfileDropDown = () => {
           src={user?.image}
           width={32}
           height={32}
-          className="border-0 rounded-full max-w-[28px] max-h-[28px] sm:max-w-8 sm:max-h-8"
+          alt="profile"
+          className="border-0 rounded-full sm:max-w-8 sm:max-h-8"
         />
       </button>
 
       {isOpen && (
         <div
           ref={dropDownRef}
-          className="absolute mt-2 right-0 bg-[#343541] rounded-md shadow-lg flex flex-col items-start px-2 py-2 text-white z-50"
+          className="absolute mt-2 right-0 bg-richblack-800 rounded-md shadow-lg flex flex-col items-start px-2 py-2 text-white z-50"
         >
           <button
             onClick={() => {
@@ -58,7 +59,7 @@ const ProfileDropDown = () => {
             className="flex gap-2 items-center px-3 py-2 w-full hover:bg-richblack-600 rounded-md transition-all duration-200"
           >
             <RiDashboard3Line className="text-xl" />
-            <p>Dashboard</p>
+            <p className="">Dashboard</p>
           </button>
           <button
             onClick={() => {

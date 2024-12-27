@@ -11,7 +11,8 @@ export interface ICourse {
     benefits: string,
     requirements: string,
     sections: mongoose.Types.ObjectId[],
-    instructor: mongoose.Types.ObjectId
+    instructor: mongoose.Types.ObjectId,
+    studentsEnroled: mongoose.Types.ObjectId[]
 }
 
 // courseSchema
@@ -61,7 +62,14 @@ const courseSchema:Schema = new Schema({
     status:{
         type:String,
         enum:["Draft","Published"]
-    }
+    },
+    studentsEnroled: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          required: true,
+          ref: "User",
+        },
+    ],
 },{timestamps:true});
 
 const Course = mongoose.model<ICourse>("Course",courseSchema);

@@ -3,9 +3,9 @@ import mongoose, { Schema } from 'mongoose';
 // profileSchema types
 interface IProfile {
     gender:string,
-    dob:string,
+    dateOfBirth:string,
     about:string,
-    phone:string,
+    contactNumber:string,
     user:mongoose.Types.ObjectId,
     country:string
 }
@@ -15,15 +15,15 @@ const profileSchema:Schema = new Schema({
 	gender: {
 		type: String,
 	},
-	dob: {
+	dateOfBirth: {
 		type: String,
 	},
 	about: {
 		type: String,
 		trim: true,
 	},
-	phone: {
-		type: Number,
+	contactNumber: {
+		type: String,
 		trim: true,
 	},
 	user:{

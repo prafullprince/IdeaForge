@@ -237,3 +237,68 @@ export const publishCourseApi = async (formData:any,token:string)=>{
     }
     toast.dismiss(tid);
 }
+
+// coursePageDetails
+export const coursePageDetailsApi = async (courseId:any)=>{
+    let res = null;
+    try {
+        // apiCall
+        const response = await apiConnector("POST",courseEndPoints.COURSE_PAGE_DETAILS,{courseId});
+
+        // res
+        res = response.data.data;
+
+    } catch (error: any) {
+        console.log(error);
+        toast.error(error.response.data.message);
+    }
+    return res;
+}
+
+// encrolledCourse
+export const encrolledCourse = async (token:string)=>{
+    let res = null;
+    const tid = toast.loading("Loading....");
+    try {
+        // apiCall
+        const response = await apiConnector("POST",courseEndPoints.ENROLLED_COURSE,{},{
+            "Content-Type":"multipart/form-data",
+            Authorization: `Bearer ${token}`
+        });
+
+        // res
+        res = response.data.data;
+        console.log(res);
+        // success
+        toast.success(response.data.message);
+    } catch (error: any) {
+        console.log(error);
+        toast.error(error.response.data.message);
+    }
+    toast.dismiss(tid);
+    return res;
+}
+
+// courseViewPageDetails
+export const courseViewPageDetailsApi = async (courseId:any,token:string)=>{
+    let res = null;
+    const tid = toast.loading("Loading....");
+    try {
+        // apiCall
+        const response = await apiConnector("POST",courseEndPoints.COURSE_VIEW_PAGE_DETAILS,{courseId},{
+            "Content-Type":"multipart/form-data",
+            Authorization: `Bearer ${token}`
+        });
+
+        // res
+        res = response.data.data;
+
+        // success
+        toast.success(response.data.message);
+    } catch (error: any) {
+        console.log(error);
+        toast.error(error.response.data.message);
+    }
+    toast.dismiss(tid);
+    return res;
+}

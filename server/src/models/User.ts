@@ -11,7 +11,9 @@ export interface IUser extends Document {
     resetPasswordExpiry:Date,
     accountType:string,
     additionalDetails: mongoose.Types.ObjectId,
-    courses: mongoose.Types.ObjectId[]
+    courses: mongoose.Types.ObjectId[],
+    followers: mongoose.Types.ObjectId[],
+    following: mongoose.Types.ObjectId[]
 }
 
 // userSchema
@@ -49,6 +51,18 @@ const userSchema:Schema = new Schema({
     courses:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:"Course"
+    }],
+    followers:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"User"
+    }],
+    following:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"User"
+    }],
+    courseProgress:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "CourseProgress"
     }]
 },{timestamps:true});
 

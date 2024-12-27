@@ -20,7 +20,12 @@ export const courseEndPoints = {
     EDIT_COURSE: BASE_URL + "/course/editCourse",
     DELETE_COURSE: BASE_URL + "/course/deleteCourse",
     INSTRUCTOR_COURSES: BASE_URL + "/course/getInstructorCourse",
-    PUBLISH_COURSE: BASE_URL + "/course/publishCourse"
+    PUBLISH_COURSE: BASE_URL + "/course/publishCourse",
+    COURSE_PAGE_DETAILS: BASE_URL + "/course/coursePageDetails",
+    CATURE_PAYMENT: BASE_URL + "/course/capturePayment",
+    VERIFY_PAYMENT: BASE_URL + "/course/verifyPayment",
+    ENROLLED_COURSE: BASE_URL + "/course/studentEnrolledCourses",
+    COURSE_VIEW_PAGE_DETAILS: BASE_URL + "/course/courseViewPageDetails"
 }
 
 // section
@@ -43,11 +48,12 @@ export const subSectionEndPoints = {
 
 // profile
 export const profileEndpoints = {
-    GET_USER_DETAILS: BASE_URL + "/auth/getUserDetails"
+    GET_USER_DETAILS: BASE_URL + "/auth/getUserDetails",
+    PROFILE_PIC: BASE_URL + "/auth/uploadPic"
 }
-
 
 // category
 export const categoryEndPoints = {
-    FETCH_ALL_CATEGORY: BASE_URL + "/course/getAllCategory"
+    FETCH_ALL_CATEGORY: BASE_URL + "/course/getAllCategory",
+    CATEGORY_PAGE_DETAILS: BASE_URL + "/course/categoryPageDetails"
 }

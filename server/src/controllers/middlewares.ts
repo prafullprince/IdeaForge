@@ -60,7 +60,7 @@ export const isInstructor = async (req: Request, res: Response,next:NextFunction
 
     // checkInstructor or not
     if(accountType !== userRole.INSTRUCTOR){
-      return ErrorResponseHandling(res,404,"invalid credentials");
+      return ErrorResponseHandling(res,404,"only for Instructor");
     }
 
     next();
@@ -88,7 +88,7 @@ export const isStudent = async (req: Request, res: Response,next:NextFunction): 
 
     // checkInstructor or not
     if(accountType !== userRole.STUDENT){
-      return ErrorResponseHandling(res,404,"invalid credentials");
+      return ErrorResponseHandling(res,404,"Only for Students");
     }
 
     next();
@@ -116,7 +116,7 @@ export const isAdmin = async (req: Request, res: Response,next:NextFunction): Pr
 
     // checkInstructor or not
     if(accountType !== userRole.ADMIN){
-      return ErrorResponseHandling(res,404,"invalid credentials");
+      return ErrorResponseHandling(res,404,"only for admin");
     }
 
     next();

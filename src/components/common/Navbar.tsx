@@ -18,7 +18,7 @@ const Navbar = () => {
 
             {/* logo */}
             <Link to={"/"} className="flex items-center gap-2">
-                <img src={logoImg} alt="logo" className="w-8 h-8" />
+                <img src={logoImg} alt="logo" width={32} height={32} className="max-w-8 max-h-8" />
                 <p className="text-[#F9F9F9] text-lg hidden sm:block">StudyNotion</p>
             </Link>
 

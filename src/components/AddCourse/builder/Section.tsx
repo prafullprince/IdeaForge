@@ -58,17 +58,17 @@ const Section = ({ section, setRefresh, setValue }: any) => {
     }
   }
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col w-full break-words text-wrap">
       <div
         onClick={() => setVisible((prev) => !prev)}
-        className="w-full relative hover:shadow-sm hover:shadow-blue-100 bg-richblack-700 hover:bg-richblack-800 transition-all duration-300 px-4 py-3 rounded-t-lg cursor-pointer flex justify-between items-center"
+        className="w-full relative hover:shadow-sm hover:shadow-blue-100 bg-richblack-700 hover:bg-richblack-800 transition-all duration-300 px-4 py-3 rounded-t-lg cursor-pointer flex flex-col gap-4 md:flex-row md:justify-between md:items-center"
       >
         <div className="flex gap-4 items-center">
           <RxDropdownMenu className="text-2xl" />
-          <p className="">{section?.sectionName.substring(0,10)}..</p>
+          <p className="">{section?.sectionName}</p>
         </div>
         {/* buttons */}
-        <div className="flex items-center gap-4 text-richblack-25">
+        <div className="flex items-center gap-4 pl-[10px] sm:pl-0 text-richblack-25">
           <FiEdit
             onClick={(e) => {
               if (editzSection) {

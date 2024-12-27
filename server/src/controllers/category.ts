@@ -59,27 +59,77 @@ export const fetchAllCategory = async (req:Request, res:Response): Promise<any> 
         // const totalPages:number = Math.ceil(totalCategory/limit);
 
         // return data if cached
-        // const cachedValue = await client.get("getCategory");
-        // if(cachedValue){
-        //     try {
-        //         const data = JSON.parse(cachedValue);
-        //         return res.status(200).json({
-        //             success:true,
-        //             message:"Category fetched",
-        //             data
-        //         })
-        //     } catch (parseError) {
-        //         console.log(parseError);
-        //         await client.del("getCategory");
-        //     }
-        // }
+        const cachedValue = await client.get("getCategory");
+        if(cachedValue){
+            try {
+                const data = JSON.parse(cachedValue);
+                return res.status(200).json({
+                    success:true,
+                    message:"Category fetched",
+                    data
+                })
+            } catch (parseError) {
+                console.log(parseError);
+                await client.del("getCategory");
+            }
+        }
 
         // find in db
         const data = await Category.find({});
 
         // if not cached, cached data
-        // await client.set("getCategory",JSON.stringify(data));
-        // await client.expire("getCategory",300);
+        await client.set("getCategory",JSON.stringify(data));
+        await client.expire("getCategory",300);
+
+        // return res
+        return res.status(200).json({
+            success:true,
+            message:"Category fetched",
+            data
+        });
+
+    } catch (error) {
+        console.log(error);
+        return ErrorResponseHandling(res,500,"Internal server error");
+    }
+}
+
+// categoryPageDetails
+export const categoryPageDetails = async (req:Request, res:Response): Promise<any> =>{
+    try {
+
+        // fetch data
+        const { categoryId } = req.body;
+
+        // return data if cached
+        const cachedValue = await client.get(`category:${categoryId}`);
+        if(cachedValue){
+            try {
+                const data = JSON.parse(cachedValue);
+                return res.status(200).json({
+                    success:true,
+                    message:"Category details fetched",
+                    data
+                })
+            } catch (parseError) {
+                console.log(parseError);
+                await client.del(`category:${categoryId}`);
+            }
+        }
+
+        // find in db
+        const data = await Category.findOne({_id:categoryId}).populate({
+            path:"courses",
+            select:"courseName courseDesc price thumbnail",
+            populate:{
+                path:"instructor",
+                select:"name email image"
+            }
+        });
+
+        // if not cached, cached data
+        await client.set(`category:${categoryId}`,JSON.stringify(data));
+        await client.expire(`category:${categoryId}`,300);
 
         // return res
         return res.status(200).json({

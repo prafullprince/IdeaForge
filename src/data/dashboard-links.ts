@@ -50,4 +50,11 @@ export const sidebarLinks: ISidebarLink[] = [
     type: ACCOUNT_TYPE.STUDENT,
     icon: "VscHistory",
   },
+  {
+    id:7,
+    name:"Watch Course",
+    path:"/dashboard/watch/:courseId",
+    type: ACCOUNT_TYPE.STUDENT,
+    icon: "VscVmRunning"
+  }
 ];

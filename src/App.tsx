@@ -20,7 +20,14 @@ import { userDetails } from "./services/apiCall/profile";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "./slices/profileSlice";
 import Spinner1 from "./components/spinners/Spinner1";
-import PrivateRoute from "./components/auth/PrivateRoute";
+import PrivateRoute from './components/auth/PrivateRoute';
+import CatalogPage from "./pages/CatalogPage";
+import CoursePageDetails from "./pages/CoursePageDetails";
+import CartPage from "./components/Cart/CartPage";
+import EnrolledCourse from "./pages/EnrolledCourse";
+import WatchCourse from "./pages/WatchCourse";
+import LectureContent from "./components/Watch/LectureContent";
+
 // import { jwtDecode } from "jwt-decode";
 
 // interface IPayload {
@@ -106,6 +113,18 @@ function App() {
         <Route path="/resetPassword/:token" element={<ResetPassword />} />
         <Route path="/resetPasswordToken" element={<ResetPasswordToken />} />
         <Route path="/verifyEmail" element={<VerifyEmail />} />
+        <Route path="/catalog/:catalogName" element={<CatalogPage />} />
+        <Route path="/course/details/:courseId" element={<CoursePageDetails />} />
+        <Route path="/cart" element={<CartPage />} />
+        {/* <Route path="/watch/:courseId" element={<WatchCourse />} /> */}
+
+        <Route 
+          element={<PrivateRoute>
+            <WatchCourse />
+          </PrivateRoute>}
+        >
+          <Route path="/watch-course/:courseId/section/:sectionId/sub-section/:subSectionId" element={<LectureContent />} />
+        </Route>
 
         <Route
           element={
@@ -119,6 +138,7 @@ function App() {
           <Route path="/dashboard/my-courses" element={<MyCourses />} />
           <Route path="/dashboard/add-course" element={<AddCourse />} />
           <Route path="/dashboard/settings" element={<Setting />} />
+          <Route path="/dashboard/enrolled-courses" element={<EnrolledCourse />} />
         </Route>
       </Routes>
     </div>

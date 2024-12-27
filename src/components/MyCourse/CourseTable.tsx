@@ -50,7 +50,7 @@ const CourseTable = ({ course,setCourses,courses }: any) => {
   }
 
   return (
-    <div className="flex shadow-sm shadow- gap-4 items-start justify-between flex-col sm:flex-row cursor-pointer bg-richblack-700 hover:bg-richblack-800 transition-all duration-300 p-4 rounded-lg">
+    <div className="flex shadow-sm gap-4 items-start justify-between flex-col sm:flex-row cursor-pointer bg-pure-greys-700 hover:bg-pure-greys-800 transition-all duration-300 p-4 rounded-lg">
       <div className="flex gap-4 flex-col lg:flex-row">
         {/* img */}
         <div>
@@ -77,7 +77,7 @@ const CourseTable = ({ course,setCourses,courses }: any) => {
         </div>
       </div>
       {/* button */}
-      <div className="flex gap-6 items-center text-richblue-5">
+      <div className="flex gap-4 items-center text-richblue-5">
         <button className="hover:text-caribbeangreen-100 transition-all duration-300">
           <RxEyeOpen className="text-3xl" />
         </button>

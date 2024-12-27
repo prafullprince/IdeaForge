@@ -1,9 +1,16 @@
 import { BsCart3 } from "react-icons/bs"
 import { IoSearchSharp } from "react-icons/io5"
 import ProfileDropDown from "./ProfileDropDown"
+import { Link } from "react-router-dom"
+import { useSelector } from "react-redux"
 
 
 const LoggedUser = () => {
+
+  // store
+  const { totalItems } = useSelector((state:any)=> state.cart);
+
+
   return (
     <div className="flex items-center gap-4 px-4">
       {/* search */}
@@ -11,9 +18,10 @@ const LoggedUser = () => {
         <IoSearchSharp className="text-2xl text-richblack-50" />
       </button>
       {/* cart */}
-      <button>
-        <BsCart3 className="text-xl text-richblack-50" />
-      </button>
+      <Link className="relative" to={"/cart"}>
+        <BsCart3 className="text-2xl text-richblack-50" />
+        <div className="absolute top-0 bg-pink-200 px-[6px] translate-x-3 translate-y-[-8px] rounded-full text-base">{totalItems}</div>
+      </Link>
       {/* Profile dropDown */}
       <ProfileDropDown />
     </div>
