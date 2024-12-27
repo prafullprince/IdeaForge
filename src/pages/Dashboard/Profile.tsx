@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { profilePicApi } from "../../services/apiCall/profile";
 import ConnectionModal from "../../components/common/ConnectionModal";
+import Spinner1 from "../../components/spinners/Spinner1";
 
 const Profile = () => {
   // hook
@@ -33,6 +34,9 @@ const Profile = () => {
   function imageSelect() {
     imageRef.current.click();
   }
+
+  // loading
+  if(loading) return <Spinner1 />
 
   return (
     <div className="w-full">

@@ -26,7 +26,7 @@ const CoursePageDetails = () => {
   const [inCart,setInCart] = useState<any>(false);
   const [loading,setLoading] = useState<boolean>(false);
   const [ratings,setRatings] = useState<number>(4.5);
-
+  setRatings(3.5);
   // handleBuyCourse
   async function handleBuyCourse(){
     try {
