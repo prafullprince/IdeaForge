@@ -8,7 +8,7 @@ export const fetchAllCategoryApi = async ()=>{
     let res = null;
     try {
         // apiCall
-        const response = await apiConnector("POST",categoryEndPoints.FETCH_ALL_CATEGORY);
+        const response = await apiConnector("GET",categoryEndPoints.FETCH_ALL_CATEGORY);
 
         // res
         res = response.data.data;

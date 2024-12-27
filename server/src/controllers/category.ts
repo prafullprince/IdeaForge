@@ -42,7 +42,7 @@ export const fetchAllCategory = async (req:Request, res:Response): Promise<any> 
     try {
 
         // return data if cached
-        const cachedValue = await client.get("getCategory");
+        const cachedValue = await client.get(`getCategory:all`);
         if(cachedValue){
             try {
                 const data = JSON.parse(cachedValue);
@@ -53,7 +53,7 @@ export const fetchAllCategory = async (req:Request, res:Response): Promise<any> 
                 })
             } catch (parseError) {
                 console.log(parseError);
-                await client.del("getCategory");
+                await client.del(`getCategory:all`);
             }
         }
 
@@ -61,8 +61,8 @@ export const fetchAllCategory = async (req:Request, res:Response): Promise<any> 
         const data = await Category.find({});
 
         // if not cached, cached data
-        await client.set("getCategory",JSON.stringify(data));
-        await client.expire("getCategory",300);
+        await client.set(`getCategory:all`,JSON.stringify(data));
+        await client.expire(`getCategory:all`,300);
 
         // return res
         return res.status(200).json({
