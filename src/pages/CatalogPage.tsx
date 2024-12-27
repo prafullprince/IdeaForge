@@ -81,7 +81,7 @@ const CatalogPage = () => {
             <div className="w-full">
               <Corousel>
                 {course?.map((item: any) => (
-                  <Link to={`/course/details/${item._id}`}
+                  <Link to={`/course/details/${item?._id}`}
                     key={item?._id}
                     className="cursor-pointer"
                   >
