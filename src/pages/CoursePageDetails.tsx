@@ -121,7 +121,7 @@ const CoursePageDetails = () => {
                 (<button onClick={()=>dispatch(removeItems(courseDetails?._id))} className="bg-[#FFD60A] py-3 px-6 rounded-lg text-[#000814] font-medium text-lg">Remove from Cart</button>) : 
                 (<button onClick={()=>dispatch(setItems(courseDetails))} className="bg-[#FFD60A] py-3 px-6 rounded-lg text-[#000814] font-medium text-lg">Add to Cart</button>)
               }
-              <button className="bg-richblack-900 py-4 px-6 rounded-lg">Buy now</button>
+              <button onClick={handleBuyCourse} className="bg-richblack-900 py-4 px-6 rounded-lg">Buy now</button>
             </div>
           </div>
           {/* cart,buy -> from laptop */}

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { ISidebarLink, sidebarLinks } from "../../data/dashboard-links";
+import { ISidebarLink } from "../../data/dashboard-links";
 import SidebarLink from "./SidebarLink";
 import { BsWindowSidebar } from "react-icons/bs";
 import { setIsOpenSidebar } from "../../slices/globalSlice";
@@ -8,6 +8,7 @@ import { useState } from "react";
 import ConfirmationModal from "../common/ConfirmationModal";
 import { logout } from "../../services/apiCall/auth";
 import { useNavigate } from "react-router-dom";
+import { useSidebarLinks } from "../../data/dashboard-links";
 
 
 export interface IModalData {
@@ -24,6 +25,9 @@ const Sidebar = () => {
   // store
   const { user } = useSelector((state: any) => state.profile);
   const { isOpenSidebar } = useSelector((state: any) => state.global);
+
+  // function
+  const sidebarLinks = useSidebarLinks();
 
   // hook
   const dispatch = useDispatch();

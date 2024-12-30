@@ -53,7 +53,7 @@ const ProfileDropDown = () => {
         >
           <button
             onClick={() => {
-              navigate("/dashboard/profile");
+              navigate(`/dashboard/profile`);
               setIsOpen(false);
             }}
             className="flex gap-2 items-center px-3 py-2 w-full hover:bg-richblack-600 rounded-md transition-all duration-200"

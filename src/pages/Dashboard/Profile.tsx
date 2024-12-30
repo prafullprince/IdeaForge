@@ -1,8 +1,13 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { profilePicApi } from "../../services/apiCall/profile";
+import {
+  loggedUserCoursesApi,
+  profilePicApi,
+  userDetailsById,
+} from "../../services/apiCall/profile";
 import ConnectionModal from "../../components/common/ConnectionModal";
 import Spinner1 from "../../components/spinners/Spinner1";
+import UserCourses from "../../components/common/UserCourses";
 
 const Profile = () => {
   // hook
@@ -16,13 +21,14 @@ const Profile = () => {
   const [loading, setLoading] = useState(false);
   const [file, setFile] = useState<any | "" | null>(null);
   const [preview, setPreview] = useState<any | "" | null>(null);
-  const [modalData,setModalData] = useState<any | null>(null);
+  const [modalData, setModalData] = useState<any | null>(null);
+  const [courses, setCourses] = useState<any>([]);
 
   // api -> profilePicUpload
-  async function profilePicHandler(){
+  async function profilePicHandler() {
     setLoading(true);
     try {
-      await profilePicApi(token,file);
+      await profilePicApi(token, file);
       setFile(null);
     } catch (error) {
       console.log(error);
@@ -35,8 +41,23 @@ const Profile = () => {
     imageRef.current.click();
   }
 
+  // function -> apiCall
+  async function fetchUserCourses() {
+    try {
+      const result = await loggedUserCoursesApi(token);
+      setCourses(result);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  // sideEffect -> courseApiCall
+  useEffect(() => {
+    fetchUserCourses();
+  }, []);
+
   // loading
-  if(loading) return <Spinner1 />
+  if (loading) return <Spinner1 />;
 
   return (
     <div className="w-full">
@@ -73,11 +94,14 @@ const Profile = () => {
               />
             )}
           </button>
-          {
-            file && (
-              <button onClick={profilePicHandler} className="px-3 py-1 bg-yellow-50 shadow-lg shadow-blue-100 text-richblack-900 rounded-lg absolute left-[10%] top-[40%]">Upload</button>
-            )
-          }
+          {file && (
+            <button
+              onClick={profilePicHandler}
+              className="px-3 py-1 bg-yellow-50 shadow-lg shadow-blue-100 text-richblack-900 rounded-lg absolute left-[10%] top-[40%]"
+            >
+              Upload
+            </button>
+          )}
           {/* userDetails */}
           <div className="flex flex-col gap-4">
             {/* button */}
@@ -94,21 +118,29 @@ const Profile = () => {
               <div className="text-lg">
                 4 <span className="text-richblack-25">posts</span>
               </div>
-              <button onClick={()=>{
-                setModalData({
-                  heading:"Followers",
-                  connection: user?.followers
-                });
-              }} className="text-lg">
-                {user?.followers?.length === 0 ? 0 : user?.followers?.length} <span className="text-richblack-25">followers</span>
+              <button
+                onClick={() => {
+                  setModalData({
+                    heading: "Followers",
+                    connection: user?.followers,
+                  });
+                }}
+                className="text-lg"
+              >
+                {user?.followers?.length === 0 ? 0 : user?.followers?.length}{" "}
+                <span className="text-richblack-25">followers</span>
               </button>
-              <button onClick={()=>{
-                setModalData({
-                  heading:"Following",
-                  connection: user?.following
-                });
-              }} className="text-lg">
-              {user?.following?.length === 0 ? 0 : user?.following?.length} <span className="text-richblack-25">following</span>
+              <button
+                onClick={() => {
+                  setModalData({
+                    heading: "Following",
+                    connection: user?.following,
+                  });
+                }}
+                className="text-lg"
+              >
+                {user?.following?.length === 0 ? 0 : user?.following?.length}{" "}
+                <span className="text-richblack-25">following</span>
               </button>
             </div>
             {/* name */}
@@ -125,9 +157,19 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      {
-        modalData && <ConnectionModal modalData={modalData} setModalData={setModalData} />
-      }
+      {/* tab */}
+      <div className="mt-8">
+        <div className="text-xl cursor-pointer py-2 px-1 border-b text-yellow-100 border-yellow-50 w-fit">
+          Courses
+        </div>
+      </div>
+
+      {/* courses */}
+      <UserCourses courses={courses} />
+
+      {modalData && (
+        <ConnectionModal modalData={modalData} setModalData={setModalData} />
+      )}
     </div>
   );
 };

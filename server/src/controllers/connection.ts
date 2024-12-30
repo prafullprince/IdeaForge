@@ -31,15 +31,14 @@ export const follow = async (req: Request, res: Response): Promise<any> => {
 
     // yes then unfollow
     if (isAlreadyFollowed) {
-      const key = false;
 
-      //   delete from db
+      // delete from db
       await Connection.findOneAndDelete({
         from: FromUser._id,
         to: ToUser._id,
       });
 
-      //   update user
+      // update user
       await Promise.all([
         User.findByIdAndUpdate(
           { _id: FromUser._id },
@@ -55,7 +54,7 @@ export const follow = async (req: Request, res: Response): Promise<any> => {
       return res.status(200).json({
         success: true,
         message: 'Unfollowed successfully',
-        key,
+        key: false,
       });
     }
 
@@ -78,11 +77,10 @@ export const follow = async (req: Request, res: Response): Promise<any> => {
         { new: true },
       ).populate('followers'),
     ]);
-    const key = true;
 
     return res
       .status(200)
-      .json({ success: true, message: 'Followed successfully', key });
+      .json({ success: true, message: 'Followed successfully', key: true });
   } catch (error) {
     console.log(error);
     return ErrorResponseHandling(res, 500, 'Internal server error');

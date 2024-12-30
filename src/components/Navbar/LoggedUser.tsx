@@ -3,6 +3,8 @@ import { IoSearchSharp } from "react-icons/io5"
 import ProfileDropDown from "./ProfileDropDown"
 import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
+import { useState } from "react"
+import SearchModal from "../common/SearchModal"
 
 
 const LoggedUser = () => {
@@ -10,11 +12,16 @@ const LoggedUser = () => {
   // store
   const { totalItems } = useSelector((state:any)=> state.cart);
 
+  const [modalData,setModalData] = useState<any>(null);
 
   return (
     <div className="flex items-center gap-4 px-4">
       {/* search */}
-      <button>
+      <button onClick={()=>{
+        setModalData({
+          heading: "Search Modal"
+        })
+      }}>
         <IoSearchSharp className="text-2xl text-richblack-50" />
       </button>
       {/* cart */}
@@ -24,6 +31,11 @@ const LoggedUser = () => {
       </Link>
       {/* Profile dropDown */}
       <ProfileDropDown />
+
+
+      {
+        modalData && <SearchModal modalData={modalData} setModalData={setModalData} />
+      }
     </div>
   )
 }

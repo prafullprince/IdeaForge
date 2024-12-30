@@ -6,6 +6,7 @@ import { auth, isInstructor, isStudent } from '../controllers/middlewares';
 import { categoryPageDetails, createCategory, fetchAllCategory } from '../controllers/category';
 import { coursePageDetails, courseViewPageDetails, createCourse, createSection, createSubSection, deleteCourse, deleteSection, deleteSubSection, editCourse, editSection, editSubSection, getCourseContent, getInstructorCourse, markVideoAsCompleted, publishCourse, studentEnrolledCourses } from '../controllers/course';
 import { capturePayment, verifyPayment } from '../controllers/payments';
+import { searchCourse } from '../controllers/extra';
 
 // router instances
 const router = express.Router();
@@ -42,6 +43,9 @@ router.post("/deleteSubSection",auth,isInstructor,deleteSubSection);
 // buy
 router.post("/capturePayment",auth,isStudent,capturePayment);
 router.post("/verifyPayment",auth,isStudent,verifyPayment);
+
+// extra
+router.post("/searchCourse",searchCourse);
 
 // export router
 export default router;

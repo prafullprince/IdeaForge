@@ -27,6 +27,8 @@ import CartPage from "./components/Cart/CartPage";
 import EnrolledCourse from "./pages/EnrolledCourse";
 import WatchCourse from "./pages/WatchCourse";
 import LectureContent from "./components/Watch/LectureContent";
+import UserProfile from "./pages/UserProfile";
+import SearchResult from "./pages/SearchResult";
 
 // import { jwtDecode } from "jwt-decode";
 
@@ -117,6 +119,9 @@ function App() {
         <Route path="/course/details/:courseId" element={<CoursePageDetails />} />
         <Route path="/cart" element={<CartPage />} />
         {/* <Route path="/watch/:courseId" element={<WatchCourse />} /> */}
+
+        <Route path="/profile/:profileId" element={<UserProfile />} />
+        <Route path="/searchResults" element={<SearchResult />} />
 
         <Route 
           element={<PrivateRoute>

@@ -2,17 +2,26 @@ import { IoSearchSharp } from "react-icons/io5";
 import { BsCart3 } from "react-icons/bs";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useState } from "react";
+import SearchModal from "../common/SearchModal";
 
 const NullUser = () => {
 
   // hook
   const location = useLocation();
   const { totalItems } = useSelector((state:any)=>state.cart);
-  console.log(totalItems)
+
+  // state
+  const [modalData,setModalData] = useState<any>(null);
+
   return (
     <div className="flex items-center gap-4 px-4">
       {/* search */}
-      <button>
+      <button onClick={()=>{
+        setModalData({
+          heading:"Search Modal"
+        });
+      }}>
         <IoSearchSharp className="text-2xl text-richblack-50" />
       </button>
       {/* cart */}
@@ -25,6 +34,10 @@ const NullUser = () => {
         location.pathname === "/signup" ? 
             (<Link to={"/login"} className="w-[72px] text-center py-[6px] border border-richblack-500 rounded-lg text-richblack-50">Login</Link>) :
             (<Link to={"/signup"} className="w-[72px] text-center py-[6px] border border-richblack-500 rounded-lg text-richblack-50">Signup</Link>)
+      }
+
+      {
+        modalData && <SearchModal modalData={modalData} setModalData={setModalData} />
       }
     </div>
   );

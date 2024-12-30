@@ -6,9 +6,9 @@ configDotenv();
 const client = new Redis(
  process.env.REDIS_URL!
 );
-if(!process.env.REDIS_URL){
-  throw new Error('Redis url not found')
-}
+// if(!process.env.REDIS_URL){
+//   throw new Error('Redis url not found')
+// }
 
 client.on('connect', () => {
   console.log('Connected to Redis');

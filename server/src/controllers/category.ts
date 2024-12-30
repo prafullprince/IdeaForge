@@ -77,48 +77,111 @@ export const fetchAllCategory = async (req:Request, res:Response): Promise<any> 
     }
 }
 
-// categoryPageDetails
+// categoryPageDetails -> specialCourses
 export const categoryPageDetails = async (req:Request, res:Response): Promise<any> =>{
     try {
 
         // fetch data
         const { categoryId } = req.body;
 
+        // validation
+        if(!categoryId){
+            return ErrorResponseHandling(res,400,"Invalid credentials")
+        }
+
         // return data if cached
-        const cachedValue = await client.get(`category:${categoryId}`);
-        if(cachedValue){
-            try {
-                const data = JSON.parse(cachedValue);
-                return res.status(200).json({
-                    success:true,
-                    message:"Category details fetched",
-                    data
-                })
-            } catch (parseError) {
-                console.log(parseError);
-                await client.del(`category:${categoryId}`);
-            }
+        // const cachedValue = await client.get(`category:${categoryId}`);
+        // if(cachedValue){
+        //     try {
+        //         const data = JSON.parse(cachedValue);
+        //         return res.status(200).json({
+        //             success:true,
+        //             message:"Category details fetched",
+        //             data
+        //         })
+        //     } catch (parseError) {
+        //         console.log(parseError);
+        //         await client.del(`category:${categoryId}`);
+        //     }
+        // }
+
+        // validation
+        const category = await Category.findOne({_id:categoryId}).select("categoryName categoryDesc");
+        if(!category){
+            return ErrorResponseHandling(res,400,"Category not found");
         }
 
         // find in db
-        const data = await Category.findOne({_id:categoryId}).populate({
+        const selectedCategory = await Category.findOne({_id:categoryId}).populate({
             path:"courses",
-            select:"courseName courseDesc price thumbnail",
+            select:"courseName courseDesc price thumbnail studentsEnroled",
             populate:{
                 path:"instructor",
                 select:"name email image"
             }
         });
 
+        // top 10 selling course
+        const topTenSellingCourse = selectedCategory?.courses.map((course:any)=>({
+            ...course.toObject(),
+            enrolledStudents: course.studentsEnroled.length
+        }));
+        topTenSellingCourse?.sort((a,b)=> b.enrolledStudents - a.enrolledStudents );
+        const mostSellingCourse = topTenSellingCourse?.slice(0,10);
+
+
         // if not cached, cached data
-        await client.set(`category:${categoryId}`,JSON.stringify(data));
-        await client.expire(`category:${categoryId}`,300);
+        // await client.set(`category:${categoryId}`,JSON.stringify(data));
+        // await client.expire(`category:${categoryId}`,3);
 
         // return res
         return res.status(200).json({
             success:true,
             message:"Category fetched",
-            data
+            data:{
+                mostSellingCourse,
+                category
+            }
+        });
+
+    } catch (error) {
+        console.log(error);
+        return ErrorResponseHandling(res,500,"Internal server error");
+    }
+}
+
+// categoryPageDetails -> allCourses TODO:pagination
+export const categoryPageDetailsAllCourse = async (req:Request, res:Response): Promise<any> =>{
+    try {
+
+        // fetch data
+        const { categoryId } = req.body;
+        const page = parseInt(req.body.page) || 1;
+        const limit = 5;
+
+        // validation
+        if(!categoryId || !page || !limit){
+            return ErrorResponseHandling(res,400,"Invalid credentials")
+        }
+
+        // find in db
+        const selectedCategory = await Category.findOne({_id:categoryId}).populate({
+            path:"courses",
+            select:"courseName courseDesc price thumbnail studentsEnroled",
+            populate:{
+                path:"instructor",
+                select:"name email image"
+            }
+        });
+
+
+
+
+        // return res
+        return res.status(200).json({
+            success:true,
+            message:"Category fetched",
+            
         });
 
     } catch (error) {

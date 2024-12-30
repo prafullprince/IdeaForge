@@ -26,9 +26,10 @@ const CatalogPage = () => {
       setLoading(true);
       try {
         const result = await categoryPageDetailsApi(categoryId);
-        setCourse(result?.courses);
-        setCategoryName(result?.categoryName);
-        setCategoryDescription(result?.categoryDesc);
+        console.log(result)
+        setCourse(result?.mostSellingCourse);
+        setCategoryName(result?.category?.categoryName);
+        setCategoryDescription(result?.category?.categoryDesc);
       } catch (error) {
         console.log(error);
       }
