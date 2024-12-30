@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import {
   loggedUserCoursesApi,
   profilePicApi,
-  userDetailsById,
+  // userDetailsById,
 } from "../../services/apiCall/profile";
 import ConnectionModal from "../../components/common/ConnectionModal";
 import Spinner1 from "../../components/spinners/Spinner1";
