@@ -45,31 +45,43 @@ const CourseBuilder = () => {
     try {
       // editMode
       if (editzSection) {
-        const currentValues = getValues();
-        if (currentValues.sectionName === section.sectionName) {
-          return toast.error("Section name is still same");
+        try {
+          setLoading(true);
+          const currentValues = getValues();
+          if (currentValues.sectionName === section.sectionName) {
+            return toast.error("Section name is still same");
+          }
+          const formData = new FormData();
+          formData.append("sectionId", section._id);
+          formData.append("sectionName", data.sectionName);
+          await editSectionApi(formData, token);
+          setRefresh((prev) => !prev);
+          dispatch(setEditzSection(false));
+          reset({
+            sectionName: "",
+          });
+        } catch (error) {
+          console.log(error);
         }
-        const formData = new FormData();
-        formData.append("sectionId", section._id);
-        formData.append("sectionName", data.sectionName);
-        await editSectionApi(formData, token);
-        setRefresh((prev) => !prev);
-        dispatch(setEditzSection(false));
-        reset({
-          sectionName: "",
-        });
+        setLoading(false);
         return;
       }
 
       // createMode
-      const formData = new FormData();
-      formData.append("sectionName", data.sectionName);
-      formData.append("courseId", course._id);
-      await createSectionApi(formData, token);
-      setRefresh((prev) => !prev);
-      reset({
-        sectionName: "",
-      });
+      try {
+        setLoading(true);
+        const formData = new FormData();
+        formData.append("sectionName", data.sectionName);
+        formData.append("courseId", course._id);
+        await createSectionApi(formData, token);
+        setRefresh((prev) => !prev);
+        reset({
+          sectionName: "",
+        });
+      } catch (error) {
+        console.log(error);
+      }
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
