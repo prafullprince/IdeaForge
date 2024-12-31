@@ -69,7 +69,7 @@ const CoursePageDetails = () => {
   return (
     <div className="w-full break-words text-wrap text-left">
       {/* section 1 */}
-      <div className="bg-pure-greys-800 py-8">
+      <div className="bg-richblack-800 py-8">
         <div className="lg:w-[80%] w-11/12 mx-auto relative flex flex-col gap-4">
           {/* header section info */}
           <div className="flex flex-col gap-3 lg:w-[70%]">

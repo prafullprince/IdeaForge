@@ -116,7 +116,7 @@ const Profile = () => {
             {/* stats */}
             <div className="flex gap-6 items-center">
               <div className="text-lg">
-                4 <span className="text-richblack-25">posts</span>
+                {courses?.length} <span className="text-richblack-25">posts</span>
               </div>
               <button
                 onClick={() => {

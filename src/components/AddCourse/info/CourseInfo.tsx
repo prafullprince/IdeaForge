@@ -334,7 +334,7 @@ const CourseInfo = () => {
             className="text-richblack-100 bg-richblack-800 hidden"
             type="file"
             {...register("thumbnail", {
-              required: "Please upload a file",
+              required: "Upload a thumbnail",
               validate: {
                 lessThan1MB: (files) =>
                   files[0]?.size < 1 * 1024 * 1024 ||
@@ -343,13 +343,13 @@ const CourseInfo = () => {
                   ["image/jpeg", "image/png", "application/pdf"].includes(
                     files[0]?.type
                   ) || "Only JPEG, PNG, or PDF files are allowed",
+                required: (files)=>
+                  files.length >= 1 || "Upload thumbnail"
               },
             })}
-            required
             ref={imageRef}
             onChange={changeHandler}
           />
-          {/* {errors.thumbnail && (<p>{errors.thumbnail.message}</p>)} */}
           {preview ? (
             <img
               src={preview}
@@ -379,6 +379,7 @@ const CourseInfo = () => {
               </div>
             </div>
           )}
+          {errors.thumbnail && (<p className="text-sm text-caribbeangreen-400 mt-2">{errors.thumbnail.message as string}</p>)}
         </div>
         {/* benefits */}
         <div className="flex flex-col gap-[6px]">

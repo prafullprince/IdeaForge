@@ -13,7 +13,6 @@ import toast from "react-hot-toast";
 import { FiEdit } from "react-icons/fi";
 import { IoMdAdd } from "react-icons/io";
 
-
 interface ISectionInfo {
   sectionName: string;
 }
@@ -69,8 +68,8 @@ const CourseBuilder = () => {
       await createSectionApi(formData, token);
       setRefresh((prev) => !prev);
       reset({
-        sectionName:""
-      })
+        sectionName: "",
+      });
     } catch (error) {
       console.log(error);
     }
@@ -93,12 +92,12 @@ const CourseBuilder = () => {
     getContentApiCall();
   }, [refresh]);
 
-  useEffect(()=>{
+  useEffect(() => {
     // alreadySetTheSection
     if (editzSection) {
       setValue("sectionName", section.sectionName);
-    }    
-  },[editzSection])
+    }
+  }, [editzSection]);
 
   return (
     <div className="flex flex-col gap-6">
@@ -135,22 +134,40 @@ const CourseBuilder = () => {
           )}
         </div>
         {/* button */}
-        <button
-          className={`px-3 relative py-2 flex justify-center ${
-            loading
-              ? "bg-richblack-900 text-richblack-5"
-              : "bg-yellow-50 text-yellow-900 hover:bg-richblack-900 hover:text-richblack-5"
-          } rounded-md text-lg font-medium hover:shadow-lg hover:shadow-blue-100 transition-all duration-300`}
-          type="submit"
-        >
-          {loading && (
+        {loading ? (
+          <div className="relative mt-8">
             <div className="loaderm absolute w-8 aspect-square rounded-full bg-[linear-gradient(0deg,rgb(255,230,6)_30%,#ffef0b_0_70%,rgb(255,225,0)_0)_50%/8%_100%,linear-gradient(90deg,rgb(107,255,2)_30%,#ee1212f9_0_70%,rgb(255,1,137)_0)_50%/100%_8%] bg-no-repeat left-1/2 bottom-1 animate-l23">
-              <div className="before absolute inset-0 rounded-full bg-inherit opacity-[0.915] rotate-[30deg]"></div>
-              <div className="after absolute inset-0 rounded-full bg-inherit opacity-[0.83] rotate-[60deg]"></div>
-            </div>
-          )}
-          {editzSection ? <div className={`flex items-center gap-2 ${loading ? "hidden" : "block"}`}> <FiEdit className="text-2xl font-bold" /> Edit Section</div> : <div className={`flex ${loading ? "hidden" : "block"} items-center gap-2`}> <IoMdAdd className="text-2xl font-bold" /> Create Section</div>}
-        </button>
+            <div className="before absolute inset-0 rounded-full bg-inherit opacity-[0.915] rotate-[30deg]"></div>
+            <div className="after absolute inset-0 rounded-full bg-inherit opacity-[0.83] rotate-[60deg]"></div>
+          </div>
+          </div>
+        ) : (
+          <button
+            className={`px-3 relative py-2 flex justify-center bg-yellow-100 text-yellow-900
+            rounded-md text-lg font-medium hover:shadow-lg hover:shadow-blue-100 transition-all duration-300`}
+            type="submit"
+          >
+            {editzSection ? (
+              <div
+                className={`flex items-center gap-2 ${
+                  loading ? "hidden" : "block"
+                }`}
+              >
+                {" "}
+                <FiEdit className="text-2xl font-bold" /> Edit Section
+              </div>
+            ) : (
+              <div
+                className={`flex ${
+                  loading ? "hidden" : "block"
+                } items-center gap-2`}
+              >
+                {" "}
+                <IoMdAdd className="text-2xl font-bold" /> Create Section
+              </div>
+            )}
+          </button>
+        )}
       </form>
       {/* courseContent */}
       <div className="border mt-6 border-[#2C333F] p-6 rounded-lg bg-richblack-900 w-full xl:w-[70%] flex flex-col gap-6">
@@ -187,11 +204,14 @@ const CourseBuilder = () => {
       </div>
       {/* next button */}
       <div className="w-full flex justify-start">
-          <button onClick={()=>{
+        <button
+          onClick={() => {
             dispatch(setStep(3));
-          }} className="px-4 py-2 bg-yellow-50 text-richblack-900 border-0 rounded-lg font-medium">
-            Next
-          </button>
+          }}
+          className="px-4 py-2 bg-yellow-50 text-richblack-900 border-0 rounded-lg font-medium"
+        >
+          Next
+        </button>
       </div>
     </div>
   );

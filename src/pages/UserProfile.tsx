@@ -49,7 +49,6 @@ const UserProfile = () => {
   async function fetchUserCourses() {
     try {
       const result: any = await otherUserCoursesApi(profileId);
-      console.log(result);
       setCourses(result);
     } catch (error) {
       console.log(error);
@@ -105,7 +104,7 @@ const UserProfile = () => {
             {/* stats */}
             <div className="flex gap-4 items-center">
               <div className="text-lg">
-                4 <span className="text-richblack-25">courses</span>
+                {courses?.length} <span className="text-richblack-25">courses</span>
               </div>
               <button
                 onClick={() => {
