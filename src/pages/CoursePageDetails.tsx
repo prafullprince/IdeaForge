@@ -8,6 +8,7 @@ import { removeItems, setItems } from "../slices/cartSlice";
 import FullPage from "../spinner/FullPage";
 import { buyCourse } from "../services/apiCall/payment";
 import RatingAndReviews from "../components/CoursePageDetails/RatingAndReviews";
+import ProfileView from "../components/common/ProfileView";
 
 
 const CoursePageDetails = () => {
@@ -26,7 +27,7 @@ const CoursePageDetails = () => {
   const [inCart,setInCart] = useState<any>(false);
   const [loading,setLoading] = useState<boolean>(false);
   const [ratings,setRatings] = useState<number>(4.5);
-  
+  console.log(courseDetails)
   // handleBuyCourse
   async function handleBuyCourse(){
     try {
@@ -100,8 +101,9 @@ const CoursePageDetails = () => {
             {/* ratingAndReviews */}
             <RatingAndReviews ratings={ratings} />
             {/* instructor name */}
-            <div className="text-base text-[#DBDDEA]">
-              Created by {courseDetails?.instructor?.name}
+            <div className="text-base text-[#DBDDEA] relative group">
+              Created by <button className="text-blue-100 font-medium text-xl">{courseDetails?.instructor?.name}</button>
+              <ProfileView course={courseDetails} />
             </div>
             {/* timestaps */}
           </div>

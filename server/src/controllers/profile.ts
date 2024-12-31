@@ -197,7 +197,7 @@ export const getUserDetailsByUserId = async (
   }
 };
 
-// userById courses
+// userById courses -> other users
 export const getUserCoursesByUserId = async (
   req: Request,
   res: Response,
@@ -235,6 +235,10 @@ export const getUserCoursesByUserId = async (
       .populate({
         path:"courses",
         select:"courseName thumbnail courseDesc status",
+        populate:{
+          path:"instructor",
+          select:"name image followers following courses"
+        }
       })
       .lean();
 
@@ -299,6 +303,10 @@ export const getUserCourses = async (
       .populate({
         path: 'courses',
         select: 'courseName courseDesc thumbnail',
+        populate:{
+          path:"instructor",
+          select:"name image courses following followers"
+        }
       })
       .lean();
 

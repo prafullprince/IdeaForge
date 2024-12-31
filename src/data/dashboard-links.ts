@@ -53,14 +53,7 @@ export const useSidebarLinks = (): ISidebarLink[] => {
       path: "/dashboard/purchase-history",
       type: ACCOUNT_TYPE.STUDENT,
       icon: "VscHistory",
-    },
-    {
-      id: 7,
-      name: "Watch Course",
-      path: "/dashboard/watch/:courseId",
-      type: ACCOUNT_TYPE.STUDENT,
-      icon: "VscVmRunning",
-    },
+    }
   ];
 
   return sidebarLinks;

@@ -687,7 +687,7 @@ export const coursePageDetails = async (
     const data = await Course.findOne({ _id: courseId })
       .populate([
         { path: 'category', select: 'categoryName' },
-        { path: 'instructor', select: 'name email image' },
+        { path: 'instructor', select: 'name email image followers following courses' },
         {
           path: 'sections',
           populate: {
@@ -797,6 +797,13 @@ export const studentEnrolledCourses = async (
       path:"courses",
       populate:{
         path:"sections"
+      }
+    })
+    .populate({
+      path:"courses",
+      populate:{
+        path:"instructor",
+        select:"name image followers following courses"
       }
     });
     if(!user){

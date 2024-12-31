@@ -158,7 +158,7 @@ const UserProfile = () => {
           </div>
         </div>
         {/* post */}
-        <UserCourses courses={courses} />
+        <UserCourses courses={courses} type={"user"} />
       </div>
 
       {modalData && (

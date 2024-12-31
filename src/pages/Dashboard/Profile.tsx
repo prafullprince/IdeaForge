@@ -23,7 +23,7 @@ const Profile = () => {
   const [preview, setPreview] = useState<any | "" | null>(null);
   const [modalData, setModalData] = useState<any | null>(null);
   const [courses, setCourses] = useState<any>([]);
-
+  console.log(courses)
   // api -> profilePicUpload
   async function profilePicHandler() {
     setLoading(true);
@@ -165,7 +165,7 @@ const Profile = () => {
       </div>
 
       {/* courses */}
-      <UserCourses courses={courses} />
+      <UserCourses courses={courses} type={"user"} />
 
       {modalData && (
         <ConnectionModal modalData={modalData} setModalData={setModalData} />

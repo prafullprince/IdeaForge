@@ -29,6 +29,7 @@ import WatchCourse from "./pages/WatchCourse";
 import LectureContent from "./components/Watch/LectureContent";
 import UserProfile from "./pages/UserProfile";
 import SearchResult from "./pages/SearchResult";
+import PurchasedHistory from "./pages/Dashboard/PurchasedHistory";
 
 // import { jwtDecode } from "jwt-decode";
 
@@ -144,6 +145,7 @@ function App() {
           <Route path="/dashboard/add-course" element={<AddCourse />} />
           <Route path="/dashboard/settings" element={<Setting />} />
           <Route path="/dashboard/enrolled-courses" element={<EnrolledCourse />} />
+          <Route path="/dashboard/purchase-history" element={<PurchasedHistory />} />
         </Route>
       </Routes>
     </div>
