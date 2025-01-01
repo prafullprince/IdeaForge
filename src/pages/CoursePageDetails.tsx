@@ -29,7 +29,7 @@ const CoursePageDetails = () => {
   const [courseDetails, setCourseDetails] = useState<any | null>(null);
   const [inCart,setInCart] = useState<any>(false);
   const [loading,setLoading] = useState<boolean>(false);
-  const [viewLoading,setViewLoading] = useState(false);
+  // const [viewLoading,setViewLoading] = useState(false);
   const [views,setViews] = useState<any>(0);
   const [ratings,setRatings] = useState<any>(0);
   
@@ -69,26 +69,26 @@ const CoursePageDetails = () => {
 
   // views
   async function fetchViews(){
-    setViewLoading(true);
+    // setViewLoading(true);
     try {
       const result = await totalViewsApi(courseId);
       setViews(result);
     } catch (error) {
       console.log(error);
     }
-    setViewLoading(false);
+    // setViewLoading(false);
   }
 
   // avgRating
   async function avgRatings(){
-    setViewLoading(true);
+    // setViewLoading(true);
     try {
       const result = await avgRating(courseId);
       setRatings(result);
     } catch (error) {
       console.log(error);
     }
-    setViewLoading(false);
+    // setViewLoading(false);
   }
 
   // views , totalRatings
