@@ -6,7 +6,8 @@ import { auth, isInstructor, isStudent } from '../controllers/middlewares';
 import { categoryPageDetails, createCategory, fetchAllCategory } from '../controllers/category';
 import { coursePageDetails, courseViewPageDetails, createCourse, createSection, createSubSection, deleteCourse, deleteSection, deleteSubSection, editCourse, editSection, editSubSection, getCourseContent, getInstructorCourse, markVideoAsCompleted, publishCourse, studentEnrolledCourses } from '../controllers/course';
 import { capturePayment, verifyPayment } from '../controllers/payments';
-import { searchCourse } from '../controllers/extra';
+import { searchCourse, totalViews } from '../controllers/extra';
+import { createRating, getAverageRating } from '../controllers/Rating';
 
 // router instances
 const router = express.Router();
@@ -44,8 +45,13 @@ router.post("/deleteSubSection",auth,isInstructor,deleteSubSection);
 router.post("/capturePayment",auth,isStudent,capturePayment);
 router.post("/verifyPayment",auth,isStudent,verifyPayment);
 
+// rating
+router.post("/createRating",auth,createRating);
+router.post("/getAverageRating",getAverageRating);
+
 // extra
 router.post("/searchCourse",searchCourse);
+router.post("/totalViews",totalViews);
 
 // export router
 export default router;

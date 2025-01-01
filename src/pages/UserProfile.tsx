@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { RiUserFollowLine } from "react-icons/ri";
 import { RiUserUnfollowLine } from "react-icons/ri";
 import UserCourses from "../components/common/UserCourses";
+import ProfileSpinner from "../spinner/ProfileSpinner";
 
 const UserProfile = () => {
   // hook
@@ -23,6 +24,7 @@ const UserProfile = () => {
   const [modalData, setModalData] = useState<any>(null);
   const [flag, setFlag] = useState<any | null>(null);
   const [courses, setCourses] = useState<any>([]);
+  const [loading, setLoading] = useState(false);
 
   // followHandler
   async function followHandler(toUser: any) {
@@ -36,6 +38,7 @@ const UserProfile = () => {
 
   // function fetchUserDetails
   async function fetchUserDetails() {
+    setLoading(true);
     try {
       const result = await userDetailsById(profileId, token);
       setDetails(result?.userDetails);
@@ -43,6 +46,7 @@ const UserProfile = () => {
     } catch (error) {
       console.log(error);
     }
+    setLoading(false);
   }
 
   // function User Courses
@@ -68,85 +72,94 @@ const UserProfile = () => {
     <div className="w-[90%] lg:w-[80%] mx-auto">
       {/* user profile dashboard */}
       <div className="flex flex-col gap-6 items-center w-full mt-12">
-        {/* profile top */}
-        <div className="flex gap-12 items-center relative sm:flex-row flex-col">
-          {/* img */}
-          <img
-            src={details?.image}
-            alt="profile"
-            width={200}
-            height={200}
-            className="rounded-full"
-          />
-
-          {/* userDetails */}
-          <div className="flex flex-col gap-4">
-            {/* name and follow/unfollow button */}
-            <div className="flex gap-4 items-center">
-              <p className="font-semibold text-lg">{details?.name}</p>
-              <button
-                onClick={() => followHandler(details?._id)}
-                className="hover:opacity-85 duration-200 transition-all"
-              >
-                {!flag ? (
-                  <div className="flex items-center gap-1 px-3 py-1 rounded-lg bg-blue-300">
-                    <RiUserFollowLine />
-                    <p>Follow</p>
-                  </div>
-                ) : (
-                  <div className="bg-pure-greys-600 px-3 py-1 rounded-lg flex items-center gap-1">
-                    <RiUserUnfollowLine />
-                    <p>Unfollow</p>
-                  </div>
-                )}
-              </button>
-            </div>
-            {/* stats */}
-            <div className="flex gap-4 items-center">
-              <div className="text-lg">
-                {courses?.length} <span className="text-richblack-25">courses</span>
-              </div>
-              <button
-                onClick={() => {
-                  setModalData({
-                    heading: "Followers",
-                    connection: details?.followers,
-                  });
-                }}
-                className="text-lg"
-              >
-                {details?.followers?.length === 0
-                  ? 0
-                  : details?.followers?.length}{" "}
-                <span className="text-richblack-25">followers</span>
-              </button>
-              <button
-                onClick={() => {
-                  setModalData({
-                    heading: "Following",
-                    connection: details?.following,
-                  });
-                }}
-                className="text-lg"
-              >
-                {details?.following?.length === 0
-                  ? 0
-                  : details?.following?.length}{" "}
-                <span className="text-richblack-25">following</span>
-              </button>
-            </div>
-            {/* name */}
-            <div>
-              <p className="mt-1 text-richblack-200">{details?.email}</p>
-              <p className="mt-1 text-richblack-200">
-                {details?.additionalDetails?.contactNumber}
-              </p>
-              <p className="mt-1 text-richblack-200">
-                {details?.additionalDetails?.about?.substring(0, 50)}..
-              </p>
-            </div>
+        {loading ? (
+          <div>
+            <ProfileSpinner />
           </div>
-        </div>
+        ) : (
+          <>
+            {/* profile top */}
+            <div className="flex gap-12 items-center relative sm:flex-row flex-col">
+              {/* img */}
+              <img
+                src={details?.image}
+                alt="profile"
+                width={200}
+                height={200}
+                className="rounded-full"
+              />
+
+              {/* userDetails */}
+              <div className="flex flex-col gap-4">
+                {/* name and follow/unfollow button */}
+                <div className="flex gap-4 items-center">
+                  <p className="font-semibold text-lg">{details?.name}</p>
+                  <button
+                    onClick={() => followHandler(details?._id)}
+                    className="hover:opacity-85 duration-200 transition-all"
+                  >
+                    {!flag ? (
+                      <div className="flex items-center gap-1 px-3 py-1 rounded-lg bg-blue-300">
+                        <RiUserFollowLine />
+                        <p>Follow</p>
+                      </div>
+                    ) : (
+                      <div className="bg-pure-greys-600 px-3 py-1 rounded-lg flex items-center gap-1">
+                        <RiUserUnfollowLine />
+                        <p>Unfollow</p>
+                      </div>
+                    )}
+                  </button>
+                </div>
+                {/* stats */}
+                <div className="flex gap-4 items-center">
+                  <div className="text-lg">
+                    {courses?.length}{" "}
+                    <span className="text-richblack-25">courses</span>
+                  </div>
+                  <button
+                    onClick={() => {
+                      setModalData({
+                        heading: "Followers",
+                        connection: details?.followers,
+                      });
+                    }}
+                    className="text-lg"
+                  >
+                    {details?.followers?.length === 0
+                      ? 0
+                      : details?.followers?.length}{" "}
+                    <span className="text-richblack-25">followers</span>
+                  </button>
+                  <button
+                    onClick={() => {
+                      setModalData({
+                        heading: "Following",
+                        connection: details?.following,
+                      });
+                    }}
+                    className="text-lg"
+                  >
+                    {details?.following?.length === 0
+                      ? 0
+                      : details?.following?.length}{" "}
+                    <span className="text-richblack-25">following</span>
+                  </button>
+                </div>
+                {/* name */}
+                <div>
+                  <p className="mt-1 text-richblack-200">{details?.email}</p>
+                  <p className="mt-1 text-richblack-200">
+                    {details?.additionalDetails?.contactNumber}
+                  </p>
+                  <p className="mt-1 text-richblack-200">
+                    {details?.additionalDetails?.about?.substring(0, 50)}..
+                  </p>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
       </div>
 
       {/* userCourses */}

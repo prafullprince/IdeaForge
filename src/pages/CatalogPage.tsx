@@ -8,6 +8,7 @@ import Header from "../components/CatalogPage/Header";
 import CategoryTab from "../components/CatalogPage/CategoryTab";
 import Corousel from "../components/common/Corousel";
 import FullPage from "../spinner/FullPage";
+import Footer from "../components/common/Footer";
 
 const CatalogPage = () => {
   // hook
@@ -96,6 +97,10 @@ const CatalogPage = () => {
             </div>
           </div>
         </div>
+      </div>
+      {/* footer */}
+      <div className="mt-12">
+        <Footer />
       </div>
     </div>
   );

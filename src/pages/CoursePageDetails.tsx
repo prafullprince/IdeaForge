@@ -9,11 +9,14 @@ import FullPage from "../spinner/FullPage";
 import { buyCourse } from "../services/apiCall/payment";
 import RatingAndReviews from "../components/CoursePageDetails/RatingAndReviews";
 import ProfileView from "../components/common/ProfileView";
+import { totalViewsApi } from "../services/apiCall/extra";
+import Footer from "../components/common/Footer";
+import { avgRating } from "../services/apiCall/rating";
 
 
 const CoursePageDetails = () => {
   // hook
-  const { courseId } = useParams();
+  const { courseId }: any = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -26,8 +29,10 @@ const CoursePageDetails = () => {
   const [courseDetails, setCourseDetails] = useState<any | null>(null);
   const [inCart,setInCart] = useState<any>(false);
   const [loading,setLoading] = useState<boolean>(false);
-  const [ratings,setRatings] = useState<number>(4.5);
-  console.log(courseDetails)
+  const [viewLoading,setViewLoading] = useState(false);
+  const [views,setViews] = useState<any>(0);
+  const [ratings,setRatings] = useState<any>(0);
+  
   // handleBuyCourse
   async function handleBuyCourse(){
     try {
@@ -44,7 +49,6 @@ const CoursePageDetails = () => {
       try {
         const result: any = await coursePageDetailsApi(courseId);
         setCourseDetails(result);
-        setRatings(3.5);
       } catch (error) {
         console.log(error);
       }
@@ -56,13 +60,42 @@ const CoursePageDetails = () => {
   // sideEffect to check is course available in cart
   useEffect(()=>{
     const isItemAvailable = items?.some((item:any)=> item?._id === courseDetails?._id);
-    console.log(isItemAvailable)
     if(isItemAvailable){
       setInCart(true);
     } else {
       setInCart(false);
     }
   },[items,courseDetails]);
+
+  // views
+  async function fetchViews(){
+    setViewLoading(true);
+    try {
+      const result = await totalViewsApi(courseId);
+      setViews(result);
+    } catch (error) {
+      console.log(error);
+    }
+    setViewLoading(false);
+  }
+
+  // avgRating
+  async function avgRatings(){
+    setViewLoading(true);
+    try {
+      const result = await avgRating(courseId);
+      setRatings(result);
+    } catch (error) {
+      console.log(error);
+    }
+    setViewLoading(false);
+  }
+
+  // views , totalRatings
+  useEffect(()=>{
+    fetchViews();
+    avgRatings()
+  },[courseId]);
 
   // spinner
   if(loading) return <FullPage />
@@ -73,7 +106,7 @@ const CoursePageDetails = () => {
       <div className="bg-richblack-800 py-8">
         <div className="lg:w-[80%] w-11/12 mx-auto relative flex flex-col gap-4">
           {/* header section info */}
-          <div className="flex flex-col gap-3 lg:w-[70%]">
+          <div className="flex flex-col lg:w-[70%]">
             {/* header */}
             <div className="flex items-center gap-1">
               <Link className="text-[#838894] text-sm" to={"/"}>
@@ -91,20 +124,27 @@ const CoursePageDetails = () => {
               </span>
             </div>
             {/* courseName */}
-            <div className="text-[#F1F2FF] font-medium text-3xl">
+            <div className="text-[#F1F2FF] font-medium text-3xl mt-4">
               {courseDetails?.courseName}
             </div>
+            {/* views */}
+            <div className="text-pure-greys-400 font-medium text-sm">
+              {views?.totalView} views
+            </div>
+            {/* instructor name */}
+            <div className="text-base text-[#DBDDEA] relative group mt-2">
+              <button className="text-blue-100 font-medium text-lg flex items-center gap-2">
+                <img src={courseDetails?.instructor?.image} className="min-w-8 min-h-8 h-8 w-8 rounded-full" /> 
+                {courseDetails?.instructor?.name}
+              </button>
+              <ProfileView course={courseDetails} />
+            </div>
             {/* courseDesc */}
-            <div className="text-[#999DAA] text-sm">
+            <div className="text-[#999DAA] text-sm mt-2">
               {courseDetails?.courseDesc}
             </div>
             {/* ratingAndReviews */}
             <RatingAndReviews ratings={ratings} />
-            {/* instructor name */}
-            <div className="text-base text-[#DBDDEA] relative group">
-              Created by <button className="text-blue-100 font-medium text-xl">{courseDetails?.instructor?.name}</button>
-              <ProfileView course={courseDetails} />
-            </div>
             {/* timestaps */}
           </div>
 
@@ -177,6 +217,11 @@ const CoursePageDetails = () => {
           {/* section 4 -> Instructor Details */}
           <InstructorDetails courseDetails={courseDetails} />
         </div>
+      </div>
+
+      {/* footer */}
+      <div className="mt-12">
+        <Footer />
       </div>
     </div>
   );

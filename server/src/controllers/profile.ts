@@ -56,7 +56,7 @@ export const getUserDetails = async (
 
     // if data is freash then cached them
     await client.set(`userDetails:${userId}`, JSON.stringify(userDetails));
-    await client.expire(`userDetails:${userId}`, 30);
+    await client.expire(`userDetails:${userId}`, 10);
 
     // return res
     return res.status(200).json({

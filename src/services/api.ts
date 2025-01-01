@@ -1,7 +1,9 @@
 // baseUrl
 const BASE_URL = "https://study-hub-2.onrender.com/api/v1";
 
+// https://studyforge.onrender.com/api/v1
 // "http://localhost:4000/api/v1"
+// https://study-forge.onrender.com
 // "https://study-hub-2.onrender.com/api/v1"
 
 // auth
@@ -45,9 +47,15 @@ export const subSectionEndPoints = {
 
 // extra
 export const extraEndPoints = {
-    SEARCH_COURSE: BASE_URL + "/course/searchCourse"
+    SEARCH_COURSE: BASE_URL + "/course/searchCourse",
+    VIEWS: BASE_URL + "/course/totalViews"
 }
 
+// rating
+export const ratingEndPoints = {
+    CREATE_RATING: BASE_URL + "/course/createRating",
+    AVG_RATING: BASE_URL + "/course/getAverageRating"
+}
 
 // profile
 export const profileEndpoints = {

@@ -15,11 +15,10 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import MyCourses from "./pages/Dashboard/MyCourses";
 import AddCourse from "./pages/Dashboard/AddCourse";
 import Setting from "./pages/Dashboard/Setting";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { userDetails } from "./services/apiCall/profile";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "./slices/profileSlice";
-import Spinner1 from "./components/spinners/Spinner1";
 import PrivateRoute from './components/auth/PrivateRoute';
 import CatalogPage from "./pages/CatalogPage";
 import CoursePageDetails from "./pages/CoursePageDetails";
@@ -48,9 +47,6 @@ function App() {
   const dispatch = useDispatch();
   // const navigate = useNavigate();
 
-  // state
-  const [loading, setLoading] = useState(false);
-
   // sideEffect -> userDetails
   useEffect(() => {
     async function fetchUserDetails() {
@@ -58,14 +54,12 @@ function App() {
         localStorage.removeItem("token");
         return;
       }
-      setLoading(true);
       try {
         const result = await userDetails(token);
         dispatch(setUser(result));
       } catch (error) {
         console.log(error);
       }
-      setLoading(false);
     }
     fetchUserDetails();
   }, [token]);
@@ -101,7 +95,6 @@ function App() {
   //   }
   // }, [navigate]);
 
-  if (loading) return <Spinner1 />;
 
   return (
     <div className="min-h-screen overflow-auto bg-richblack-900 text-white font-inter">

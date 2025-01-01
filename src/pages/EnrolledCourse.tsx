@@ -11,16 +11,19 @@ const EnrolledCourse = () => {
 
   // state
   const [courses,setCourses] = useState<any>([]);
+  const [loading,setLoading] = useState(false);
 
   // sideEffect -> enrolledCourseApi
   useEffect(()=>{
     async function userEnrolledCourse(token:string) {
+      setLoading(true);
       try {
         const result = await encrolledCourse(token);
         setCourses(result);
       } catch (error) {
         console.log(error);
       }
+      setLoading(false);
     }
     userEnrolledCourse(token);
   },[])
@@ -59,7 +62,7 @@ const EnrolledCourse = () => {
         }
       </div> */}
 
-      <UserCourses courses={courses} type={"enrolled"} />
+      <UserCourses courses={courses} type={"enrolled"} courseLoading={loading} />
     </div>
   )
 }

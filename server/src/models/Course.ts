@@ -12,7 +12,9 @@ export interface ICourse {
     requirements: string,
     sections: mongoose.Types.ObjectId[],
     instructor: mongoose.Types.ObjectId,
-    studentsEnroled: mongoose.Types.ObjectId[]
+    studentsEnroled: mongoose.Types.ObjectId[],
+    viewedByIp: String[],
+    ratings: mongoose.Types.ObjectId[],
 }
 
 // courseSchema
@@ -70,6 +72,13 @@ const courseSchema:Schema = new Schema({
           ref: "User",
         },
     ],
+    viewedByIp: [{
+        type: String,
+    }],
+    ratings:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Rating"
+    }]
 },{timestamps:true});
 
 const Course = mongoose.model<ICourse>("Course",courseSchema);

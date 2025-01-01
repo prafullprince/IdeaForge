@@ -4,10 +4,11 @@ import HighlightButton from "../components/HomePage/HighlightButton";
 import HomeBanner from "../assets/Images/boxoffice.webp";
 import CodeBlocks from "../components/HomePage/CodeBlocks";
 import LearningSection from "../components/HomePage/LearningSection";
+import Footer from "../components/common/Footer";
 
 const HomePage = () => {
   return (
-    <div className="w-full mb-[700px]">
+    <div className="w-full">
       {/* section1 -> instructor button,heading,para,authBtn */}
       <div className="lg:w-[80%] w-11/12 mx-auto mt-4">
         <div className="lg:w-11/12 w-[98%] mx-auto flex flex-col items-start lg:items-center lg:my-20 my-4">
@@ -86,6 +87,10 @@ const HomePage = () => {
       <div></div>
       {/* section 8 -> footer */}
       <div></div>
+
+      <div className="mt-24">
+        <Footer />
+      </div>
     </div>
   );
 };
