@@ -13,7 +13,8 @@ export interface IUser extends Document {
     additionalDetails: mongoose.Types.ObjectId,
     courses: mongoose.Types.ObjectId[],
     followers: mongoose.Types.ObjectId[],
-    following: mongoose.Types.ObjectId[]
+    following: mongoose.Types.ObjectId[],
+    notifications: mongoose.Types.ObjectId[]
 }
 
 // userSchema
@@ -63,6 +64,10 @@ const userSchema:Schema = new Schema({
     courseProgress:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: "CourseProgress"
+    }],
+    notifications:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Notification"
     }]
 },{timestamps:true});
 

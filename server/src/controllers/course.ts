@@ -9,6 +9,9 @@ import Section from '../models/Section';
 import SubSection from '../models/SubSection';
 import client from '../config/redis';
 import CourseProgress from '../models/CourseProgress';
+import { userConnections } from '../index' ;
+import { WebSocket } from 'ws';
+import Notification from '../models/Notification';
 
 // createCourse
 export const createCourse = async (
@@ -105,13 +108,30 @@ export const createCourse = async (
     ]);
 
     // return res
-    return res.status(200).json({
+    res.status(200).json({
       success: true,
       message: 'Course created',
       data,
       updatedCategory,
       updatedInstructor,
     });
+
+    // send notifications
+    const followers = instructorDetails.followers;
+    followers.forEach( async (followerId)=>{
+      const followerIdString = followerId.toString();
+      const ws = userConnections.get(followerIdString);
+      const notification = `${instructorDetails?.name} uploaded: ${courseName}`;
+      if(ws && ws.readyState === WebSocket.OPEN){
+        ws.send(notification);
+      }
+      
+      // save notifications in db
+      await Notification.create({userId: followerId,message:notification})
+    })
+
+    return;
+
   } catch (error) {
     console.log(error);
     return ErrorResponseHandling(res, 500, 'Internal server error');

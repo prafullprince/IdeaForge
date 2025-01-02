@@ -129,7 +129,7 @@ export const categoryPageDetails = async (req:Request, res:Response): Promise<an
         topTenSellingCourse?.sort((a,b)=> b.enrolledStudents - a.enrolledStudents );
         const mostSellingCourse = topTenSellingCourse?.slice(0,10);
 
-
+        
         // if not cached, cached data
         // await client.set(`category:${categoryId}`,JSON.stringify(data));
         // await client.expire(`category:${categoryId}`,3);
