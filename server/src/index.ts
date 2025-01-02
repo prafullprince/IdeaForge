@@ -73,11 +73,11 @@ wss.on('connection',function connection(socket:any){
         } catch (error) {
             console.log(error);
         }
-        // wss.clients.forEach(function each(client){
-        //     if(client.readyState === WebSocket.OPEN){
-        //         client.send(data,{binary: isBinary});
-        //     }
-        // })
+        wss.clients.forEach(function each(client){
+            if(client.readyState === WebSocket.OPEN){
+                client.send(data,{binary: isBinary});
+            }
+        })
     })
 
     socket.on('close', () => {
