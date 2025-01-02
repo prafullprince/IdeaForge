@@ -58,12 +58,12 @@ const wss = new WebSocketServer({ server:httpServer });
 export const userConnections = new Map<string, WebSocket>();
 
 // handle connection
-wss.on('connection',function connection(socket){
+wss.on('connection',function connection(socket:any){
     // error handle
-    socket.on('error',(err)=> console.log(err));
+    socket.on('error',(err:any)=> console.log(err));
 
     // message handle
-    socket.on('message', function message(data,isBinary){
+    socket.on('message', function message(data:any,isBinary:any){
         try {
             const userId = data.toString();
             if(userId){
