@@ -24,7 +24,7 @@ const NotModal = ({
   console.log(socket,connected)
   // socket
   useEffect(() => {
-    const socket = new WebSocket("ws://study-hub-2.onrender.com");
+    const socket = new WebSocket("wss://study-hub-2.onrender.com");
 
     // open
     socket.onopen = () => {
