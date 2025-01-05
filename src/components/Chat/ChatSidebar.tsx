@@ -6,12 +6,13 @@ import ChatModal from "../common/ChatModal";
 import { fetchAllChat } from "../../services/apiCall/chat";
 import { setChatter } from "../../slices/globalSlice";
 import { MdCreateNewFolder } from "react-icons/md";
+import { BsLayoutTextSidebar } from "react-icons/bs";
 
 
 const ChatSidebar = () => {
   // store
   const { token } = useSelector((state: any) => state.auth);
-  const { user } = useSelector((state:any)=> state.profile);
+  const { user } = useSelector((state: any) => state.profile);
 
   // hook
   const { userId } = useParams();
@@ -22,6 +23,7 @@ const ChatSidebar = () => {
   const [createChatModal, setCreateChatModal] = useState<any | null>(null);
   const [refresh, setRefresh] = useState(false);
   const [chat, setChat] = useState<any>([]);
+  const [isOpen, setIsOpen] = useState(false);
 
   // fetchAllFollowers
   async function fetchAllFollowers() {
@@ -53,40 +55,81 @@ const ChatSidebar = () => {
   }, [refresh]);
 
   return (
-    <div className="min-w-[400px] bg-[#111B21] px-4">
-      {/* create chat */}
-      <div className="flex justify-between items-center border-b border-b-richblack-500 border-opacity-60 py-4">
-        <p className="text-3xl font-semibold">Chats</p>
-        <button
-          onClick={() => {
-            setCreateChatModal({
-              heading: "Chat Modal",
-            });
-          }}
-          className="bg-yellow-100 text-richblack-900 px-2 py-1 rounded-lg flex items-center gap-1"
-        >
-          <MdCreateNewFolder className="text-3xl font-bold" />
-          <p className="font-medium text-lg">Chat</p>
-        </button>
-      </div>
-
-      {/* allChats */}
-      <div className="flex flex-col gap-2 mt-12 overflow-auto">
-        {chat?.map((chit: any) => (
-          <button onClick={()=>{
-            setChatter(chit);
-            navigate(`/chat/${chit?._id}/user/${chit?.participants?.find((chatter:any)=> chatter?._id !== user?._id )?._id}`)
-          }}
-            key={chit?._id}
-            className={`flex gap-4 items-center ${chit?.participants?.find((chatter:any)=> chatter?._id !== user?._id )?._id === userId ? "bg-richblack-700" : ""} hover:bg-richblack-600 duration-200 transition-all px-4 py-3 rounded-lg`}
+    <div className={`bg-[#111B21] px-4 relative`}>
+      <button
+        onClick={() => {
+          setIsOpen((prev: any) => !prev);
+        }}
+        className="text-3xl font-semibold absolute top-5"
+      >
+        <BsLayoutTextSidebar className={`${isOpen ? "text-richblack-200" : "text-yellow-50"}`} />
+      </button>
+      <div className={`${isOpen ? "min-w-[360px]":"w-6"}`}>
+        {/* create chat */}
+        <div className={`flex justify-end items-center border-b border-b-richblack-500 border-opacity-60 py-4 ${isOpen ? "" : "hidden"}`}>
+          <button
+            onClick={() => {
+              setCreateChatModal({
+                heading: "Chat Modal",
+              });
+            }}
+            className="bg-yellow-100 text-richblack-900 px-2 py-1 rounded-lg flex items-center gap-1"
           >
-            <img src={chit?.participants?.find((chatter:any)=> chatter?._id !== user?._id )?.image} className="w-10 h-10 rounded-full" />
-            <div className="flex flex-col items-start">
-              <p className="text-base text-richblack-25">{chit?.participants?.find((chatter:any)=> chatter?._id !== user?._id )?.name}</p>
-              <p className="text-sm text-richblack-400">{chit?.participants?.find((chatter:any)=> chatter?._id !== user?._id )?.email}</p>
-            </div>
+            <MdCreateNewFolder className="text-3xl font-bold" />
+            <p className="font-medium text-lg">Chat</p>
           </button>
-        ))}
+        </div>
+
+        {/* allChats */}
+        <div className={`flex flex-col gap-2 mt-12 overflow-auto ${isOpen ? "" : "hidden"}`}>
+          {chat?.map((chit: any) => (
+            <button
+              onClick={() => {
+                setChatter(chit);
+                navigate(
+                  `/chat/${chit?._id}/user/${
+                    chit?.participants?.find(
+                      (chatter: any) => chatter?._id !== user?._id
+                    )?._id
+                  }`
+                );
+              }}
+              key={chit?._id}
+              className={`flex gap-4 items-center ${
+                chit?.participants?.find(
+                  (chatter: any) => chatter?._id !== user?._id
+                )?._id === userId
+                  ? "bg-richblack-700"
+                  : ""
+              } hover:bg-richblack-600 duration-200 transition-all px-4 py-3 rounded-lg`}
+            >
+              <img
+                src={
+                  chit?.participants?.find(
+                    (chatter: any) => chatter?._id !== user?._id
+                  )?.image
+                }
+                className="w-10 h-10 rounded-full"
+              />
+              <div className="flex flex-col items-start">
+                <p className="text-base text-richblack-25">
+                  {
+                    chit?.participants?.find(
+                      (chatter: any) => chatter?._id !== user?._id
+                    )?.name
+                  }
+                </p>
+                <p className="text-sm text-richblack-400">
+                  {
+                    chit?.participants?.find(
+                      (chatter: any) => chatter?._id !== user?._id
+                    )?.email
+                  }
+                </p>
+              </div>
+            </button>
+          ))}
+        </div>
       </div>
       {createChatModal && (
         <ChatModal

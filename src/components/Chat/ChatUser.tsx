@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { userDetailsById } from "../../services/apiCall/profile";
@@ -8,6 +8,7 @@ import { IoSendSharp } from "react-icons/io5";
 const ChatUser = () => {
   // hook
   const { chatId, userId } = useParams();
+  const divRef = useRef<null | HTMLDivElement>(null);
 
   // store
   const { user } = useSelector((state: any) => state.profile);
@@ -18,7 +19,6 @@ const ChatUser = () => {
   const [message, setMessage] = useState<any>([]);
   const [chat, setChat] = useState<string>("");
   const [userInfo, setUserInfo] = useState<any>(null);
-  console.log(userInfo);
 
   // apiCall -> allMessage
   useEffect(() => {
@@ -76,6 +76,10 @@ const ChatUser = () => {
     };
   }, [chatId]);
 
+  useEffect(()=>{
+    divRef.current?.scrollIntoView({behavior: "smooth"})
+  },[message]);
+
   useEffect(() => {
     async function fetchUserDetails() {
       try {
@@ -91,16 +95,16 @@ const ChatUser = () => {
   return (
     <div className="flex flex-col relative w-full">
       {/* topbar */}
-      <div className="bg-[#202c33] p-4 flex gap-4">
+      <div className="bg-[#202c33] p-4 flex gap-4 break-words text-wrap">
         <img
           src={userInfo?.userDetails?.image}
           className="w-10 h-10 rounded-full"
         />
-        <div className="flex flex-col items-start">
+        <div className="flex flex-col items-start break-words text-wrap">
           <p className="text-base text-richblack-5 font-semibold">
             {userInfo?.userDetails?.name}
           </p>
-          <p className="text-xs text-richblack-100">
+          <p className="text-xs text-richblack-100 break-words text-wrap">
             {userInfo?.userDetails?.email}
           </p>
         </div>
@@ -120,24 +124,24 @@ const ChatUser = () => {
                 {/* receiver */}
                 {msg?.receiver?._id === user?._id && (
                   <div className="flex w-full justify-start">
-                    <div className="w-fit flex gap-2 bg-[#202C33] px-2 py-1 rounded-lg">
-                      <img
+                    <div className="w-fit flex gap-2 bg-[#202C33] px-2 py-1 rounded-lg break-words text-wrap">
+                      {/* <img
                         src={msg?.sender?.image}
                         className="w-6 h-6 rounded-full"
-                      />
-                      <p>{msg?.text}</p>
+                      /> */}
+                      <p className="break-words text-wrap">{msg?.text}</p>
                     </div>
                   </div>
                 )}
                 {/* sender */}
                 {msg?.sender?._id === user?._id && (
                   <div className="flex w-full justify-end">
-                    <div className="w-fit flex gap-2 bg-[#056162] px-2 py-1 rounded-lg">
-                      <img
+                    <div className="w-fit flex gap-2 bg-[#056162] px-2 py-1 rounded-lg break-words text-wrap">
+                      {/* <img
                         src={msg?.sender?.image}
                         className="w-6 h-6 rounded-full"
-                      />
-                      <p>{msg?.text}</p>
+                      /> */}
+                      <p className="break-words text-wrap">{msg?.text}</p>
                     </div>
                   </div>
                 )}
@@ -145,6 +149,7 @@ const ChatUser = () => {
             ))}
           </div>
         )}
+        <div ref={divRef}></div>
       </div>
 
       {/* send message */}
