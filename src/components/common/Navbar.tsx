@@ -11,6 +11,7 @@ const Navbar = () => {
   // store
   const { token } = useSelector((state:any)=>state.auth);
 
+
   return (
     <div className="border-b border-opacity-30 flex items-center border-b-pure-greys-300 bg-richblack-900 shadow-2xl">
         {/* box */}

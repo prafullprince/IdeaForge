@@ -14,7 +14,8 @@ export interface IUser extends Document {
     courses: mongoose.Types.ObjectId[],
     followers: mongoose.Types.ObjectId[],
     following: mongoose.Types.ObjectId[],
-    notifications: mongoose.Types.ObjectId[]
+    notifications: mongoose.Types.ObjectId[],
+    chats: mongoose.Types.ObjectId[]
 }
 
 // userSchema
@@ -68,6 +69,10 @@ const userSchema:Schema = new Schema({
     notifications:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Notification"
+    }],
+    chats:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"Chat"
     }]
 },{timestamps:true});
 

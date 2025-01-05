@@ -48,7 +48,10 @@ export const subSectionEndPoints = {
 // extra
 export const extraEndPoints = {
     SEARCH_COURSE: BASE_URL + "/course/searchCourse",
-    VIEWS: BASE_URL + "/course/totalViews"
+    VIEWS: BASE_URL + "/course/totalViews",
+    NOTIFICATION: BASE_URL + "/course/notifications",
+    MARK_AS_READ: BASE_URL + "/course/markAsReadNot",
+    ALL_NOTIFICATION: BASE_URL + "/course/allNotifications"
 }
 
 // rating
@@ -71,4 +74,10 @@ export const profileEndpoints = {
 export const categoryEndPoints = {
     FETCH_ALL_CATEGORY: BASE_URL + "/course/getAllCategory",
     CATEGORY_PAGE_DETAILS: BASE_URL + "/course/categoryPageDetails"
+}
+
+// chat
+export const chatEndPoints = {
+    CREATE_CHAT: BASE_URL + "/course/createChat",
+    FETCH_CHAT: BASE_URL + "/course/fetchChat"
 }

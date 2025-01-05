@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import Tab from "../common/Tab"
 import HighlightText from "./HighlightText"
-import { HomePageExplore } from "../../data/homepage-explore";
+// import { HomePageExplore } from "../../data/homepage-explore";
 
-interface Course {
-    heading:string,
-    description:string,
-    level:string,
-    lessionNumber:number,
-}
+// interface Course {
+//     heading:string,
+//     description:string,
+//     level:string,
+//     lessionNumber:number,
+// }
 
 const LearningSection = () => {
 
@@ -17,17 +17,17 @@ const LearningSection = () => {
 
     // state
     const [tabData,setTabData] = useState<string>(data[0]);
-    const [course,setCourse] = useState<Course[] | []>(HomePageExplore[0].courses);
-    const [currentCourse,setCurrentCourse] = useState<string>(course[0].heading);
-    console.log(currentCourse)
-    console.log(course)
+    // const [course,setCourse] = useState<Course[] | []>(HomePageExplore[0].courses);
+    // const [currentCourse,setCurrentCourse] = useState<string>(course[0].heading);
+    // console.log(currentCourse)
+    // console.log(course)
 
     // sideEffects
     useEffect(()=>{
         // filteredCourse a/c to tag
-        const filteredCourse:Course[] = HomePageExplore.find((doc) => doc.tag === tabData )?.courses || [];
-        setCourse(filteredCourse);
-        setCurrentCourse(filteredCourse[0].heading);
+        // const filteredCourse:Course[] = HomePageExplore.find((doc) => doc.tag === tabData )?.courses || [];
+        // setCourse(filteredCourse);
+        // setCurrentCourse(filteredCourse[0].heading);
     },[tabData])
 
 

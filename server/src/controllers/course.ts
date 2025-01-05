@@ -9,9 +9,9 @@ import Section from '../models/Section';
 import SubSection from '../models/SubSection';
 import client from '../config/redis';
 import CourseProgress from '../models/CourseProgress';
-import { userConnections } from '../index' ;
 import { WebSocket } from 'ws';
 import Notification from '../models/Notification';
+import { userConnection } from '../websocket/sendMessage';
 
 // createCourse
 export const createCourse = async (
@@ -118,20 +118,27 @@ export const createCourse = async (
 
     // send notifications
     const followers = instructorDetails.followers;
-    followers.forEach( async (followerId)=>{
+    followers.forEach(async (followerId) => {
       const followerIdString = followerId.toString();
-      const ws = userConnections.get(followerIdString);
+      const ws = userConnection.get(followerIdString);
       const notification = `${instructorDetails?.name} uploaded: ${courseName}`;
-      if(ws && ws.readyState === WebSocket.OPEN){
-        ws.send(notification);
+      if (ws && ws.readyState === WebSocket.OPEN) {
+        ws.send(JSON.stringify({
+          userId: followerId,
+          message: notification,
+          thumbnail: instructorDetails.image
+        }));
+      } else {
+        // save notifications in db
+        await Notification.create({
+          userId: followerId,
+          message: notification,
+          thumbnail: instructorDetails.image
+        });
       }
-      
-      // save notifications in db
-      await Notification.create({userId: followerId,message:notification})
-    })
+    });
 
     return;
-
   } catch (error) {
     console.log(error);
     return ErrorResponseHandling(res, 500, 'Internal server error');
@@ -707,7 +714,10 @@ export const coursePageDetails = async (
     const data = await Course.findOne({ _id: courseId })
       .populate([
         { path: 'category', select: 'categoryName' },
-        { path: 'instructor', select: 'name email image followers following courses' },
+        {
+          path: 'instructor',
+          select: 'name email image followers following courses',
+        },
         {
           path: 'sections',
           populate: {
@@ -744,7 +754,7 @@ export const markVideoAsCompleted = async (
 ): Promise<any> => {
   try {
     // fetch data
-    const { courseId,subSectionId } = req.body;
+    const { courseId, subSectionId } = req.body;
     const userId = req.user?.id;
 
     // validation
@@ -753,16 +763,23 @@ export const markVideoAsCompleted = async (
     }
 
     // create progress
-    let courseProgress = await CourseProgress.findOne({userId: userId, courseId: courseId});
+    let courseProgress = await CourseProgress.findOne({
+      userId: userId,
+      courseId: courseId,
+    });
 
     // if courseProgress is not set
-    if(!courseProgress){
-      courseProgress = new CourseProgress({courseId: courseId, userId: userId, completedVideos: []});
+    if (!courseProgress) {
+      courseProgress = new CourseProgress({
+        courseId: courseId,
+        userId: userId,
+        completedVideos: [],
+      });
     }
 
     // save subSection in completedVideos
-    if(courseProgress.completedVideos.includes(subSectionId)){
-      return ErrorResponseHandling(res,400,"Already mark as completed");
+    if (courseProgress.completedVideos.includes(subSectionId)) {
+      return ErrorResponseHandling(res, 400, 'Already mark as completed');
     }
 
     // if not already completed
@@ -798,13 +815,13 @@ export const studentEnrolledCourses = async (
 
     // check is cached available
     const cachedValue = await client.get(`enrolledCourse:${userId}`);
-    if(cachedValue){
+    if (cachedValue) {
       try {
         const data = JSON.parse(cachedValue);
         return res.status(200).json({
           success: true,
-          message: "All Enrolled Courses",
-          data
+          message: 'All Enrolled Courses',
+          data,
         });
       } catch (error) {
         console.log(error);
@@ -813,35 +830,36 @@ export const studentEnrolledCourses = async (
     }
 
     // find user
-    const user = await User.findOne({_id: userId}).populate({
-      path:"courses",
-      populate:{
-        path:"sections"
-      }
-    })
-    .populate({
-      path:"courses",
-      populate:{
-        path:"instructor",
-        select:"name image followers following courses"
-      }
-    });
-    if(!user){
-      return ErrorResponseHandling(res,400,"User not found");
+    const user = await User.findOne({ _id: userId })
+      .populate({
+        path: 'courses',
+        populate: {
+          path: 'sections',
+        },
+      })
+      .populate({
+        path: 'courses',
+        populate: {
+          path: 'instructor',
+          select: 'name image followers following courses',
+        },
+      });
+    if (!user) {
+      return ErrorResponseHandling(res, 400, 'User not found');
     }
 
     // allCourse
     const data = user.courses;
 
     // if not cached then cached them
-    await client.set(`enrolledCourse:${userId}`,JSON.stringify(data));
-    await client.expire(`enrolledCourse:${userId}`,40);
+    await client.set(`enrolledCourse:${userId}`, JSON.stringify(data));
+    await client.expire(`enrolledCourse:${userId}`, 40);
 
     // return res
     return res.status(200).json({
       success: true,
       message: `All Enrolled Courses`,
-      data
+      data,
     });
   } catch (error) {
     console.log(error);
@@ -866,13 +884,13 @@ export const courseViewPageDetails = async (
 
     // check is cached available
     const cachedValue = await client.get(`courseView:${courseId}`);
-    if(cachedValue){
+    if (cachedValue) {
       try {
         const data = JSON.parse(cachedValue);
         return res.status(200).json({
           success: true,
-          message: "All Enrolled Courses",
-          data
+          message: 'All Enrolled Courses',
+          data,
         });
       } catch (error) {
         console.log(error);
@@ -881,35 +899,37 @@ export const courseViewPageDetails = async (
     }
 
     // isValid credentials
-    const [user,course] = await Promise.all([
-      User.findOne({_id:userId}),
-      Course.findOne({_id:courseId})
+    const [user, course] = await Promise.all([
+      User.findOne({ _id: userId }),
+      Course.findOne({ _id: courseId }),
     ]);
 
     // validation
-    if(!user || !course){
-      return ErrorResponseHandling(res,400,"Invalid credentials");
+    if (!user || !course) {
+      return ErrorResponseHandling(res, 400, 'Invalid credentials');
     }
 
     // fullDetails
-    const data = await Course.findOne({_id:courseId})
-                                          .populate([
-                                            {path:"sections",
-                                              populate:{
-                                                path:"subSections"
-                                              }
-                                            }
-                                          ]).lean();
-    
+    const data = await Course.findOne({ _id: courseId })
+      .populate([
+        {
+          path: 'sections',
+          populate: {
+            path: 'subSections',
+          },
+        },
+      ])
+      .lean();
+
     // if not cached then cached them
-    await client.set(`courseView:${courseId}`,JSON.stringify(data));
-    await client.expire(`courseView:${courseId}`,40);
+    await client.set(`courseView:${courseId}`, JSON.stringify(data));
+    await client.expire(`courseView:${courseId}`, 40);
 
     // return res
     return res.status(200).json({
       success: true,
       message: `All Enrolled Courses`,
-      data
+      data,
     });
   } catch (error) {
     console.log(error);

@@ -3,7 +3,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 // initialstate
 const initialState: any = {
-    isOpenSidebar:false
+    isOpenSidebar:false,
+    chatter: null
 };
 
 // slice
@@ -18,12 +19,15 @@ const globalSlice = createSlice({
         else{
             state.isOpenSidebar = !state.isOpenSidebar;
         }
+    },
+    setChatter(state,action: PayloadAction<any>){
+      state.chatter = action.payload;
     }
   },
 });
 
 // Export actions
-export const { setIsOpenSidebar } = globalSlice.actions;
+export const { setIsOpenSidebar,setChatter } = globalSlice.actions;
 
 // Export reducer
 export default globalSlice.reducer;

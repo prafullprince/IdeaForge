@@ -8,6 +8,8 @@ import { coursePageDetails, courseViewPageDetails, createCourse, createSection, 
 import { capturePayment, verifyPayment } from '../controllers/payments';
 import { searchCourse, totalViews } from '../controllers/extra';
 import { createRating, getAverageRating } from '../controllers/Rating';
+import { allNotifications, allUnreadNotifications, markNotificationAsRead } from '../controllers/notifications';
+import { createChat, fetchChat } from '../controllers/chat';
 
 // router instances
 const router = express.Router();
@@ -52,6 +54,13 @@ router.post("/getAverageRating",getAverageRating);
 // extra
 router.post("/searchCourse",searchCourse);
 router.post("/totalViews",totalViews);
+router.post("/notifications",auth,allUnreadNotifications);
+router.post("/markAsReadNot",auth,markNotificationAsRead);
+router.post("/allNotifications",auth,allNotifications);
+
+// chat
+router.post("/createChat",auth,createChat);
+router.post("/fetchChat",auth,fetchChat);
 
 // export router
 export default router;

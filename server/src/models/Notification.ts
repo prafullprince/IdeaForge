@@ -6,6 +6,7 @@ export interface INotification extends Document {
   courseId: string; // Optional: ID of the new course
   isSeen: boolean; // Whether the user has seen this notification
   createdAt: Date;
+  thumbnail: String
 }
 
 const NotificationSchema: Schema = new Schema(
@@ -13,6 +14,7 @@ const NotificationSchema: Schema = new Schema(
     userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     message: { type: String, required: true },
     isSeen: { type: Boolean, default: false },
+    thumbnail: { type: String, default:"abc.jpg" },
     createdAt:{
         type: Date,
         default: Date.now(),

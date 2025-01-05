@@ -29,6 +29,8 @@ import LectureContent from "./components/Watch/LectureContent";
 import UserProfile from "./pages/UserProfile";
 import SearchResult from "./pages/SearchResult";
 import PurchasedHistory from "./pages/Dashboard/PurchasedHistory";
+import ChatPage from "./pages/ChatPage";
+import ChatUser from "./components/Chat/ChatUser";
 
 // import { jwtDecode } from "jwt-decode";
 
@@ -117,6 +119,7 @@ function App() {
         <Route path="/profile/:profileId" element={<UserProfile />} />
         <Route path="/searchResults" element={<SearchResult />} />
 
+        {/* viewCourse */}
         <Route 
           element={<PrivateRoute>
             <WatchCourse />
@@ -125,6 +128,18 @@ function App() {
           <Route path="/watch-course/:courseId/section/:sectionId/sub-section/:subSectionId" element={<LectureContent />} />
         </Route>
 
+
+        {/* chat */}
+        <Route element={
+          <PrivateRoute>
+            <ChatPage />
+          </PrivateRoute>
+        }>
+          <Route path="/chat/:chatId/user/:userId" element={<ChatUser />} />
+        </Route>
+
+
+        {/* dashboard */}
         <Route
           element={
             <PrivateRoute>
