@@ -25,8 +25,6 @@ const SearchModal = ({
     }
   }
 
-  console.log(course);
-
   // sideEffect -> apiCall on every query changes
   useEffect(() => {
     const timeoutId = setTimeout(() => {

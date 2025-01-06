@@ -11,6 +11,7 @@ import { RiUserFollowLine } from "react-icons/ri";
 import { RiUserUnfollowLine } from "react-icons/ri";
 import UserCourses from "../components/common/UserCourses";
 import ProfileSpinner from "../spinner/ProfileSpinner";
+import FullPage from "../spinner/FullPage";
 
 const UserProfile = () => {
   // hook
@@ -27,22 +28,6 @@ const UserProfile = () => {
   const [courses, setCourses] = useState<any>([]);
   const [loading, setLoading] = useState(false);
 
-  // socket
-  // const [socket,setSocket] = useState<WebSocket | null>(null);
-  // const [connected,setConnected] = useState<boolean>(false);
-  // const [chat,setChat] = useState<string>("");
-  // const [latest,setLatest] = useState("");
-
-  // function send message
-  // function sendMessage(){
-  //   if(connected){
-  //     socket?.send(JSON.stringify({
-  //       type: "SendMessage",
-  //       userId: profileId,
-  //       payload: {message:chat}
-  //     }));
-  //   }
-  // }
 
   // followHandler
   async function followHandler(toUser: any) {
@@ -86,48 +71,11 @@ const UserProfile = () => {
     fetchUserCourses();
   }, [profileId]);
 
-  // useEffect(()=>{
-  //   const socket = new WebSocket('ws://localhost:4000');
 
-  //   // open socket
-  //   socket.onopen = ()=>{
-  //     setConnected(true);
-  //     socket?.send(JSON.stringify({
-  //       type: "register",
-  //       userId: profileId
-  //     }))
-  //   }
-
-  //   // onmessage
-  //   socket.onmessage = (message)=>{
-  //     setLatest(message.data);
-  //   }
-
-  //   // onerror
-  //   socket.onerror = (error)=>{
-  //     console.log(error);
-  //   }
-
-  //   // onclose
-  //   socket.onclose = ()=>{
-  //     console.log('connection closed');
-  //     setConnected(false);
-  //   }
-
-  //   setSocket(socket);
-
-  //   // cleanup function
-  //   return ()=>{
-  //     socket.close();
-  //     console.log("closed during cleanup")
-  //   }
-
-
-
-  // },[]);
+  if(loading) return <FullPage />
 
   return (
-    <div className="w-[90%] lg:w-[80%] mx-auto">
+    <div className="w-[90%] lg:w-[80%] mx-auto min-h-screen">
       {/* user profile dashboard */}
       <div className="flex flex-col gap-6 items-center w-full mt-12">
         {loading ? (
@@ -217,12 +165,6 @@ const UserProfile = () => {
                     {details?.additionalDetails?.about?.substring(0, 50)}..
                   </p>
                 </div>
-                {/* message */}
-                {/* <div className="flex items-center gap-2">
-                  <Input type="text" value={chat} onChange={(e:any)=> setChat(e.target.value)} placeholder="send message" />
-                  <button onClick={sendMessage} className="bg-yellow-100 px-3 py-2 rounded-lg text-lg text-richblack-900">Send message</button>
-                </div>
-                <div>{latest}</div> */}
               </div>
             </div>
           </>
@@ -242,7 +184,7 @@ const UserProfile = () => {
       </div>
 
       {modalData && (
-        <ConnectionModal modalData={modalData} setModalData={setModalData} />
+        <ConnectionModal modalData={modalData} setModalData={setModalData} onFollow={followHandler} />
       )}
     </div>
   );

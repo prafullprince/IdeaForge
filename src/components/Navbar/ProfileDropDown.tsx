@@ -37,13 +37,17 @@ const ProfileDropDown = () => {
   return (
     <div className="relative mt-2">
       <button onClick={() => setIsOpen((prev) => !prev)}>
-        <img
-          src={user?.image}
-          width={32}
-          height={32}
-          alt="profile"
-          className="border-0 rounded-full sm:max-w-8 sm:max-h-8"
-        />
+        {
+          user ? (<img
+            src={user?.image}
+            width={32}
+            height={32}
+            alt="profile"
+            className="border-0 rounded-full sm:max-w-8 sm:max-h-8"
+          />) : (<div
+            className="div border-0 rounded-full sm:max-w-8 sm:max-h-8 w-8 h-8"
+          ></div>)
+        }
       </button>
 
       {isOpen && (

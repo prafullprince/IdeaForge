@@ -12,6 +12,7 @@ import {
   allUserNotificationsApi,
   markAsReadNotificationApi,
 } from "../../services/apiCall/extra";
+import { BsChatDots } from "react-icons/bs";
 
 const LoggedUser = () => {
   // store
@@ -28,7 +29,6 @@ const LoggedUser = () => {
   async function fetchAllNotification() {
     try {
       const result = await allUserNotificationsApi(token);
-      console.log(result);
       setNotification(result);
     } catch (error) {
       console.log(error);
@@ -62,7 +62,6 @@ const LoggedUser = () => {
     fetchAllUnreadNotification();
   }, []);
 
-
   return (
     <div className="flex items-center gap-4 px-4 relative">
       {/* notification */}
@@ -82,6 +81,13 @@ const LoggedUser = () => {
       >
         <IoSearchSharp className="text-2xl text-richblack-50" />
       </button>
+      {/* chat */}
+      <Link className="relative" to={`/chat/${123}/user/${123}`}>
+        <BsChatDots className="text-2xl text-richblack-50 font-bold" />
+        {/* <div className="absolute top-0 bg-pink-200 px-[6px] translate-x-3 translate-y-[-8px] rounded-full text-base">
+          {totalItems}
+        </div> */}
+      </Link>
       {/* cart */}
       <Link className="relative" to={"/cart"}>
         <BsCart3 className="text-2xl text-richblack-50" />

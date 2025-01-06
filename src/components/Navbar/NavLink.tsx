@@ -11,7 +11,7 @@ interface ICategory {
 }
 
 const NavLink = () => {
-
+  
   // hook
   const prevCategoriesRef = useRef<ICategory[]>([]);
   const location = useLocation();
@@ -59,9 +59,7 @@ const NavLink = () => {
                 ) : (
                   <>
                     {allCategory?.length === 0 ? (
-                      <>
-                        No category found 
-                      </>
+                      <>No category found</>
                     ) : (
                       <>
                         {allCategory?.map((cat) => (
@@ -85,7 +83,9 @@ const NavLink = () => {
           ) : (
             <Link
               to={link.path}
-              className={`${matchRoute(link?.path) ? "text-yellow-50" : "text-richblack-25"}`}
+              className={`${
+                matchRoute(link?.path) ? "text-yellow-50" : "text-richblack-25"
+              }`}
             >
               <p>{link.title}</p>
             </Link>

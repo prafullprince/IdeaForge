@@ -6,7 +6,6 @@ import { setCourse, setStep } from "../../slices/courseSlice";
 
 // createCourse
 export const createCourseApi = async (formData:any,token:string,dispatch:any)=>{
-    const tid = toast.loading("Loading....");
     try {
         // apiCall
         const response = await apiConnector("POST",courseEndPoints.CREATE_COURSE,formData,{
@@ -24,7 +23,6 @@ export const createCourseApi = async (formData:any,token:string,dispatch:any)=>{
         console.log(error);
         toast.error(error.response.data.message);
     }
-    toast.dismiss(tid);
 }
 
 // instructorCourse

@@ -23,7 +23,7 @@ const UserCourses = ({ courses, type, courseLoading }: any) => {
                   {/* instructor */}
                   <Link
                     to={`/profile/${course?.instructor?._id}`}
-                    className="flex gap-2 items-center bg-richblack-900 py-2 group relative w-fit"
+                    className="flex gap-2 items-center py-2 group relative w-fit"
                   >
                     <img
                       src={course?.instructor?.image}

@@ -83,8 +83,8 @@ const NotModal = ({
           </div>
           {/* all notifications */}
           <div className="flex gap-4 flex-col overflow-auto mt-8">
-            {notification?.map((msg: any) => (
-              <div key={msg?._id} className="flex gap-2 items-center">
+            {notification?.map((msg: any,index:number) => (
+              <div key={index} className="flex gap-2 items-center">
                 <img src={msg?.thumbnail} className="w-10 h-10 rounded-full" />
                 <p className="text-richblack-25 text-sm">{msg?.message}</p>
               </div>

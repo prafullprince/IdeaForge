@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import { ACCOUNT_TYPE } from "../lib/constants";
 
 export interface ISidebarLink {
@@ -10,8 +9,6 @@ export interface ISidebarLink {
 }
 
 export const useSidebarLinks = (): ISidebarLink[] => {
-  const { user } = useSelector((state: any) => state.profile);
-  console.log(user)
   const sidebarLinks: ISidebarLink[] = [
     {
       id: 1,

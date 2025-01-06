@@ -8,6 +8,7 @@ import {
 import ConnectionModal from "../../components/common/ConnectionModal";
 import UserCourses from "../../components/common/UserCourses";
 import ProfileSpinner from "../../spinner/ProfileSpinner";
+import FullPage from "../../spinner/FullPage";
 
 const Profile = () => {
   // hook
@@ -60,7 +61,7 @@ const Profile = () => {
   }, []);
 
   // loading
-  // if (loading) return <FullPage />;
+  if (!user || courseLoading) return <FullPage />
 
   return (
     <div className="w-full">
@@ -182,7 +183,7 @@ const Profile = () => {
       <UserCourses courses={courses} courseLoading={courseLoading} type={"user"} />
 
       {modalData && (
-        <ConnectionModal modalData={modalData} setModalData={setModalData} />
+        <ConnectionModal modalData={modalData} setModalData={setModalData} onFollow={""} />
       )}
     </div>
   );

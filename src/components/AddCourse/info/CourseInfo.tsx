@@ -430,7 +430,7 @@ const CourseInfo = () => {
         {/* button */}
         <div className="flex items-center w-full justify-end gap-6">
           <button
-            className={`px-3 py-1 relative ${!loading ? "bg-yellow-50 text-yellow-900" : "bg-richblack-900 text-richblack-5 py-3 px-8"} hover:bg-richblack-900 hover:text-richblack-5 rounded-md text-lg font-medium hover:shadow-lg hover:shadow-blue-100 transition-all duration-300`}
+            className={`px-3 py-1 relative ${!loading ? "bg-yellow-50 text-yellow-900 hover:bg-richblack-900" : "bg-richblack-900 text-richblack-5 py-3 px-8"} hover:text-richblack-5 rounded-md text-lg font-medium hover:shadow-lg hover:shadow-blue-100 transition-all duration-300`}
             type="submit"
           >
             {loading && (
