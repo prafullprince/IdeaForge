@@ -1,29 +1,29 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { userDetails } from "../../services/apiCall/profile";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ChatModal from "../common/ChatModal";
 import { fetchAllChat } from "../../services/apiCall/chat";
-import { setChatter } from "../../slices/globalSlice";
-import { MdCreateNewFolder } from "react-icons/md";
+import { setChatter, setIsOpenChatSidebar } from "../../slices/globalSlice";
+import { MdAddToPhotos, MdClose } from "react-icons/md";
 import { BsLayoutTextSidebar } from "react-icons/bs";
-
 
 const ChatSidebar = () => {
   // store
   const { token } = useSelector((state: any) => state.auth);
   const { user } = useSelector((state: any) => state.profile);
+  const { isOpenChatSidebar } = useSelector((state: any) => state.global);
 
   // hook
   const { userId } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // state
   const [users, setUsers] = useState<any>([]);
   const [createChatModal, setCreateChatModal] = useState<any | null>(null);
   const [refresh, setRefresh] = useState(false);
   const [chat, setChat] = useState<any>([]);
-  const [isOpen, setIsOpen] = useState(false);
 
   // fetchAllFollowers
   async function fetchAllFollowers() {
@@ -55,33 +55,53 @@ const ChatSidebar = () => {
   }, [refresh]);
 
   return (
-    <div className={`bg-[#111B21] px-4 relative`}>
-      <button
-        onClick={() => {
-          setIsOpen((prev: any) => !prev);
-        }}
-        className="text-3xl font-semibold absolute top-5"
-      >
-        <BsLayoutTextSidebar className={`${isOpen ? "text-richblack-200" : "text-yellow-50"}`} />
-      </button>
-      <div className={`${isOpen ? "min-w-[360px]":"w-6"}`}>
-        {/* create chat */}
-        <div className={`flex justify-end items-center border-b border-b-richblack-500 border-opacity-60 py-4 ${isOpen ? "" : "hidden"}`}>
+    <div className={`bg-[#03111a] relative min-h-[835px]`}>
+      <div className={`${isOpenChatSidebar ? "min-w-[360px]" : "hidden"}`}>
+        {/* create chat and close modal */}
+        <div
+          className={`flex justify-between items-center border-b border-b-richblack-500 border-opacity-60 p-4 ${
+            isOpenChatSidebar ? "" : "hidden"
+          }`}
+        >
+          <button
+            onClick={() => {
+              dispatch(setIsOpenChatSidebar());
+            }}
+            className="text-3xl font-semibold absolute top-5 z-50 right-10 sm:right-6"
+          >
+            {isOpenChatSidebar ? (
+              <MdClose
+                className={`${
+                  isOpenChatSidebar ? "text-richblack-200" : "text-yellow-50"
+                }`}
+              />
+            ) : (
+              <BsLayoutTextSidebar
+                className={`${
+                  isOpenChatSidebar ? "text-richblack-200" : "text-yellow-50"
+                }`}
+              />
+            )}
+          </button>
           <button
             onClick={() => {
               setCreateChatModal({
-                heading: "Chat Modal",
+                heading: "New chat",
               });
             }}
-            className="bg-yellow-100 text-richblack-900 px-2 py-1 rounded-lg flex items-center gap-1"
+            // className="bg-yellow-100 text-richblack-900 px-2 py-1 rounded-lg flex items-center gap-1"
           >
-            <MdCreateNewFolder className="text-3xl font-bold" />
-            <p className="font-medium text-lg">Chat</p>
+            <MdAddToPhotos className="text-3xl font-bold ml-4 text-yellow-100 hover:text-caribbeangreen-200 duration-200 transition-all" />
+            {/* <p className="font-medium text-lg">Chat</p> */}
           </button>
         </div>
 
         {/* allChats */}
-        <div className={`flex flex-col gap-2 mt-12 overflow-auto ${isOpen ? "" : "hidden"}`}>
+        <div
+          className={`flex flex-col gap-2 py-2 overflow-auto ${
+            isOpenChatSidebar ? "" : "hidden"
+          } px-4`}
+        >
           {chat?.map((chit: any) => (
             <button
               onClick={() => {

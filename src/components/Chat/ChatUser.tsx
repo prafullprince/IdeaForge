@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { userDetailsById } from "../../services/apiCall/profile";
 import { IoSendSharp } from "react-icons/io5";
-
+import wspLogo from "../../assets/Images/whatsappImg.webp";
 
 const ChatUser = () => {
   // hook
@@ -76,9 +76,9 @@ const ChatUser = () => {
     };
   }, [chatId]);
 
-  useEffect(()=>{
-    divRef.current?.scrollIntoView({behavior: "smooth"})
-  },[message]);
+  useEffect(() => {
+    divRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [message]);
 
   useEffect(() => {
     async function fetchUserDetails() {
@@ -111,7 +111,10 @@ const ChatUser = () => {
       </div>
 
       {/* message box */}
-      <div className="h-[700px] p-4 overflow-auto bg-pure-greys-800">
+      <div
+        className={`h-[700px] p-4 overflow-auto bg-pure-greys-800 bg-center bg-cover`}
+        style={{ backgroundImage: `url(${wspLogo})` }}
+      >
         {/*  */}
         {message?.length === 0 ? (
           <div className="flex items-center justify-center">
@@ -123,25 +126,28 @@ const ChatUser = () => {
               <div key={msg?._id} className="flex flex-col gap-1">
                 {/* receiver */}
                 {msg?.receiver?._id === user?._id && (
-                  <div className="flex w-full justify-start">
-                    <div className="w-fit flex gap-2 bg-[#202C33] px-2 py-1 rounded-lg break-words text-wrap">
+                  <div className="flex break-words text-wrap justify-start">
+                    <div className="w-auto relative max-w-[75%] md:max-w-[65%] bg-[#1d2930] px-3 text-richblue-5 py-2 rounded-lg rounded-tl-none break-words text-wrap">
                       {/* <img
                         src={msg?.sender?.image}
                         className="w-6 h-6 rounded-full"
                       /> */}
-                      <p className="break-words text-wrap">{msg?.text}</p>
+                      <div className="absolute left-0 top-0 border-t-[10px] border-t-transparent border-l-[10px] border-l-[#1d2930] w-0 h-0 rotate-180 translate-x-[-8px] translate-y-0"></div>
+                      <div className="break-words text-wrap">{msg?.text}</div>
                     </div>
                   </div>
                 )}
                 {/* sender */}
                 {msg?.sender?._id === user?._id && (
-                  <div className="flex w-full justify-end">
-                    <div className="w-fit flex gap-2 bg-[#056162] px-2 py-1 rounded-lg break-words text-wrap">
+                  <div className="flex break-words text-wrap justify-end">
+                    <div className="w-auto relative max-w-[75%] md:max-w-[65%] bg-[#144a4b] px-3 text-richblue-5 py-2 rounded-lg rounded-tr-none break-words text-wrap">
                       {/* <img
                         src={msg?.sender?.image}
                         className="w-6 h-6 rounded-full"
                       /> */}
-                      <p className="break-words text-wrap">{msg?.text}</p>
+                      {/* <div className="absolute right-0 top-0 w-0 h-0 border-t-[50px] border-t-transparent border-l-[50px] border-l-[#31d1d4] rotate-0"></div> */}
+                      <div className="absolute right-0 top-0 border-t-[10px] border-t-transparent border-l-[10px] border-l-[#144a4b] w-0 h-0 rotate-90 translate-x-2 translate-y-0"></div>
+                      <div className="break-words text-wrap">{msg?.text}</div>
                     </div>
                   </div>
                 )}
@@ -163,26 +169,26 @@ const ChatUser = () => {
             placeholder="Type a message"
             className="bg-[#050301] w-full h-12 outline-none rounded-lg px-4 placeholder:px-2 placeholder:font-extralight placeholder:text-base"
           />
-          {
-            chat && <button
-            onClick={() => {
-              socket?.send(
-                JSON.stringify({
-                  type: "createMessage",
-                  payload: {
-                    chatId: chatId,
-                    sender: user?._id,
-                    receiver: userId,
-                    text: chat,
-                  },
-                })
-              );
-              setChat("");
-            }}
-          >
-            <IoSendSharp className="font-semibold text-3xl" />
-          </button>
-          }
+          {chat && (
+            <button
+              onClick={() => {
+                socket?.send(
+                  JSON.stringify({
+                    type: "createMessage",
+                    payload: {
+                      chatId: chatId,
+                      sender: user?._id,
+                      receiver: userId,
+                      text: chat,
+                    },
+                  })
+                );
+                setChat("");
+              }}
+            >
+              <IoSendSharp className="font-semibold text-3xl" />
+            </button>
+          )}
         </div>
       </div>
     </div>
