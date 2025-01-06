@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { userDetailsById } from "../../services/apiCall/profile";
 import { IoSendSharp } from "react-icons/io5";
-import wspLogo from "../../assets/Images/whatsappImg.webp";
+import wspLogo from "../../assets/Images/Black Mode whatsapp.jpeg";
 
 const ChatUser = () => {
   // hook

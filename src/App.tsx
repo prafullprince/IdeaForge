@@ -31,6 +31,7 @@ import SearchResult from "./pages/SearchResult";
 import PurchasedHistory from "./pages/Dashboard/PurchasedHistory";
 import ChatPage from "./pages/ChatPage";
 import ChatUser from "./components/Chat/ChatUser";
+import OpenRoute from "./components/auth/OpenRoute";
 
 // import { jwtDecode } from "jwt-decode";
 
@@ -104,17 +105,25 @@ function App() {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/signup" element={<SignupPage />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<OpenRoute>
+          <SignupPage />
+        </OpenRoute>} />
+        <Route path="/login" element={<OpenRoute>
+          <LoginPage />
+        </OpenRoute>} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/resetPassword/:token" element={<ResetPassword />} />
         <Route path="/resetPasswordToken" element={<ResetPasswordToken />} />
-        <Route path="/verifyEmail" element={<VerifyEmail />} />
+        <Route path="/verifyEmail" element={<OpenRoute>
+          <VerifyEmail />
+        </OpenRoute>} />
         <Route path="/catalog/:catalogName" element={<CatalogPage />} />
         <Route path="/course/details/:courseId" element={<CoursePageDetails />} />
         <Route path="/cart" element={<CartPage />} />
-        <Route path="/profile/:profileId" element={<UserProfile />} />
+        <Route path="/profile/:profileId" element={<PrivateRoute>
+          <UserProfile />
+        </PrivateRoute>} />
         <Route path="/searchResults" element={<SearchResult />} />
 
         {/* viewCourse */}
