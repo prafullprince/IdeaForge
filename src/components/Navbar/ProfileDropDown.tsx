@@ -45,7 +45,7 @@ const ProfileDropDown = () => {
             alt="profile"
             className="border-0 rounded-full sm:max-w-8 sm:max-h-8"
           />) : (<div
-            className="div border-0 rounded-full sm:max-w-8 sm:max-h-8 w-8 h-8"
+            className="div border-0 rounded-full sm:max-w-8 sm:max-h-8 sm:w-8 sm:h-8 w-6 h-6 max-w-6 max-h-6"
           ></div>)
         }
       </button>

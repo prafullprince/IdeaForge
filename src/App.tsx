@@ -114,8 +114,6 @@ function App() {
         <Route path="/catalog/:catalogName" element={<CatalogPage />} />
         <Route path="/course/details/:courseId" element={<CoursePageDetails />} />
         <Route path="/cart" element={<CartPage />} />
-        {/* <Route path="/watch/:courseId" element={<WatchCourse />} /> */}
-
         <Route path="/profile/:profileId" element={<UserProfile />} />
         <Route path="/searchResults" element={<SearchResult />} />
 

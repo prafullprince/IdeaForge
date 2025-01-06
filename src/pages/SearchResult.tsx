@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { searchApi } from "../services/apiCall/extra";
 import CourseCard from "../components/common/CourseCard";
+import { VscListFilter } from "react-icons/vsc";
 
 const SearchResult = () => {
 
@@ -31,9 +32,14 @@ const SearchResult = () => {
 
   return (
     <div className="">
-      <div className="w-[90%] lg:w-[80%] mx-auto">
+      <div className="w-[90%] lg:w-[80%] mx-auto my-12">
+        {/* filters */}
+        <button className="flex items-center gap-2 text-xl hover:bg-richblack-600 px-3 py-1 rounded-lg transition-all duration-200">
+          <p>Filters</p>
+          <VscListFilter className="font-bold" />
+        </button>
         {/* search results */}
-        <div className="flex flex-col gap-4 my-12">
+        <div className="flex flex-col gap-4">
             {
                 course?.map((item:any)=>(
                     <CourseCard key={item?._id} item={item} />

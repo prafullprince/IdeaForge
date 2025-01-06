@@ -14,7 +14,7 @@ const SearchModal = ({
   // state
   const [query, setQuery] = useState("");
   const [course, setCourse] = useState<any>([]);
-
+  console.log(course)
   // apiCall function
   async function searchApiCall() {
     try {
@@ -35,7 +35,7 @@ const SearchModal = ({
   }, [query]);
 
   return (
-    <div className="fixed inset-0 z-[1000] bg-white bg-opacity-10 backdrop-blur-sm flex items-center justify-center w-full min-h-screen overflow-auto">
+    <div className="fixed inset-0 z-[1000] bg-white bg-opacity-10 backdrop-blur-sm flex items-center justify-center w-full min-h-screen">
       <div className="w-11/12 mx-auto min-w-[350px] flex flex-col max-w-[1000px] rounded-b-lg">
         {/* header */}
         <div className="px-6 py-4 flex justify-between items-center bg-[#2C333F] border-b-[1px] border-b-[#424854]">
@@ -67,7 +67,7 @@ const SearchModal = ({
             </div>
           </div>
           {/* search results */}
-          <div className="flex flex-col gap-4 w-[90%] mx-auto bg-pure-greys-700 px-4 py-4 rounded-lg">
+          <div className="flex flex-col gap-4 w-[90%] mx-auto bg-pure-greys-700 px-4 py-4 rounded-lg overflow-auto h-[600px]">
             {course?.length === 0 ? (
               <p>No course found</p>
             ) : (
@@ -76,7 +76,8 @@ const SearchModal = ({
                   <Link onClick={()=> {
                     // setQuery(item?.courseName);
                     setModalData(null);
-                  } } to={`/searchResults?v=${query}`} key={item?._id} className="flex flex-col gap-2">
+                  }} to={`/searchResults?v=${query}`} key={item?._id} className="flex gap-2 break-words text-wrap">
+                    <img src={item?.instructor?.image} className="w-8 h-8 min-w-8 min-h-8 rounded-full" />
                     <p>{item?.courseName}</p>
                   </Link>
                 ))}

@@ -3,7 +3,7 @@ import { IoSearchSharp } from "react-icons/io5";
 import ProfileDropDown from "./ProfileDropDown";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import SearchModal from "../common/SearchModal";
 import { IoNotifications } from "react-icons/io5";
 import NotModal from "../common/NotModal";
@@ -13,17 +13,47 @@ import {
   markAsReadNotificationApi,
 } from "../../services/apiCall/extra";
 import { BsChatDots } from "react-icons/bs";
+import { IoMdArrowDropdown } from "react-icons/io";
+import { fetchAllCategoryApi } from "../../services/apiCall/category";
+
+interface ICategory {
+  _id: string;
+  categoryName: string;
+  CategoryDesc: string;
+}
 
 const LoggedUser = () => {
   // store
   const { totalItems } = useSelector((state: any) => state.cart);
   const { token } = useSelector((state: any) => state.auth);
+  const prevCategoriesRef = useRef<ICategory[]>([]);
 
   // state
   const [modalData, setModalData] = useState<any>(null);
   const [notModal, setNotModal] = useState<any>(null);
   const [notification, setNotification] = useState<any>([]);
   const [totalNotification, setTotalNotification] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [allCategory, setAllCategory] = useState<ICategory[]>([]);
+
+  // apiCall -> fetchAllCategory
+  useEffect(() => {
+    async function fetchAllCategory() {
+      setLoading(true);
+      try {
+        // apiCall
+        const result = await fetchAllCategoryApi();
+        if (JSON.stringify(result) !== JSON.stringify(prevCategoriesRef)) {
+          setAllCategory(result);
+          prevCategoriesRef.current = result;
+        }
+      } catch (error) {
+        console.log(error);
+      }
+      setLoading(false);
+    }
+    fetchAllCategory();
+  }, []);
 
   // function -> all notifications
   async function fetchAllNotification() {
@@ -64,6 +94,37 @@ const LoggedUser = () => {
 
   return (
     <div className="flex items-center gap-4 px-4 relative">
+      {/* catalog */}
+      <div className="relative flex items-center gap-[2px] cursor-pointer group">
+        <IoMdArrowDropdown className="text-3xl" />
+        <div className="invisible absolute left-[50%] top-[50%] z-[1000] flex w-[200px] translate-x-[-60%] translate-y-[3em] flex-col rounded-lg bg-richblack-5 text-richblack-900 opacity-0 transition-all  duration-150 group-hover:visible group-hover:translate-y-[1.65em] group-hover:opacity-100 lg:w-[300px] px-2 py-4 gap-1">
+          <div className="absolute left-[50%] top-0 -z-10 h-6 w-6 translate-x-[80%] translate-y-[-40%] rotate-45 select-none rounded bg-richblack-5"></div>
+          {loading ? (
+            <span className="loader"></span>
+          ) : (
+            <>
+              {allCategory?.length === 0 ? (
+                <>No category found</>
+              ) : (
+                <>
+                  {allCategory?.map((cat) => (
+                    <Link
+                      to={`/catalog/${cat?.categoryName
+                        ?.split(" ")
+                        .join("-")
+                        .toLowerCase()}`}
+                      className="text-black py-2 px-4 hover:bg-richblack-700 hover:text-white rounded-lg flex items-center transition-all duration-200"
+                      key={cat._id}
+                    >
+                      {cat?.categoryName}
+                    </Link>
+                  ))}
+                </>
+              )}
+            </>
+          )}
+        </div>
+      </div>
       {/* notification */}
       <button className="relative" onClick={markAsReadHandler}>
         <IoNotifications className="text-2xl text-richblack-50" />
