@@ -24,7 +24,6 @@ export const userDetails = async (token:string)=>{
 
 // profilePic
 export const profilePicApi = async (token:string,profilePic:any)=>{
-    const tid = toast.loading("Loading....");
     try {
         // apiCall
         const response = await apiConnector("POST",profileEndpoints.PROFILE_PIC,{profilePic},{
@@ -38,7 +37,6 @@ export const profilePicApi = async (token:string,profilePic:any)=>{
     } catch (error:any) {
         console.log(error);
     }
-    toast.dismiss(tid);
 }
 
 // getUserDetailsById

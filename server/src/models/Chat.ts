@@ -16,6 +16,6 @@ const chatSchema: Schema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Message"
     }],
-});
+},{timestamps:true});
 const Chat = mongoose.model<IChat>("Chat",chatSchema);
 export default Chat;

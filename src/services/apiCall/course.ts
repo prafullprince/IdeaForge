@@ -65,7 +65,6 @@ export const deleteCourseApi = async (formData:any,token:string)=>{
 
 // editCourse
 export const editCourseApi = async (formData:any,token:string,dispatch:any)=>{
-    const tid = toast.loading("Loading....");
     try {
         // apiCall
         const response = await apiConnector("POST",courseEndPoints.EDIT_COURSE,formData,{
@@ -83,12 +82,10 @@ export const editCourseApi = async (formData:any,token:string,dispatch:any)=>{
         console.log(error);
         toast.error(error.response.data.message);
     }
-    toast.dismiss(tid);
 }
 
 // createSection
 export const createSectionApi = async (formData:any,token:string)=>{
-    const tid = toast.loading("Loading....");
     try {
         // apiCall
         const response = await apiConnector("POST",sectionEndPoints.CREATE_SECTION,formData,{
@@ -102,12 +99,10 @@ export const createSectionApi = async (formData:any,token:string)=>{
         console.log(error);
         toast.error(error.response.data.message);
     }
-    toast.dismiss(tid);
 }
 
 // editSection
 export const editSectionApi = async (formData:any,token:string)=>{
-    const tid = toast.loading("Loading....");
     try {
         // apiCall
         const response = await apiConnector("POST",sectionEndPoints.EDIT_SECTION,formData,{
@@ -121,7 +116,6 @@ export const editSectionApi = async (formData:any,token:string)=>{
         console.log(error);
         toast.error(error.response.data.message);
     }
-    toast.dismiss(tid);
 }
 
 // deleteSection
@@ -162,7 +156,6 @@ export const getCourseContentApi = async (courseId:any)=>{
 
 // createSubSection
 export const createSubSectionApi = async (formData:any,token:string)=>{
-    const tid = toast.loading("Loading....");
     try {
         // apiCall
         const response = await apiConnector("POST",subSectionEndPoints.CREATE_SUBSECTION,formData,{
@@ -176,12 +169,10 @@ export const createSubSectionApi = async (formData:any,token:string)=>{
         console.log(error);
         toast.error(error.response.data.message);
     }
-    toast.dismiss(tid);
 }
 
 // editSubSection
 export const editSubSectionApi = async (formData:any,token:string)=>{
-    const tid = toast.loading("Loading....");
     try {
         // apiCall
         const response = await apiConnector("POST",subSectionEndPoints.EDIT_SUBSECTION,formData,{
@@ -195,7 +186,6 @@ export const editSubSectionApi = async (formData:any,token:string)=>{
         console.log(error);
         toast.error(error.response.data.message);
     }
-    toast.dismiss(tid);
 }
 
 // deleteSubSection
@@ -256,7 +246,6 @@ export const coursePageDetailsApi = async (courseId:any)=>{
 // encrolledCourse
 export const encrolledCourse = async (token:string)=>{
     let res = null;
-    const tid = toast.loading("Loading....");
     try {
         // apiCall
         const response = await apiConnector("POST",courseEndPoints.ENROLLED_COURSE,{},{
@@ -273,14 +262,12 @@ export const encrolledCourse = async (token:string)=>{
         console.log(error);
         toast.error(error.response.data.message);
     }
-    toast.dismiss(tid);
     return res;
 }
 
 // courseViewPageDetails
 export const courseViewPageDetailsApi = async (courseId:any,token:string)=>{
     let res = null;
-    const tid = toast.loading("Loading....");
     try {
         // apiCall
         const response = await apiConnector("POST",courseEndPoints.COURSE_VIEW_PAGE_DETAILS,{courseId},{
@@ -297,6 +284,5 @@ export const courseViewPageDetailsApi = async (courseId:any,token:string)=>{
         console.log(error);
         toast.error(error.response.data.message);
     }
-    toast.dismiss(tid);
     return res;
 }

@@ -30,6 +30,6 @@ const messageSchema: Schema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Chat"
     }
-});
+},{timestamps:true});
 const Message = mongoose.model<IMessage>("Message",messageSchema);
 export default Message;

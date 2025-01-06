@@ -23,7 +23,7 @@ const otpSchema:Schema = new Schema({
     createdAt:{
         type:Date,
         required:true,
-        default:Date.now(),
+        default:Date.now,
         expires: 4*60
     }
 },{timestamps:true});

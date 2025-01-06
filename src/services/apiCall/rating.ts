@@ -5,7 +5,6 @@ import { apiConnector } from "../apiConnector";
 
 // createRating
 export const createRatingApi = async (formData:any,token:string)=>{
-    const tid = toast.loading("Loading....");
     try {
         // apiCall
         const response = await apiConnector("POST",ratingEndPoints.CREATE_RATING,formData,{
@@ -19,7 +18,6 @@ export const createRatingApi = async (formData:any,token:string)=>{
         console.log(error);
         toast.error(error.response.data.message);
     }
-    toast.dismiss(tid);
 }
 
 // avgRatings

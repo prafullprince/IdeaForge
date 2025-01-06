@@ -19,7 +19,7 @@ const ChatUser = () => {
   const [message, setMessage] = useState<any>([]);
   const [chat, setChat] = useState<string>("");
   const [userInfo, setUserInfo] = useState<any>(null);
-
+  console.log(message);
   // apiCall -> allMessage
   useEffect(() => {
     const socket = new WebSocket("wss://study-hub-2.onrender.com");
@@ -127,27 +127,62 @@ const ChatUser = () => {
                 {/* receiver */}
                 {msg?.receiver?._id === user?._id && (
                   <div className="flex break-words text-wrap justify-start">
-                    <div className="w-auto relative max-w-[75%] md:max-w-[65%] bg-[#1d2930] px-3 text-richblue-5 py-2 rounded-lg rounded-tl-none break-words text-wrap">
-                      {/* <img
-                        src={msg?.sender?.image}
-                        className="w-6 h-6 rounded-full"
-                      /> */}
+                    <div className="w-auto relative max-w-[75%] md:max-w-[65%] bg-[#1d2930] px-3 text-richblue-5 py-1 rounded-lg rounded-tl-none break-words text-wrap">
                       <div className="absolute left-0 top-0 border-t-[10px] border-t-transparent border-l-[10px] border-l-[#1d2930] w-0 h-0 rotate-180 translate-x-[-8px] translate-y-0"></div>
-                      <div className="break-words text-wrap">{msg?.text}</div>
+                      <div className="break-words text-wrap relative">
+                        <div className="pr-10 pb-2">{msg?.text}</div>
+                        <span className="text-right text-xs text-richblack-25 font-bold absolute bottom-0 right-0">
+                          {new Date(msg?.createdAt).toLocaleString("en-us", {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                            hour12: false,
+                          }) === "Invalid Date" ? (
+                            <>23:59</>
+                          ) : (
+                            <>
+                              {new Date(msg?.createdAt).toLocaleString(
+                                "en-us",
+                                {
+                                  hour: "2-digit",
+                                  minute: "2-digit",
+                                  hour12: false,
+                                }
+                              )}
+                            </>
+                          )}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 )}
                 {/* sender */}
                 {msg?.sender?._id === user?._id && (
                   <div className="flex break-words text-wrap justify-end">
-                    <div className="w-auto relative max-w-[75%] md:max-w-[65%] bg-[#144a4b] px-3 text-richblue-5 py-2 rounded-lg rounded-tr-none break-words text-wrap">
-                      {/* <img
-                        src={msg?.sender?.image}
-                        className="w-6 h-6 rounded-full"
-                      /> */}
-                      {/* <div className="absolute right-0 top-0 w-0 h-0 border-t-[50px] border-t-transparent border-l-[50px] border-l-[#31d1d4] rotate-0"></div> */}
+                    <div className="w-auto relative max-w-[75%] md:max-w-[65%] bg-[#144a4b] px-3 text-richblue-5 py-1 rounded-lg rounded-tr-none break-words text-wrap">
                       <div className="absolute right-0 top-0 border-t-[10px] border-t-transparent border-l-[10px] border-l-[#144a4b] w-0 h-0 rotate-90 translate-x-2 translate-y-0"></div>
-                      <div className="break-words text-wrap">{msg?.text}</div>
+                      <div className="break-words text-wrap relative">
+                        <div className="pr-10 pb-2">{msg?.text}</div>
+                        <span className="text-right text-xs text-richblack-25 font-bold absolute bottom-0 right-0">
+                          {new Date(msg?.createdAt).toLocaleString("en-us", {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                            hour12: false,
+                          }) === "Invalid Date" ? (
+                            <>23:59</>
+                          ) : (
+                            <>
+                              {new Date(msg?.createdAt).toLocaleString(
+                                "en-us",
+                                {
+                                  hour: "2-digit",
+                                  minute: "2-digit",
+                                  hour12: false,
+                                }
+                              )}
+                            </>
+                          )}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 )}

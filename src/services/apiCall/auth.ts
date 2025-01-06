@@ -19,7 +19,6 @@ interface signupDataType {
 
 // sendOtp
 export const sendOtpApi = async (email: string, navigate: any) => {
-  const tid = toast.loading("Loading...");
   try {
     // apiCall
     const response = await apiConnector("POST", authEndPoints.SEND_OTP, {
@@ -35,12 +34,10 @@ export const sendOtpApi = async (email: string, navigate: any) => {
     console.log(error);
     toast.error(error.response.data.message);
   }
-  toast.dismiss(tid);
 };
 
 // signup
 export const signupApi = async (formData: signupDataType, navigate: any) => {
-  const tid = toast.loading("Loading...");
   try {
     // apiCall
     const response = await apiConnector("POST", authEndPoints.SIGNUP, formData);
@@ -54,7 +51,6 @@ export const signupApi = async (formData: signupDataType, navigate: any) => {
     console.log(error);
     toast.error(error.response.data.message);
   }
-  toast.dismiss(tid);
 };
 
 // login
@@ -63,7 +59,6 @@ export const loginApi = async (
   navigate: any,
   dispatch: any
 ) => {
-  const tid = toast.loading("Loading...");
   try {
     // apiCall
     const response = await apiConnector("POST", authEndPoints.LOGIN, formData);
@@ -87,7 +82,6 @@ export const loginApi = async (
     console.log(error);
     toast.error(error.response.data.message);
   }
-  toast.dismiss(tid);
 };
 
 // resetPasswordToken
