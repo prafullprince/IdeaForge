@@ -42,15 +42,15 @@ const ChatPage = () => {
         />
       </button>
       {/* box */}
-      <div className="">
+      <div className="py-12 px-8">
         {/* content box */}
-        <div className="flex relative">
+        <div className="flex relative min-h-[calc(100vh-3.5rem)]">
           {/* sidebar */}
           <div ref={sidebarRef} className={`absolute left-0 top-0 border-r border-r-richblack-700 z-[1000] transform transition-transform duration-300 ${isOpenChatSidebar ? "translate-x-0" : "translate-x-[-400px]"}`}>
             <ChatSidebar />
           </div>
           {/* chatUser */}
-          <div className="w-full">
+          <div className="w-full min-h-[calc(100vh-3.5rem)]">
             <Outlet />
           </div>
         </div>
