@@ -4,7 +4,7 @@ import { userDetails } from "../../services/apiCall/profile";
 import { useDispatch, useSelector } from "react-redux";
 import ChatModal from "../common/ChatModal";
 import { fetchAllChat } from "../../services/apiCall/chat";
-import { setChatter, setIsOpenChatSidebar } from "../../slices/globalSlice";
+import { setIsOpenChatSidebar } from "../../slices/globalSlice";
 import { MdAddToPhotos, MdClose } from "react-icons/md";
 import { BsLayoutTextSidebar } from "react-icons/bs";
 
@@ -105,7 +105,6 @@ const ChatSidebar = () => {
           {chat?.map((chit: any) => (
             <button
               onClick={() => {
-                dispatch(setChatter(chit));
                 navigate(
                   `/chat/${chit?._id}/user/${
                     chit?.participants?.find(

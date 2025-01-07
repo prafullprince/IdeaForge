@@ -19,6 +19,8 @@ const ChatUser = () => {
   const [message, setMessage] = useState<any>([]);
   const [chat, setChat] = useState<string>("");
   const [userInfo, setUserInfo] = useState<any>(null);
+  console.log(message);
+  console.log(socket);
 
   // apiCall -> allMessage
   useEffect(() => {
@@ -26,21 +28,25 @@ const ChatUser = () => {
 
     // open
     socket.onopen = () => {
-      // register user
-      socket.send(
-        JSON.stringify({
-          type: "register",
-          userId: user?._id,
-        })
-      );
+      if (user?._id) {
+        // register user
+        socket.send(
+          JSON.stringify({
+            type: "register",
+            userId: user?._id,
+          })
+        );
 
-      // fetchAllMessageAvailable in this chat
-      socket.send(
-        JSON.stringify({
-          type: "fetchMessage",
-          payload: { chatId: chatId, sender: user?._id },
-        })
-      );
+        // fetchAllMessageAvailable in this chat
+        socket.send(
+          JSON.stringify({
+            type: "fetchMessage",
+            payload: { chatId: chatId, sender: user?._id },
+          })
+        );
+      } else {
+        console.log("first")
+      }
     };
 
     // onMessage
@@ -74,7 +80,7 @@ const ChatUser = () => {
     return () => {
       socket.close();
     };
-  }, [chatId]);
+  }, [chatId, userId,user]);
 
   useEffect(() => {
     divRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -224,7 +230,7 @@ const ChatUser = () => {
                 setChat("");
               }}
             >
-              <IoSendSharp className=""/>
+              <IoSendSharp className="" />
             </button>
           )}
         </div>

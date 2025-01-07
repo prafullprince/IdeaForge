@@ -80,12 +80,12 @@ wss.on('connection', function connection(socket: any) {
     } 
 
     // create message
-    else if(body.type === 'createMessage') {
+    if(body.type === 'createMessage') {
       createMessage(body);
     }
 
     // fetch message
-    else if(body.type === 'fetchMessage') {
+    if(body.type === 'fetchMessage') {
       fetchMessage(body);
     }
   });
