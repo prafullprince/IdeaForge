@@ -93,7 +93,7 @@ const ChatUser = () => {
   }, [userId]);
 
   return (
-    <div className="flex flex-col relative w-full">
+    <div className="flex flex-col relative w-full max-h-screen">
       {/* topbar */}
       <div className="bg-[#202c33] p-4 flex gap-4 break-words text-wrap">
         <img
@@ -112,7 +112,7 @@ const ChatUser = () => {
 
       {/* message box */}
       <div
-        className={`h-[700px] p-4 overflow-auto bg-pure-greys-800 bg-center bg-cover`}
+        className={`h-[700px] max-h-screen p-4 overflow-auto bg-pure-greys-800 bg-center bg-cover`}
         style={{ backgroundImage: `url(${wspLogo})` }}
       >
         {/*  */}
