@@ -130,7 +130,7 @@ export const createMessage = async (body: any) => {
     });
 
     // sendMessage
-    const data = await Message.findById(newMessage._id).populate([
+    const data:any = await Message.findById(newMessage._id).populate([
       {
         path: 'sender',
         select: 'name email image',
@@ -147,7 +147,7 @@ export const createMessage = async (body: any) => {
         }),
       );
     } else {
-      console.log('not sent');
+      console.log('sender is not online');
     }
 
     if (ws2 && ws2.readyState === WebSocket.OPEN) {
@@ -158,11 +158,11 @@ export const createMessage = async (body: any) => {
         }),
       );
     } else {
-      console.log('not sent again');
+      console.log('receiver not online');
     }
 
     // updateChat
-    const updatedChat = await Chat.findByIdAndUpdate(
+    await Chat.findByIdAndUpdate(
       { _id: chatId },
       { $push: { message: newMessage._id } },
       { new: true },
@@ -224,3 +224,22 @@ export const fetchMessage = async (body: any) => {
     console.log(error);
   }
 };
+
+// markAsSeen
+export const markAsSeen = async (body: any)=>{
+  try {
+    const { chatId, currentUser } = body.payload;
+    if(!chatId || !currentUser){
+      return;
+    }
+
+    const data = await Message.updateMany(
+      {chat:chatId,isSeen:false,receiver: currentUser},
+      {isSeen: true},
+    )
+
+    console.log("data: ",data)
+  } catch (error) {
+    console.log(error);
+  }
+}

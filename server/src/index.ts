@@ -17,7 +17,7 @@ import fileUpload from 'express-fileupload';
 // websocket
 import { WebSocket, WebSocketServer } from 'ws';
 import { registerUser, userConnection } from './websocket/sendMessage';
-import { createChat, createMessage, fetchMessage } from './controllers/chat';
+import { createChat, createMessage, fetchMessage, markAsSeen } from './controllers/chat';
 
 // initialize port and app
 const app: Application = express();
@@ -73,7 +73,7 @@ wss.on('connection', function connection(socket: any) {
 
     // parse data
     const body = JSON.parse(data);
-
+    console.log(body)
     // register user
     if (body.type === 'register') {
       registerUser(body.userId, socket);
@@ -88,6 +88,12 @@ wss.on('connection', function connection(socket: any) {
     if(body.type === 'fetchMessage') {
       fetchMessage(body);
     }
+
+    // seen
+    if(body.type === "seen") {
+      markAsSeen(body);
+    }
+
   });
 
   // close socket

@@ -5,6 +5,7 @@ import { userDetailsById } from "../../services/apiCall/profile";
 import { IoSendSharp } from "react-icons/io5";
 import wspLogo from "../../assets/Images/Black Mode whatsapp.jpeg";
 import FullPage from "../../spinner/FullPage";
+import { IoMdDoneAll } from "react-icons/io";
 
 
 const ChatUser = () => {
@@ -23,6 +24,7 @@ const ChatUser = () => {
   const [userInfo, setUserInfo] = useState<any>(null);
   const [loading,setLoading] = useState<boolean>(true);
   const [userLoading,setUserLoading] = useState<boolean>(false);
+  console.log(message)
 
   // apiCall -> allMessage
   useEffect(() => {
@@ -46,6 +48,12 @@ const ChatUser = () => {
             payload: { chatId: chatId, sender: user?._id },
           })
         );
+
+        // markAsSeen
+        socket.send(JSON.stringify({
+          type: "seen",
+          payload: { chatId:chatId , currentUser: user?._id }
+        }));
       }
     };
 
@@ -176,8 +184,8 @@ const ChatUser = () => {
                     <div className="w-auto relative max-w-[75%] md:max-w-[65%] bg-[#144a4b] px-3 text-richblue-5 py-1 rounded-lg rounded-tr-none break-words text-wrap">
                       <div className="absolute right-0 top-0 border-t-[10px] border-t-transparent border-l-[10px] border-l-[#144a4b] w-0 h-0 rotate-90 translate-x-2 translate-y-0"></div>
                       <div className="break-words text-wrap relative">
-                        <div className="pr-10 pb-2">{msg?.text}</div>
-                        <span className="text-right text-xs text-richblack-25 font-bold absolute bottom-0 right-0">
+                        <div className="pr-16 pb-2">{msg?.text}</div>
+                        <span className="text-right text-xs text-richblack-25 font-bold absolute bottom-0 right-6">
                           {new Date(msg?.createdAt).toLocaleString("en-us", {
                             hour: "2-digit",
                             minute: "2-digit",
@@ -196,6 +204,9 @@ const ChatUser = () => {
                               )}
                             </>
                           )}
+                        </span>
+                        <span className="absolute right-0 bottom-0">
+                            <IoMdDoneAll className={`${msg?.isSeen ? "text-[#34B7F1]" : "text-richblack-100"} text-lg font-bold`} />
                         </span>
                       </div>
                     </div>
