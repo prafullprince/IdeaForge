@@ -30,7 +30,7 @@ const ChatPage = () => {
   },[]);
 
   return (
-    <div className="w-full relative bg-richblack-700 max-h-[calc[100vh-3.5rem]]">
+    <div className="w-full relative bg-richblack-900">
       <button
         onClick={() => {
           dispatch(setIsOpenChatSidebar());
@@ -44,13 +44,13 @@ const ChatPage = () => {
       {/* box */}
       <div className="">
         {/* content box */}
-        <div className="flex relative min-h-[calc(100vh-3.5rem)]">
+        <div className="flex relative">
           {/* sidebar */}
           <div ref={sidebarRef} className={`absolute left-0 top-0 border-r border-r-richblack-700 z-[1000] transform transition-transform duration-300 ${isOpenChatSidebar ? "translate-x-0" : "translate-x-[-400px]"}`}>
             <ChatSidebar />
           </div>
           {/* chatUser */}
-          <div className="w-full min-h-[calc(100vh-3.5rem)]">
+          <div className="w-full">
             <Outlet />
           </div>
         </div>

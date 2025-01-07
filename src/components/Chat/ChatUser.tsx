@@ -93,9 +93,9 @@ const ChatUser = () => {
   }, [userId]);
 
   return (
-    <div className="flex flex-col relative w-full max-h-[calc[100vh-3.5rem]]">
+    <div className="flex flex-col relative w-full">
       {/* topbar */}
-      <div className="bg-[#202c33] p-4 flex gap-4 break-words text-wrap absolute top-0 right-0 left-0 z-50">
+      <div className="bg-[#202c33] p-4 flex gap-4 break-words text-wrap">
         <img
           src={userInfo?.userDetails?.image}
           className="w-10 h-10 rounded-full"
@@ -112,7 +112,7 @@ const ChatUser = () => {
 
       {/* message box */}
       <div
-        className={`h-[700px] p-4 my-16 overflow-auto bg-pure-greys-800 bg-center bg-cover`}
+        className={`lg:max-h-[700px] lg:min-h-[700px] max-h-[500px] min-h-[500px] p-4 overflow-auto bg-pure-greys-800 bg-center bg-cover`}
         style={{ backgroundImage: `url(${wspLogo})` }}
       >
         {/*  */}
@@ -194,7 +194,7 @@ const ChatUser = () => {
       </div>
 
       {/* send message */}
-      <div className="w-full bg-[#202c33] px-12 absolute bottom-0">
+      <div className="w-full bg-[#202c33] px-12">
         <div className="flex gap-4 items-center mx-auto w-full my-2">
           <input
             type="text"

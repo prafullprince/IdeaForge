@@ -55,7 +55,7 @@ const ChatSidebar = () => {
   }, [refresh]);
 
   return (
-    <div className={`bg-[#03111a] relative min-h-[700px] max-h-[calc[100vh-3.5rem]]`}>
+    <div className={`bg-[#03111a] relative lg:min-h-[835px] lg:max-h-[835px] min-h-[640px] max-h-[640px]`}>
       <div className={`${isOpenChatSidebar ? "min-w-[340px]" : "hidden"}`}>
         {/* create chat and close modal */}
         <div
