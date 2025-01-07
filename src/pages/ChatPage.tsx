@@ -30,7 +30,7 @@ const ChatPage = () => {
   },[]);
 
   return (
-    <div className="w-screen relative bg-richblack-900 max-h-[calc-[100vh-3.5rem]] overflow-auto">
+    <div className="w-screen relative bg-richblack-900 min-h-[835px] max-h-[calc-[100vh-3.5rem]] overflow-auto">
       <button
         onClick={() => {
           dispatch(setIsOpenChatSidebar());

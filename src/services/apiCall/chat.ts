@@ -24,7 +24,6 @@ export const createChat = async (user1:any,user2:any,token:string)=>{
 // fetchAllChat
 export const fetchAllChat = async (token:string)=>{
     let res = null;
-    const tid = toast.loading("Loading....");
     try {
         // apiCall
         const response = await apiConnector("POST",chatEndPoints.FETCH_CHAT,{},{
@@ -33,7 +32,6 @@ export const fetchAllChat = async (token:string)=>{
         });
 
         // success
-        toast.success(response.data.message);
 
         res = response.data.data;
 
@@ -41,7 +39,6 @@ export const fetchAllChat = async (token:string)=>{
         console.log(error);
         toast.error(error.response.data.message);
     }
-    toast.dismiss(tid);
     return res;
 }
 

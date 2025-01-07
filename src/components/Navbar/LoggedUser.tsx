@@ -28,7 +28,7 @@ const LoggedUser = () => {
   const { token } = useSelector((state: any) => state.auth);
   const { user } = useSelector((state: any) => state.profile);
   const prevCategoriesRef = useRef<ICategory[]>([]);
-  console.log("user", user);
+
   // state
   const [modalData, setModalData] = useState<any>(null);
   const [notModal, setNotModal] = useState<any>(null);

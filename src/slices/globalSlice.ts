@@ -4,7 +4,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 const initialState: any = {
   isOpenSidebar: false,
   chatter: null,
-  isOpenChatSidebar: true,
+  isOpenChatSidebar: false,
 };
 
 // slice

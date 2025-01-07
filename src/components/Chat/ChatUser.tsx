@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import { userDetailsById } from "../../services/apiCall/profile";
 import { IoSendSharp } from "react-icons/io5";
 import wspLogo from "../../assets/Images/Black Mode whatsapp.jpeg";
+import FullPage from "../../spinner/FullPage";
+
 
 const ChatUser = () => {
   // hook
@@ -19,8 +21,8 @@ const ChatUser = () => {
   const [message, setMessage] = useState<any>([]);
   const [chat, setChat] = useState<string>("");
   const [userInfo, setUserInfo] = useState<any>(null);
-  console.log(message);
-  console.log(socket);
+  const [loading,setLoading] = useState<boolean>(true);
+  const [userLoading,setUserLoading] = useState<boolean>(false);
 
   // apiCall -> allMessage
   useEffect(() => {
@@ -44,8 +46,6 @@ const ChatUser = () => {
             payload: { chatId: chatId, sender: user?._id },
           })
         );
-      } else {
-        console.log("first")
       }
     };
 
@@ -56,6 +56,7 @@ const ChatUser = () => {
       // fetching chat
       if (data?.type === "fetchMessage") {
         setMessage(data?.payload);
+        setLoading(false);
       }
 
       // receiving chat
@@ -66,12 +67,12 @@ const ChatUser = () => {
 
     // error
     socket.onerror = () => {
-      console.log("socket error");
+      
     };
 
     // close
     socket.onclose = () => {
-      console.log("socket closed");
+     
     };
 
     setSocket(socket);
@@ -82,31 +83,36 @@ const ChatUser = () => {
     };
   }, [chatId, userId,user]);
 
+  // new message in view
   useEffect(() => {
     divRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [message]);
 
+  // userDetails fetched
   useEffect(() => {
     async function fetchUserDetails() {
+      setUserLoading(true);
       try {
         const result = await userDetailsById(userId, token);
         setUserInfo(result);
       } catch (error) {
         console.log(error);
       }
+      setUserLoading(false);
     }
     fetchUserDetails();
   }, [userId]);
 
   return (
-    <div className="flex flex-col relative w-full max-h-[calc[100vh-3.5rem]] overflow-auto">
+    <div className="flex flex-col relative w-full min-h-[835px] max-h-[calc[100vh-3.5rem]] overflow-auto">
       {/* topbar */}
       <div className="">
         <div className="bg-[#202c33] p-4 flex gap-4 break-words text-wrap sticky top-0 left-0 right-0">
-          <img
+          {userLoading ? (<div className="min-w-10 min-h-10 w-10 h-10 max-w-10 max-h-10 div"></div>) : 
+          (<img
             src={userInfo?.userDetails?.image}
-            className="w-10 h-10 rounded-full"
-          />
+            className="min-w-10 min-h-10 w-10 h-10 rounded-full"
+          />)}
           <div className="flex flex-col items-start break-words text-wrap">
             <p className="text-base text-richblack-5 font-semibold">
               {userInfo?.userDetails?.name}
@@ -119,7 +125,8 @@ const ChatUser = () => {
       </div>
 
       {/* message box */}
-      <div
+      {loading ? (<FullPage />) : 
+      (<div
         className={`max-h-[700px] min-h-[700px] p-4 md:mt-0 overflow-auto bg-pure-greys-800 bg-center bg-cover`}
         style={{ backgroundImage: `url(${wspLogo})` }}
       >
@@ -199,7 +206,7 @@ const ChatUser = () => {
           </div>
         )}
         <div ref={divRef}></div>
-      </div>
+      </div>)}
 
       {/* send message */}
       <div className="w-full bg-[#202c33] px-12">

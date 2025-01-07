@@ -53,7 +53,7 @@ const ProfileDropDown = () => {
       {isOpen && (
         <div
           ref={dropDownRef}
-          className="absolute mt-2 right-0 bg-richblack-800 rounded-md shadow-lg flex flex-col items-start px-2 py-2 text-white z-50"
+          className="absolute mt-2 right-0 bg-richblack-800 rounded-md shadow-lg flex flex-col items-start px-2 py-2 text-white z-[200]"
         >
           <button
             onClick={() => {
