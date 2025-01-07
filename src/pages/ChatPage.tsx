@@ -42,7 +42,7 @@ const ChatPage = () => {
         />
       </button>
       {/* box */}
-      <div className="py-12 px-8">
+      <div className="">
         {/* content box */}
         <div className="flex relative min-h-[calc(100vh-3.5rem)]">
           {/* sidebar */}
