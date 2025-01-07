@@ -112,7 +112,7 @@ const ChatUser = () => {
 
       {/* message box */}
       <div
-        className={`h-[700px] max-h-screen p-4 overflow-auto bg-pure-greys-800 bg-center bg-cover`}
+        className={`h-[700px] max-h-screen p-4 my-16 overflow-auto bg-pure-greys-800 bg-center bg-cover`}
         style={{ backgroundImage: `url(${wspLogo})` }}
       >
         {/*  */}
