@@ -95,7 +95,7 @@ const ChatUser = () => {
   return (
     <div className="flex flex-col relative w-full max-h-screen">
       {/* topbar */}
-      <div className="bg-[#202c33] p-4 flex gap-4 break-words text-wrap">
+      <div className="bg-[#202c33] p-4 flex gap-4 break-words text-wrap absolute top-0 right-0 left-0 z-50">
         <img
           src={userInfo?.userDetails?.image}
           className="w-10 h-10 rounded-full"
@@ -194,7 +194,7 @@ const ChatUser = () => {
       </div>
 
       {/* send message */}
-      <div className="w-full bg-[#202c33] px-12">
+      <div className="w-full bg-[#202c33] px-12 absolute bottom-0">
         <div className="flex gap-4 items-center mx-auto w-full my-2">
           <input
             type="text"

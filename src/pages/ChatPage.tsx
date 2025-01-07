@@ -30,12 +30,12 @@ const ChatPage = () => {
   },[]);
 
   return (
-    <div className="w-full relative max-h-screen">
+    <div className="w-full relative bg-richblack-700">
       <button
         onClick={() => {
           dispatch(setIsOpenChatSidebar());
         }}
-        className="text-3xl font-semibold absolute top-5 z-50 right-6"
+        className="text-3xl font-semibold absolute top-5 z-[100] right-6"
       >
         <BsLayoutTextSidebar
           className={`${ isOpenChatSidebar ? "text-richblack-200" : "text-yellow-50"}`}
