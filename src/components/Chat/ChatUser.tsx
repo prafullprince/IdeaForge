@@ -19,7 +19,7 @@ const ChatUser = () => {
   const [message, setMessage] = useState<any>([]);
   const [chat, setChat] = useState<string>("");
   const [userInfo, setUserInfo] = useState<any>(null);
-  console.log(message);
+
   // apiCall -> allMessage
   useEffect(() => {
     const socket = new WebSocket("wss://study-hub-2.onrender.com");
@@ -93,26 +93,28 @@ const ChatUser = () => {
   }, [userId]);
 
   return (
-    <div className="flex flex-col relative w-full">
+    <div className="flex flex-col relative w-full max-h-[calc[100vh-3.5rem]] overflow-auto">
       {/* topbar */}
-      <div className="bg-[#202c33] p-4 flex gap-4 break-words text-wrap">
-        <img
-          src={userInfo?.userDetails?.image}
-          className="w-10 h-10 rounded-full"
-        />
-        <div className="flex flex-col items-start break-words text-wrap">
-          <p className="text-base text-richblack-5 font-semibold">
-            {userInfo?.userDetails?.name}
-          </p>
-          <p className="text-xs text-richblack-100 break-words text-wrap">
-            {userInfo?.userDetails?.email}
-          </p>
+      <div className="">
+        <div className="bg-[#202c33] p-4 flex gap-4 break-words text-wrap sticky top-0 left-0 right-0">
+          <img
+            src={userInfo?.userDetails?.image}
+            className="w-10 h-10 rounded-full"
+          />
+          <div className="flex flex-col items-start break-words text-wrap">
+            <p className="text-base text-richblack-5 font-semibold">
+              {userInfo?.userDetails?.name}
+            </p>
+            <p className="text-xs text-richblack-100 break-words text-wrap">
+              {userInfo?.userDetails?.email}
+            </p>
+          </div>
         </div>
       </div>
 
       {/* message box */}
       <div
-        className={`lg:max-h-[700px] lg:min-h-[700px] max-h-[500px] min-h-[500px] p-4 overflow-auto bg-pure-greys-800 bg-center bg-cover`}
+        className={`max-h-[700px] min-h-[700px] p-4 md:mt-0 overflow-auto bg-pure-greys-800 bg-center bg-cover`}
         style={{ backgroundImage: `url(${wspLogo})` }}
       >
         {/*  */}
@@ -206,6 +208,7 @@ const ChatUser = () => {
           />
           {chat && (
             <button
+              className="bg-[#00a884] hover:bg-[#009272] text-white px-4 py-1 rounded-lg text-2xl"
               onClick={() => {
                 socket?.send(
                   JSON.stringify({
@@ -221,7 +224,7 @@ const ChatUser = () => {
                 setChat("");
               }}
             >
-              <IoSendSharp className="font-semibold text-3xl" />
+              <IoSendSharp className=""/>
             </button>
           )}
         </div>

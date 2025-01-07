@@ -52,9 +52,15 @@ export const getUserDetails = async (
         path: 'followers',
         select: 'name email image',
       })
+      .populate({
+        path:"chats",
+        populate: {
+          path: "message"
+        }
+      })
       .lean();
 
-    // if data is freash then cached them
+    // if data is fresh then cached them
     await client.set(`userDetails:${userId}`, JSON.stringify(userDetails));
     await client.expire(`userDetails:${userId}`, 10);
 

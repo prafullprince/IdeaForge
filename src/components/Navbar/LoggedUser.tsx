@@ -26,8 +26,9 @@ const LoggedUser = () => {
   // store
   const { totalItems } = useSelector((state: any) => state.cart);
   const { token } = useSelector((state: any) => state.auth);
+  const { user } = useSelector((state: any) => state.profile);
   const prevCategoriesRef = useRef<ICategory[]>([]);
-
+  console.log("user", user);
   // state
   const [modalData, setModalData] = useState<any>(null);
   const [notModal, setNotModal] = useState<any>(null);
@@ -143,7 +144,14 @@ const LoggedUser = () => {
         <IoSearchSharp className="text-2xl text-richblack-50" />
       </button>
       {/* chat */}
-      <Link className="relative" to={`/chat/${123}/user/${123}`}>
+      <Link
+        className="relative"
+        to={`/chat/${
+          user?.chats?.[0]?._id
+        }/user/${user?.chats?.[0]?.participants?.find(
+          (chatter: any) => chatter !== user?._id
+        )}`}
+      >
         <BsChatDots className="text-2xl text-richblack-50 font-bold" />
         {/* <div className="absolute top-0 bg-pink-200 px-[6px] translate-x-3 translate-y-[-8px] rounded-full text-base">
           {totalItems}
