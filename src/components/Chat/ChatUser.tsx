@@ -48,12 +48,6 @@ const ChatUser = () => {
             payload: { chatId: chatId, sender: user?._id },
           })
         );
-
-        // markAsSeen
-        socket.send(JSON.stringify({
-          type: "seen",
-          payload: { chatId:chatId , currentUser: userId }
-        }));
       }
     };
 
