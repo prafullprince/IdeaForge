@@ -1,4 +1,4 @@
-import { userConnection } from '../websocket/sendMessage';
+import { chatRoom } from '../websocket/sendMessage';
 import User from '../models/User';
 import Message from '../models/Message';
 import Chat from '../models/Chat';
@@ -93,24 +93,19 @@ export const createMessage = async (body: any) => {
     let { chatId, sender, receiver, text } = body.payload;
 
     // socket
-    const ws1 = userConnection.get(sender);
-    const ws2 = userConnection.get(receiver);
+    const participants = chatRoom.get(chatId);
+    const senderWs = participants?.get(sender);
+    const receiverWs = participants?.get(receiver);
 
     // validation
     if (!chatId || !sender || !receiver || !text) {
-      ws1?.send(
+      senderWs?.send(
         JSON.stringify({
           type: 'recieveMessage',
           payload: 'provide all details',
         }),
       );
 
-      ws2?.send(
-        JSON.stringify({
-          type: 'recieveMessage',
-          payload: 'provide all details',
-        }),
-      );
       return;
     }
 
@@ -130,7 +125,7 @@ export const createMessage = async (body: any) => {
     });
 
     // sendMessage
-    const data:any = await Message.findById(newMessage._id).populate([
+    const data: any = await Message.findById(newMessage._id).populate([
       {
         path: 'sender',
         select: 'name email image',
@@ -139,8 +134,8 @@ export const createMessage = async (body: any) => {
     ]);
 
     // send to sender and receiver
-    if (ws1 && ws1.readyState === WebSocket.OPEN) {
-      ws1.send(
+    if (senderWs && senderWs.readyState === WebSocket.OPEN) {
+      senderWs.send(
         JSON.stringify({
           type: 'recieveMessage',
           payload: data,
@@ -150,8 +145,8 @@ export const createMessage = async (body: any) => {
       console.log('sender is not online');
     }
 
-    if (ws2 && ws2.readyState === WebSocket.OPEN) {
-      ws2.send(
+    if (receiverWs && receiverWs.readyState === WebSocket.OPEN) {
+      receiverWs.send(
         JSON.stringify({
           type: 'recieveMessage',
           payload: data,
@@ -184,7 +179,8 @@ export const fetchMessage = async (body: any) => {
     }
 
     // find socket
-    const ws = userConnection.get(sender);
+    const chatParticipants = chatRoom.get(chatId);
+    const ws = chatParticipants?.get(sender);
     if (!ws) {
       console.log('sender not available');
       return;
@@ -225,21 +221,21 @@ export const fetchMessage = async (body: any) => {
   }
 };
 
-// markAsSeen
-export const markAsSeen = async (body: any)=>{
-  try {
-    const { chatId, currentUser } = body.payload;
-    if(!chatId || !currentUser){
-      return;
-    }
+// // markAsSeen
+// export const markAsSeen = async (body: any)=>{
+//   try {
+//     const { chatId, currentUser } = body.payload;
+//     if(!chatId || !currentUser){
+//       return;
+//     }
 
-    const data = await Message.updateMany(
-      {chat:chatId,isSeen:false,receiver: currentUser},
-      {isSeen: true},
-    )
+//     const data = await Message.updateMany(
+//       {chat:chatId,isSeen:false,receiver: currentUser},
+//       {isSeen: true},
+//     )
 
-    console.log("data: ",data)
-  } catch (error) {
-    console.log(error);
-  }
-}
+//     console.log("data: ",data)
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }

@@ -11,7 +11,7 @@ import client from '../config/redis';
 import CourseProgress from '../models/CourseProgress';
 import { WebSocket } from 'ws';
 import Notification from '../models/Notification';
-import { userConnection } from '../websocket/sendMessage';
+import {  } from '../websocket/sendMessage';
 
 // createCourse
 export const createCourse = async (
@@ -117,26 +117,26 @@ export const createCourse = async (
     });
 
     // send notifications
-    const followers = instructorDetails.followers;
-    followers.forEach(async (followerId) => {
-      const followerIdString = followerId.toString();
-      const ws = userConnection.get(followerIdString);
-      const notification = `${instructorDetails?.name} uploaded: ${courseName}`;
-      if (ws && ws.readyState === WebSocket.OPEN) {
-        ws.send(JSON.stringify({
-          userId: followerId,
-          message: notification,
-          thumbnail: instructorDetails.image
-        }));
-      } else {
-        // save notifications in db
-        await Notification.create({
-          userId: followerId,
-          message: notification,
-          thumbnail: instructorDetails.image
-        });
-      }
-    });
+    // const followers = instructorDetails.followers;
+    // followers.forEach(async (followerId) => {
+    //   const followerIdString = followerId.toString();
+    //   const ws = userConnection.get(followerIdString);
+    //   const notification = `${instructorDetails?.name} uploaded: ${courseName}`;
+    //   if (ws && ws.readyState === WebSocket.OPEN) {
+    //     ws.send(JSON.stringify({
+    //       userId: followerId,
+    //       message: notification,
+    //       thumbnail: instructorDetails.image
+    //     }));
+    //   } else {
+    //     // save notifications in db
+    //     await Notification.create({
+    //       userId: followerId,
+    //       message: notification,
+    //       thumbnail: instructorDetails.image
+    //     });
+    //   }
+    // });
 
     return;
   } catch (error) {

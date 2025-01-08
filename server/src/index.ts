@@ -16,8 +16,8 @@ import fileUpload from 'express-fileupload';
 
 // websocket
 import { WebSocket, WebSocketServer } from 'ws';
-import { registerUser, userConnection } from './websocket/sendMessage';
-import { createChat, createMessage, fetchMessage, markAsSeen } from './controllers/chat';
+import { registerUser } from './websocket/sendMessage';
+import { createMessage, fetchMessage } from './controllers/chat';
 
 // initialize port and app
 const app: Application = express();
@@ -76,7 +76,7 @@ wss.on('connection', function connection(socket: any) {
     console.log(body)
     // register user
     if (body.type === 'register') {
-      registerUser(body.userId, socket);
+      registerUser(body.userId,body.chatId, socket);
     } 
 
     // create message
@@ -89,21 +89,21 @@ wss.on('connection', function connection(socket: any) {
       fetchMessage(body);
     }
 
-    // seen
-    if(body.type === "seen") {
-      markAsSeen(body);
-    }
+    // // seen
+    // if(body.type === "seen") {
+    //   markAsSeen(body);
+    // }
 
   });
 
   // close socket
-  socket.on('close', () => {
-    const userId = Array.from(userConnection.keys()).find(
-      (key) => userConnection.get(key) === socket,
-    );
-    if (userId) userConnection.delete(userId);
-    console.log('Client disconnected');
-  });
+  // socket.on('close', () => {
+  //   const userId = Array.from(userConnection.keys()).find(
+  //     (key) => userConnection.get(key) === socket,
+  //   );
+  //   if (userId) userConnection.delete(userId);
+  //   console.log('Client disconnected');
+  // });
 
   // connection message
   // socket.send('Hello : message from server!')

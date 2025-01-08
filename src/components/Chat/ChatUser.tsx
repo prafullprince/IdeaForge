@@ -38,6 +38,7 @@ const ChatUser = () => {
           JSON.stringify({
             type: "register",
             userId: user?._id,
+            chatId:chatId
           })
         );
 
