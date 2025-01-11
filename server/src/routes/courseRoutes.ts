@@ -6,7 +6,7 @@ import { auth, isInstructor, isStudent } from '../controllers/middlewares';
 import { categoryPageDetails, createCategory, fetchAllCategory } from '../controllers/category';
 import { coursePageDetails, courseViewPageDetails, createCourse, createSection, createSubSection, deleteCourse, deleteSection, deleteSubSection, editCourse, editSection, editSubSection, getCourseContent, getInstructorCourse, markVideoAsCompleted, publishCourse, studentEnrolledCourses } from '../controllers/course';
 import { capturePayment, verifyPayment } from '../controllers/payments';
-import { searchCourse, totalViews } from '../controllers/extra';
+import { searchCourse, searchResults, totalViews } from '../controllers/extra';
 import { createRating, getAverageRating } from '../controllers/Rating';
 import { allNotifications, allUnreadNotifications, markNotificationAsRead } from '../controllers/notifications';
 import { createChat, fetchChat } from '../controllers/chat';
@@ -57,6 +57,7 @@ router.post("/totalViews",totalViews);
 router.post("/notifications",auth,allUnreadNotifications);
 router.post("/markAsReadNot",auth,markNotificationAsRead);
 router.post("/allNotifications",auth,allNotifications);
+router.post("/searchResult",searchResults);
 
 // chat
 router.post("/createChat",auth,createChat);

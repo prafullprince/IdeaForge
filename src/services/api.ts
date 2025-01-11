@@ -51,7 +51,8 @@ export const extraEndPoints = {
     VIEWS: BASE_URL + "/course/totalViews",
     NOTIFICATION: BASE_URL + "/course/notifications",
     MARK_AS_READ: BASE_URL + "/course/markAsReadNot",
-    ALL_NOTIFICATION: BASE_URL + "/course/allNotifications"
+    ALL_NOTIFICATION: BASE_URL + "/course/allNotifications",
+    SEARCH_RESULT: BASE_URL + "/course/searchResult"
 }
 
 // rating

@@ -5,6 +5,7 @@ const initialState: any = {
   isOpenSidebar: false,
   chatter: null,
   isOpenChatSidebar: false,
+  fullScreen: false
 };
 
 // slice
@@ -29,11 +30,14 @@ const globalSlice = createSlice({
         state.isOpenChatSidebar = !state.isOpenChatSidebar;
       }
     },
+    setFullScreen(state){
+      state.fullScreen = !state.fullScreen;
+    }
   },
 });
 
 // Export actions
-export const { setIsOpenSidebar, setChatter, setIsOpenChatSidebar } =
+export const { setIsOpenSidebar, setChatter, setIsOpenChatSidebar, setFullScreen } =
   globalSlice.actions;
 
 // Export reducer

@@ -23,11 +23,12 @@ export const searchCourse = async (
         { path: 'instructor', select: 'name image' },
         { path: 'category', select: 'categoryName' },
       ])
-      .lean();
+      .lean()
+      .limit(5);
     // options
     const options = {
-      keys: ['courseName', 'category.categoryName', 'instructor.name'],
-      threshold: 0.4,
+      keys: [{name:'courseName',weight: 0.8}, {name:'category.categoryName',weight:0.1}, {name:'instructor.name',weight:0.1}],
+      threshold: 0.3,
     };
 
     // fuse
@@ -47,6 +48,75 @@ export const searchCourse = async (
     return ErrorResponseHandling(res, 500, 'Internal server error');
   }
 };
+
+// searchResultApis
+export const searchResults = async (
+  req: Request,
+  res: Response,
+): Promise<any> => {
+  try {
+    // fetch data
+    const { query } = req.body;
+    const page = parseInt(req.body.page) || 1;
+    const limit = parseInt(req.body.limit) || 10;
+
+    // validation
+    if (!query || !page || !limit) {
+      return ErrorResponseHandling(res, 400, 'please provide query');
+    }
+
+    // skip
+    const skip = (page-1) * limit ;
+
+    // course
+    const course = await Course.find({})
+      .select('courseName courseDesc thumbnail')
+      .populate([
+        { path: 'instructor', select: 'name image' },
+        { path: 'category', select: 'categoryName' },
+      ])
+      .lean()
+      ;
+
+    // options
+    const options = {
+      keys: [{name:'courseName',weight: 0.8}, {name:'category.categoryName',weight:0.1}, {name:'instructor.name',weight:0.1}],
+      threshold: 0.3,
+    };
+
+    // fuse
+    const fuse: any = new Fuse(course, options);
+
+    // all result
+    const result = fuse.search(query);
+
+    // totalCourse
+    const totalCourse = result.length;
+
+    // paginatedResult
+    const paginatedResults = result.slice(skip,skip+limit);
+
+    // finalData
+    const data = paginatedResults.map((course: any) => course.item);
+
+    // return res
+    return res.status(200).json({
+      success: true,
+      message: 'search succeed',
+      data:{
+        totalCourse,
+        page,
+        data,
+        totalPage : Math.ceil(totalCourse/limit) 
+      }
+    });
+
+  } catch (error) {
+    console.log(error);
+    return ErrorResponseHandling(res, 500, 'Internal server error');
+  }
+};
+
 
 // calculateBlogs
 export const totalViews = async (req: Request, res: Response): Promise<any> => {

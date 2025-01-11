@@ -12,6 +12,18 @@ export const searchApi = async (query:string)=>{
     }
 }
 
+// seacrResultsApi
+export const searchResultsApi = async (query:any,page:any)=>{
+    try {
+        const response = await apiConnector("POST",extraEndPoints.SEARCH_RESULT,{query,page});
+
+        console.log(response);
+        return response.data.data;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 // totalViews
 export const totalViewsApi = async (courseId:string)=>{
     try {

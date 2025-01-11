@@ -15,6 +15,7 @@ const SearchModal = ({
   const [query, setQuery] = useState("");
   const [course, setCourse] = useState<any>([]);
   console.log(course)
+
   // apiCall function
   async function searchApiCall() {
     try {
@@ -29,7 +30,7 @@ const SearchModal = ({
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       searchApiCall();
-    }, 100);
+    }, 300);
 
     return () => clearInterval(timeoutId);
   }, [query]);
@@ -67,7 +68,7 @@ const SearchModal = ({
             </div>
           </div>
           {/* search results */}
-          <div className="flex flex-col gap-4 w-[90%] mx-auto bg-pure-greys-700 px-4 py-4 rounded-lg overflow-auto h-[600px]">
+          <div className={`flex flex-col gap-4 w-[90%] mx-auto bg-pure-greys-700 rounded-lg overflow-auto h-auto ${query ? "px-4 py-4" : ""}`}>
             {course?.length === 0 ? (
               <p>No course found</p>
             ) : (
