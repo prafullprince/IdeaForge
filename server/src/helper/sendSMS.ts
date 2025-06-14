@@ -23,7 +23,7 @@ export const sendOtpSms = async (otp:string,phoneNumber:string) => {
     }
 }
 
-export const sendEmail = async (email:string,title:string,body:string):Promise<void>=>{
+export const sendEmail = async (email:string,title:string,body:string):Promise<any>=>{
     try {
         // make transporter
         const transporter = nodemailer.createTransport({
@@ -42,7 +42,7 @@ export const sendEmail = async (email:string,title:string,body:string):Promise<v
             html:`${body}`
         });
         
-        // return info;
+        return info;
     } catch (error) {
         console.log(error);
     }

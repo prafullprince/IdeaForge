@@ -1,9 +1,8 @@
 // baseUrl
-const BASE_URL = "https://study-hub-2.onrender.com/api/v1";
+const BASE_URL = "http://localhost:4000/api/v1";
 
-// https://studyforge.onrender.com/api/v1
+
 // "http://localhost:4000/api/v1"
-// https://study-forge.onrender.com
 // "https://study-hub-2.onrender.com/api/v1"
 
 // auth

@@ -1,0 +1,256 @@
+Date : 2025-06-14 21:07:48
+Directory : /Users/prafullprince/Desktop/StudyForge/IdeaForge
+Total : 175 files,  20790 codes, 1403 comments, 1463 blanks, all 23656 lines
+
+Languages
++--------------------+------------+------------+------------+------------+------------+
+| language           | files      | code       | comment    | blank      | total      |
++--------------------+------------+------------+------------+------------+------------+
+| JSON               |         11 |     10,319 |          4 |         14 |     10,337 |
+| TypeScript JSX     |         82 |      5,593 |        643 |        644 |      6,880 |
+| TypeScript         |         64 |      3,963 |        740 |        741 |      5,444 |
+| CSS                |          2 |        356 |         15 |         32 |        403 |
+| XML                |          9 |        267 |          0 |          8 |        275 |
+| JavaScript         |          3 |        217 |          1 |         10 |        228 |
+| Markdown           |          1 |         40 |          0 |         11 |         51 |
+| JSON with Comments |          2 |         22 |          0 |          2 |         24 |
+| HTML               |          1 |         13 |          0 |          1 |         14 |
++--------------------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                     | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                        |        175 |     20,790 |      1,403 |      1,463 |     23,656 |
+| . (Files)                                                                                                |         12 |      5,209 |          6 |         34 |      5,249 |
+| public                                                                                                   |          1 |          1 |          0 |          0 |          1 |
+| server                                                                                                   |         43 |      7,384 |        545 |        544 |      8,473 |
+| server (Files)                                                                                           |          6 |      4,625 |          0 |          6 |      4,631 |
+| server/src                                                                                               |         37 |      2,759 |        545 |        538 |      3,842 |
+| server/src (Files)                                                                                       |          1 |         54 |         35 |         22 |        111 |
+| server/src/config                                                                                        |          4 |         46 |          2 |         14 |         62 |
+| server/src/controllers                                                                                   |         11 |      2,065 |        448 |        398 |      2,911 |
+| server/src/helper                                                                                        |          4 |         70 |          5 |         20 |         95 |
+| server/src/models                                                                                        |         13 |        423 |         31 |         51 |        505 |
+| server/src/routes                                                                                        |          2 |         61 |         20 |         20 |        101 |
+| server/src/types                                                                                         |          1 |         23 |          1 |          4 |         28 |
+| server/src/websocket                                                                                     |          1 |         17 |          3 |          9 |         29 |
+| src                                                                                                      |        119 |      8,196 |        852 |        885 |      9,933 |
+| src (Files)                                                                                              |          5 |        482 |         57 |         56 |        595 |
+| src/assets                                                                                               |          8 |        266 |          0 |          8 |        274 |
+| src/assets/Images                                                                                        |          4 |        254 |          0 |          4 |        258 |
+| src/assets/TimeLineLogo                                                                                  |          4 |         12 |          0 |          4 |         16 |
+| src/components                                                                                           |         53 |      4,223 |        433 |        446 |      5,102 |
+| src/components/AddCourse                                                                                 |          6 |      1,095 |         82 |         64 |      1,241 |
+| src/components/AddCourse (Files)                                                                         |          2 |        264 |         18 |         18 |        300 |
+| src/components/AddCourse/builder                                                                         |          2 |        363 |         30 |         20 |        413 |
+| src/components/AddCourse/info                                                                            |          1 |        415 |         28 |         16 |        459 |
+| src/components/AddCourse/publish                                                                         |          1 |         53 |          6 |         10 |         69 |
+| src/components/Cart                                                                                      |          2 |        102 |          9 |         10 |        121 |
+| src/components/CatalogPage                                                                               |          2 |         32 |          6 |          6 |         44 |
+| src/components/Chat                                                                                      |          2 |        356 |         31 |         34 |        421 |
+| src/components/CoursePageDetails                                                                         |          4 |        128 |          9 |         16 |        153 |
+| src/components/Dashboard                                                                                 |          2 |        130 |         34 |         18 |        182 |
+| src/components/HomePage                                                                                  |          4 |        125 |         20 |         24 |        169 |
+| src/components/MyCourse                                                                                  |          1 |         98 |         10 |          9 |        117 |
+| src/components/Navbar                                                                                    |          5 |        364 |         61 |         44 |        469 |
+| src/components/Watch                                                                                     |          2 |        303 |         35 |         28 |        366 |
+| src/components/auth                                                                                      |          8 |        664 |         71 |         83 |        818 |
+| src/components/common                                                                                    |         12 |        755 |         64 |         96 |        915 |
+| src/components/spinners                                                                                  |          2 |         17 |          0 |          7 |         24 |
+| src/components/ui                                                                                        |          1 |         54 |          1 |          7 |         62 |
+| src/data                                                                                                 |          5 |      1,055 |          0 |         12 |      1,067 |
+| src/global                                                                                               |          1 |          6 |          0 |          2 |          8 |
+| src/hooks                                                                                                |          1 |          2 |          9 |          2 |         13 |
+| src/lib                                                                                                  |          2 |         19 |          0 |          6 |         25 |
+| src/pages                                                                                                |         22 |      1,199 |        169 |        162 |      1,530 |
+| src/pages (Files)                                                                                        |         16 |        833 |        127 |        118 |      1,078 |
+| src/pages/Dashboard                                                                                      |          6 |        366 |         42 |         44 |        452 |
+| src/services                                                                                             |         10 |        706 |        152 |        138 |        996 |
+| src/services (Files)                                                                                     |          2 |         72 |         22 |         16 |        110 |
+| src/services/apiCall                                                                                     |          8 |        634 |        130 |        122 |        886 |
+| src/slices                                                                                               |          7 |        193 |         32 |         40 |        265 |
+| src/spinner                                                                                              |          5 |         45 |          0 |         13 |         58 |
++----------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| filename                                                                                                 | language           | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/README.md                                              | Markdown           |         40 |          0 |         11 |         51 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/eslint.config.js                                       | JavaScript         |         27 |          0 |          2 |         29 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/index.html                                             | HTML               |         13 |          0 |          1 |         14 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/package-lock.json                                      | JSON               |      4,829 |          0 |          1 |      4,830 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/package.json                                           | JSON               |         48 |          0 |          1 |         49 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/postcss.config.js                                      | JavaScript         |          6 |          0 |          1 |          7 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/public/vite.svg                                        | XML                |          1 |          0 |          0 |          1 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/.eslintrc.json                                  | JSON               |         14 |          0 |          1 |         15 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/.prettierrc                                     | JSON               |          5 |          0 |          1 |          6 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/nodemon.json                                    | JSON               |          6 |          0 |          1 |          7 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/package-lock.json                               | JSON               |      4,528 |          0 |          1 |      4,529 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/package.json                                    | JSON               |         57 |          0 |          1 |         58 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/src/config/cloudinary.ts                        | TypeScript         |         14 |          1 |          3 |         18 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/src/config/database.ts                          | TypeScript         |         13 |          0 |          3 |         16 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/src/config/instances.ts                         | TypeScript         |          7 |          0 |          2 |          9 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/src/config/redis.ts                             | TypeScript         |         12 |          1 |          6 |         19 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/src/controllers/Rating.ts                       | TypeScript         |         93 |         10 |         12 |        115 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/src/controllers/auth.ts                         | TypeScript         |        287 |         52 |         58 |        397 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/src/controllers/category.ts                     | TypeScript         |        116 |         41 |         35 |        192 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/src/controllers/chat.ts                         | TypeScript         |        167 |         43 |         32 |        242 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/src/controllers/connection.ts                   | TypeScript         |         66 |         11 |         13 |         90 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/src/controllers/course.ts                       | TypeScript         |        676 |        158 |        111 |        945 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/src/controllers/extra.ts                        | TypeScript         |        127 |         24 |         28 |        179 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/src/controllers/middlewares.ts                  | TypeScript         |         85 |         18 |         30 |        133 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/src/controllers/notifications.ts                | TypeScript         |         66 |         21 |         25 |        112 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/src/controllers/payments.ts                     | TypeScript         |        138 |         16 |         18 |        172 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/src/controllers/profile.ts                      | TypeScript         |        244 |         54 |         36 |        334 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/src/helper/EroorResponse.ts                     | TypeScript         |          6 |          0 |          2 |          8 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/src/helper/UploadMedia.ts                       | TypeScript         |         15 |          0 |          9 |         24 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/src/helper/constants.ts                         | TypeScript         |         10 |          0 |          3 |         13 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/src/helper/sendSMS.ts                           | TypeScript         |         39 |          5 |          6 |         50 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/src/index.ts                                    | TypeScript         |         54 |         35 |         22 |        111 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/src/models/Category.ts                          | TypeScript         |         23 |          2 |          4 |         29 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/src/models/Chat.ts                              | TypeScript         |         17 |          2 |          3 |         22 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/src/models/Connection.ts                        | TypeScript         |         17 |          3 |          4 |         24 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/src/models/Course.ts                            | TypeScript         |         80 |          2 |          4 |         86 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/src/models/CourseProgress.ts                    | TypeScript         |         22 |          3 |          4 |         29 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/src/models/Message.ts                           | TypeScript         |         31 |          2 |          3 |         36 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/src/models/Notification.ts                      | TypeScript         |         25 |          0 |          4 |         29 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/src/models/OTP.ts                               | TypeScript         |         31 |          4 |          5 |         40 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/src/models/Profile.ts                           | TypeScript         |         34 |          3 |          4 |         41 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/src/models/Rating.ts                            | TypeScript         |         24 |          3 |          4 |         31 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/src/models/Section.ts                           | TypeScript         |         18 |          2 |          4 |         24 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/src/models/SubSection.ts                        | TypeScript         |         26 |          2 |          4 |         32 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/src/models/User.ts                              | TypeScript         |         75 |          3 |          4 |         82 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/src/routes/authRoutes.ts                        | TypeScript         |         19 |          7 |          7 |         33 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/src/routes/courseRoutes.ts                      | TypeScript         |         42 |         13 |         13 |         68 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/src/types/env.d.ts                              | TypeScript         |         23 |          1 |          4 |         28 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/src/websocket/sendMessage.ts                    | TypeScript         |         17 |          3 |          9 |         29 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/server/tsconfig.json                                   | JSON with Comments |         15 |          0 |          1 |         16 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/App.css                                            | CSS                |        353 |         15 |         32 |        400 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/App.tsx                                            | TypeScript JSX     |        111 |         41 |         19 |        171 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/assets/Images/Compare_with_others.svg              | XML                |         52 |          0 |          1 |         53 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/assets/Images/Know_your_progress.svg               | XML                |         45 |          0 |          1 |         46 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/assets/Images/Plan_your_lessons.svg                | XML                |         86 |          0 |          1 |         87 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/assets/Images/bghome.svg                           | XML                |         71 |          0 |          1 |         72 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/assets/TimeLineLogo/Logo1.svg                      | XML                |          3 |          0 |          1 |          4 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/assets/TimeLineLogo/Logo2.svg                      | XML                |          3 |          0 |          1 |          4 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/assets/TimeLineLogo/Logo3.svg                      | XML                |          3 |          0 |          1 |          4 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/assets/TimeLineLogo/Logo4.svg                      | XML                |          3 |          0 |          1 |          4 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/AddCourse/AddModal.tsx                  | TypeScript JSX     |        258 |         18 |         15 |        291 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/AddCourse/ViewModal.tsx                 | TypeScript JSX     |          6 |          0 |          3 |          9 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/AddCourse/builder/CourseBuilder.tsx     | TypeScript JSX     |        203 |         18 |         12 |        233 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/AddCourse/builder/Section.tsx           | TypeScript JSX     |        160 |         12 |          8 |        180 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/AddCourse/info/CourseInfo.tsx           | TypeScript JSX     |        415 |         28 |         16 |        459 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/AddCourse/publish/CoursePublish.tsx     | TypeScript JSX     |         53 |          6 |         10 |         69 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/Cart/CartItem.tsx                       | TypeScript JSX     |         67 |          5 |          6 |         78 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/Cart/CartPage.tsx                       | TypeScript JSX     |         35 |          4 |          4 |         43 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/CatalogPage/CategoryTab.tsx             | TypeScript JSX     |          6 |          0 |          3 |          9 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/CatalogPage/Header.tsx                  | TypeScript JSX     |         26 |          6 |          3 |         35 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/Chat/ChatSidebar.tsx                    | TypeScript JSX     |        144 |         10 |         11 |        165 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/Chat/ChatUser.tsx                       | TypeScript JSX     |        212 |         21 |         23 |        256 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/CoursePageDetails/CourseContent.tsx     | TypeScript JSX     |         66 |          9 |          5 |         80 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/CoursePageDetails/InstructorDetails.tsx | TypeScript JSX     |         13 |          0 |          4 |         17 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/CoursePageDetails/RatingAndReviews.tsx  | TypeScript JSX     |         24 |          0 |          3 |         27 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/CoursePageDetails/SubSectionContent.tsx | TypeScript JSX     |         25 |          0 |          4 |         29 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/Dashboard/Sidebar.tsx                   | TypeScript JSX     |         96 |         30 |         10 |        136 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/Dashboard/SidebarLink.tsx               | TypeScript JSX     |         34 |          4 |          8 |         46 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/HomePage/CodeBlocks.tsx                 | TypeScript JSX     |         78 |          2 |          5 |         85 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/HomePage/HighlightButton.tsx            | TypeScript JSX     |         18 |          0 |          4 |         22 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/HomePage/HighlightText.tsx              | TypeScript JSX     |          8 |          0 |          5 |         13 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/HomePage/LearningSection.tsx            | TypeScript JSX     |         21 |         18 |         10 |         49 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/MyCourse/CourseTable.tsx                | TypeScript JSX     |         98 |         10 |          9 |        117 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/Navbar/Catalog.tsx                      | TypeScript JSX     |          0 |          0 |          6 |          6 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/Navbar/LoggedUser.tsx                   | TypeScript JSX     |        158 |         17 |         12 |        187 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/Navbar/NavLink.tsx                      | TypeScript JSX     |         29 |         32 |          9 |         70 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/Navbar/NullUser.tsx                     | TypeScript JSX     |        105 |          8 |          8 |        121 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/Navbar/ProfileDropDown.tsx              | TypeScript JSX     |         72 |          4 |          9 |         85 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/Watch/LectureContent.tsx                | TypeScript JSX     |        165 |         25 |         17 |        207 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/Watch/SidebarContent.tsx                | TypeScript JSX     |        138 |         10 |         11 |        159 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/auth/LoginForm.tsx                      | TypeScript JSX     |        102 |         12 |         13 |        127 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/auth/OpenRoute.tsx                      | TypeScript JSX     |         12 |          0 |          4 |         16 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/auth/PrivateRoute.tsx                   | TypeScript JSX     |         12 |          0 |          5 |         17 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/auth/ResetPasswordForm.tsx              | TypeScript JSX     |        114 |         11 |         13 |        138 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/auth/ResetPwdTokenForm.tsx              | TypeScript JSX     |         81 |          9 |         10 |        100 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/auth/SignupForm.tsx                     | TypeScript JSX     |        212 |         19 |         19 |        250 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/auth/Template.tsx                       | TypeScript JSX     |         69 |         10 |          4 |         83 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/auth/VerifyEmailForm.tsx                | TypeScript JSX     |         62 |         10 |         15 |         87 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/common/ChatModal.tsx                    | TypeScript JSX     |         60 |          6 |          9 |         75 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/common/ConfirmationModal.tsx            | TypeScript JSX     |         49 |          5 |          7 |         61 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/common/ConnectionModal.tsx              | TypeScript JSX     |         99 |          6 |          8 |        113 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/common/Corousel.tsx                     | TypeScript JSX     |         37 |          3 |          7 |         47 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/common/CourseCard.tsx                   | TypeScript JSX     |         29 |          6 |          6 |         41 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/common/Footer.tsx                       | TypeScript JSX     |        162 |          5 |         15 |        182 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/common/Navbar.tsx                       | TypeScript JSX     |         27 |          7 |         11 |         45 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/common/NotModal.tsx                     | TypeScript JSX     |         78 |         10 |         12 |        100 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/common/ProfileView.tsx                  | TypeScript JSX     |         52 |          5 |          6 |         63 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/common/SearchModal.tsx                  | TypeScript JSX     |         81 |          7 |          7 |         95 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/common/Tab.tsx                          | TypeScript JSX     |         21 |          1 |          5 |         27 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/common/UserCourses.tsx                  | TypeScript JSX     |         60 |          3 |          3 |         66 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/spinners/Spinner1.tsx                   | TypeScript JSX     |          8 |          0 |          3 |         11 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/spinners/Spinner2.tsx                   | TypeScript JSX     |          9 |          0 |          4 |         13 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/components/ui/input.tsx                            | TypeScript JSX     |         54 |          1 |          7 |         62 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/data/countrycode.json                              | JSON               |        782 |          0 |          0 |        782 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/data/dashboard-links.ts                            | TypeScript         |         54 |          0 |          4 |         58 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/data/footer-links.ts                               | TypeScript         |         55 |          0 |          1 |         56 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/data/homepage-explore.ts                           | TypeScript         |        142 |          0 |          4 |        146 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/data/navbar-links.ts                               | TypeScript         |         22 |          0 |          3 |         25 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/global/global.d.ts                                 | TypeScript         |          6 |          0 |          2 |          8 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/hooks/useSocket.ts                                 | TypeScript         |          2 |          9 |          2 |         13 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/index.css                                          | CSS                |          3 |          0 |          0 |          3 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/lib/constants.ts                                   | TypeScript         |         14 |          0 |          4 |         18 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/lib/utils.ts                                       | TypeScript         |          5 |          0 |          2 |          7 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/main.tsx                                           | TypeScript JSX     |         15 |          0 |          4 |         19 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/pages/AboutPage.tsx                                | TypeScript JSX     |          6 |          0 |          3 |          9 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/pages/CatalogPage.tsx                              | TypeScript JSX     |         90 |         12 |          8 |        110 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/pages/ChatPage.tsx                                 | TypeScript JSX     |         57 |          6 |          7 |         70 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/pages/ContactPage.tsx                              | TypeScript JSX     |          6 |          0 |          3 |          9 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/pages/CoursePageDetails.tsx                        | TypeScript JSX     |        174 |         39 |         18 |        231 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/pages/Dashboard/AddCourse.tsx                      | TypeScript JSX     |         61 |          8 |          7 |         76 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/pages/Dashboard/Dashboard.tsx                      | TypeScript JSX     |          6 |          0 |          3 |          9 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/pages/Dashboard/MyCourses.tsx                      | TypeScript JSX     |        125 |         16 |         15 |        156 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/pages/Dashboard/Profile.tsx                        | TypeScript JSX     |        162 |         18 |         13 |        193 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/pages/Dashboard/PurchasedHistory.tsx               | TypeScript JSX     |          6 |          0 |          3 |          9 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/pages/Dashboard/Setting.tsx                        | TypeScript JSX     |          6 |          0 |          3 |          9 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/pages/DashboardLayoutPage.tsx                      | TypeScript JSX     |         33 |          5 |          7 |         45 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/pages/EnrolledCourse.tsx                           | TypeScript JSX     |         40 |         22 |          9 |         71 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/pages/HomePage.tsx                                 | TypeScript JSX     |         82 |         12 |          5 |         99 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/pages/LoginPage.tsx                                | TypeScript JSX     |         14 |          0 |          4 |         18 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/pages/ResetPassword.tsx                            | TypeScript JSX     |         13 |          0 |          4 |         17 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/pages/ResetPasswordToken.tsx                       | TypeScript JSX     |         13 |          0 |          4 |         17 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/pages/SearchResult.tsx                             | TypeScript JSX     |         81 |         10 |         15 |        106 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/pages/SignupPage.tsx                               | TypeScript JSX     |         15 |          0 |          4 |         19 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/pages/UserProfile.tsx                              | TypeScript JSX     |        159 |         18 |         17 |        194 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/pages/VerifyEmail.tsx                              | TypeScript JSX     |         13 |          0 |          4 |         17 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/pages/WatchCourse.tsx                              | TypeScript JSX     |         37 |          3 |          6 |         46 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/services/api.ts                                    | TypeScript         |         60 |         12 |         12 |         84 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/services/apiCall/auth.ts                           | TypeScript         |        109 |         33 |         22 |        164 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/services/apiCall/category.ts                       | TypeScript         |         25 |          6 |          6 |         37 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/services/apiCall/chat.ts                           | TypeScript         |         31 |          6 |          8 |         45 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/services/apiCall/course.ts                         | TypeScript         |        204 |         48 |         37 |        289 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/services/apiCall/extra.ts                          | TypeScript         |         60 |          6 |         13 |         79 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/services/apiCall/payment.ts                        | TypeScript         |        109 |         11 |         13 |        133 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/services/apiCall/profile.ts                        | TypeScript         |         72 |         14 |         17 |        103 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/services/apiCall/rating.ts                         | TypeScript         |         24 |          6 |          6 |         36 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/services/apiConnector.ts                           | TypeScript         |         12 |         10 |          4 |         26 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/slices/authSlice.ts                                | TypeScript         |         33 |         11 |          8 |         52 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/slices/cartSlice.ts                                | TypeScript         |         28 |          4 |          6 |         38 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/slices/courseSlice.ts                              | TypeScript         |         35 |          4 |          6 |         45 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/slices/globalSlice.ts                              | TypeScript         |         36 |          4 |          5 |         45 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/slices/profileSlice.ts                             | TypeScript         |         15 |          4 |          6 |         25 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/slices/store.ts                                    | TypeScript         |         19 |          1 |          3 |         23 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/slices/viewCourseSlice.ts                          | TypeScript         |         27 |          4 |          6 |         37 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/spinner/ButtonLoading.tsx                          | TypeScript JSX     |          6 |          0 |          3 |          9 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/spinner/DivLoading.tsx                             | TypeScript JSX     |         10 |          0 |          2 |         12 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/spinner/FullPage.tsx                               | TypeScript JSX     |         10 |          0 |          3 |         13 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/spinner/MyCourseLoading.tsx                        | TypeScript JSX     |          8 |          0 |          3 |         11 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/spinner/ProfileSpinner.tsx                         | TypeScript JSX     |         11 |          0 |          2 |         13 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/src/vite-env.d.ts                                      | TypeScript         |          0 |          1 |          1 |          2 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/tailwind.config.js                                     | JavaScript         |        184 |          1 |          7 |        192 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/tsconfig.app.json                                      | JSON               |         22 |          2 |          3 |         27 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/tsconfig.json                                          | JSON with Comments |          7 |          0 |          1 |          8 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/tsconfig.node.json                                     | JSON               |         20 |          2 |          3 |         25 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/vercel.json                                            | JSON               |          8 |          0 |          1 |          9 |
+| /Users/prafullprince/Desktop/StudyForge/IdeaForge/vite.config.ts                                         | TypeScript         |          5 |          1 |          2 |          8 |
+| Total                                                                                                    |                    |     20,790 |      1,403 |      1,463 |     23,656 |
++----------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+

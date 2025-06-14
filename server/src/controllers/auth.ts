@@ -43,10 +43,8 @@ export const sendOtp = async (req: Request, res: Response): Promise<any> => {
       digits: true,
     });
 
-    console.time('sa');
     // save otp in db
     await Otp.create({ email, otp });
-    console.timeEnd('sa');
 
     // return res
     return res.status(200).json({

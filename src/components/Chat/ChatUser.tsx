@@ -28,7 +28,7 @@ const ChatUser = () => {
 
   // apiCall -> allMessage
   useEffect(() => {
-    const socket = new WebSocket("wss://study-hub-2.onrender.com");
+    const socket = new WebSocket("wss://localhost:4000");
 
     // open
     socket.onopen = () => {
